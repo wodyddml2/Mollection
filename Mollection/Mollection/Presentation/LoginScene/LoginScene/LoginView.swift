@@ -9,6 +9,8 @@ import SwiftUI
 import AuthenticationServices
 
 struct LoginView: View {
+   
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -26,19 +28,25 @@ struct LoginView: View {
                 
                 SignInWithAppleView()
                     .frame(width: 280, height: 40)
-                    .onTapGesture {
-                        showAppleLogin()
-                    }
+//                    .onTapGesture {
+//                        showAppleLogin()
+//                    }
+//
+
             }
         }
     }
     
-    private func showAppleLogin() {
-        let request = ASAuthorizationAppleIDProvider().createRequest()
-        request.requestedScopes = [.email, .fullName]
-        let controller = ASAuthorizationController(authorizationRequests: [request])
-        controller.performRequests()
-    }
+//    private func showAppleLogin() {
+//        let request = ASAuthorizationAppleIDProvider().createRequest()
+//        let nonce = FBAuth.randomNonceString()
+//        currentNonce = nonce
+//        request.requestedScopes = [.email, .fullName]
+//        request.nonce = FBAuth.sha256(nonce)
+//
+//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+//        authorizationController.performRequests()
+//    }
     
 }
 

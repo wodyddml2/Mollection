@@ -27,6 +27,7 @@
 		63082E2D299502C2007769E0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 63082E2C299502C2007769E0 /* FirebaseAuth */; };
 		63082E2F299502C2007769E0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 63082E2E299502C2007769E0 /* FirebaseFirestore */; };
 		63082E31299502C2007769E0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63082E30299502C2007769E0 /* FirebaseFirestoreSwift */; };
+		63082E342995151F007769E0 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E332995151F007769E0 /* FBAuth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		63082E162994F588007769E0 /* SignInWithAppleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleView.swift; sourceTree = "<group>"; };
 		63082E1A2994FF77007769E0 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 		63082E2729950292007769E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Documents/Mollection/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		63082E332995151F007769E0 /* FBAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 		63082DFA2994E021007769E0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				63082E322995150D007769E0 /* Firebase */,
 				63082DF72994DFA6007769E0 /* APIKey.swift */,
 			);
 			path = Network;
@@ -219,6 +222,14 @@
 			path = SignupScene;
 			sourceTree = "<group>";
 		};
+		63082E322995150D007769E0 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				63082E332995151F007769E0 /* FBAuth.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -302,6 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63082E342995151F007769E0 /* FBAuth.swift in Sources */,
 				63082DEC2994DE9A007769E0 /* ContentView.swift in Sources */,
 				63082E082994E238007769E0 /* Font+Custom.swift in Sources */,
 				63082DF82994DFA6007769E0 /* APIKey.swift in Sources */,
