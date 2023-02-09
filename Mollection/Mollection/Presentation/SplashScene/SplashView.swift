@@ -8,17 +8,29 @@
 import SwiftUI
 
 struct SplashView: View {
-    var body: some View {
-        Image(systemName: "play.fill")
-            .foregroundColor(.customPurple)
-            .font(.system(size: 130))
+    @State var isActive: Bool = false
     
-        if UserManager.login {
-            
-        } else {
-            
+    var body: some View {
+        VStack {
+            if isActive {
+                if UserManager.login {
+                    
+                } else {
+                    LoginView()
+                }
+            } else {
+                Image(systemName: "play.fill")
+                    .foregroundColor(.customPurple)
+                    .font(.system(size: 130))
+            }
         }
-       
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                withAnimation {
+                    isActive = true
+                }
+            }
+        }
     }
 }
 
