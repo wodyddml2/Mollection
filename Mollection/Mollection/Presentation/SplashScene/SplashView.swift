@@ -12,6 +12,13 @@ struct SplashView: View {
         Image(systemName: "play.fill")
             .foregroundColor(.customPurple)
             .font(.system(size: 130))
+    
+        if UserManager.login {
+            
+        } else {
+            
+        }
+       
     }
 }
 

@@ -19,6 +19,7 @@
 		63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E092994E2CE007769E0 /* Color+Custom.swift */; };
 		63082E0E2994EA03007769E0 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E0D2994EA03007769E0 /* SplashView.swift */; };
 		63082E112994ED06007769E0 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E102994ED06007769E0 /* UserDefault.swift */; };
+		63082E142994EF33007769E0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E132994EF33007769E0 /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		63082E0B2994E3D2007769E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		63082E0D2994EA03007769E0 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		63082E102994ED06007769E0 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		63082E132994EF33007769E0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 			children = (
 				63082DEB2994DE9A007769E0 /* ContentView.swift */,
 				63082E0C2994E9E4007769E0 /* SplashScene */,
+				63082E122994EEC3007769E0 /* LoginScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -171,6 +174,14 @@
 				63082E102994ED06007769E0 /* UserDefault.swift */,
 			);
 			path = PropertyWrapper;
+			sourceTree = "<group>";
+		};
+		63082E122994EEC3007769E0 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				63082E132994EF33007769E0 /* LoginView.swift */,
+			);
+			path = LoginScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +263,7 @@
 				63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */,
 				63082DEA2994DE9A007769E0 /* MollectionApp.swift in Sources */,
 				63082E112994ED06007769E0 /* UserDefault.swift in Sources */,
+				63082E142994EF33007769E0 /* LoginView.swift in Sources */,
 				63082E0E2994EA03007769E0 /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
