@@ -28,26 +28,9 @@ struct LoginView: View {
                 
                 SignInWithAppleView()
                     .frame(width: 280, height: 40)
-//                    .onTapGesture {
-//                        showAppleLogin()
-//                    }
-//
-
             }
         }
     }
-    
-//    private func showAppleLogin() {
-//        let request = ASAuthorizationAppleIDProvider().createRequest()
-//        let nonce = FBAuth.randomNonceString()
-//        currentNonce = nonce
-//        request.requestedScopes = [.email, .fullName]
-//        request.nonce = FBAuth.sha256(nonce)
-//
-//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//        authorizationController.performRequests()
-//    }
-    
 }
 
 struct LoginView_Previews: PreviewProvider {
