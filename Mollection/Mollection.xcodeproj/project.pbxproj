@@ -11,6 +11,12 @@
 		63082DEC2994DE9A007769E0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082DEB2994DE9A007769E0 /* ContentView.swift */; };
 		63082DEE2994DE9B007769E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63082DED2994DE9B007769E0 /* Assets.xcassets */; };
 		63082DF12994DE9B007769E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63082DF02994DE9B007769E0 /* Preview Assets.xcassets */; };
+		63082DF82994DFA6007769E0 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082DF72994DFA6007769E0 /* APIKey.swift */; };
+		63082E012994E1CE007769E0 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 63082DFE2994E1CD007769E0 /* NotoSansKR-Bold.otf */; };
+		63082E022994E1CE007769E0 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 63082DFF2994E1CD007769E0 /* NotoSansKR-Medium.otf */; };
+		63082E032994E1CE007769E0 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 63082E002994E1CE007769E0 /* NotoSansKR-Regular.otf */; };
+		63082E082994E238007769E0 /* Font+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E072994E238007769E0 /* Font+Custom.swift */; };
+		63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E092994E2CE007769E0 /* Color+Custom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +25,13 @@
 		63082DEB2994DE9A007769E0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		63082DED2994DE9B007769E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63082DF02994DE9B007769E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		63082DF72994DFA6007769E0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		63082DFE2994E1CD007769E0 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		63082DFF2994E1CD007769E0 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		63082E002994E1CE007769E0 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		63082E072994E238007769E0 /* Font+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Custom.swift"; sourceTree = "<group>"; };
+		63082E092994E2CE007769E0 /* Color+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Custom.swift"; sourceTree = "<group>"; };
+		63082E0B2994E3D2007769E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +64,12 @@
 		63082DE82994DE9A007769E0 /* Mollection */ = {
 			isa = PBXGroup;
 			children = (
-				63082DE92994DE9A007769E0 /* MollectionApp.swift */,
-				63082DEB2994DE9A007769E0 /* ContentView.swift */,
-				63082DED2994DE9B007769E0 /* Assets.xcassets */,
+				63082E0B2994E3D2007769E0 /* Info.plist */,
+				63082DF92994E000007769E0 /* Application */,
+				63082DFB2994E07D007769E0 /* Presentation */,
+				63082DFA2994E021007769E0 /* Network */,
+				63082E042994E210007769E0 /* Utility */,
+				63082DFC2994E0C0007769E0 /* Resources */,
 				63082DEF2994DE9B007769E0 /* Preview Content */,
 			);
 			path = Mollection;
@@ -65,6 +81,74 @@
 				63082DF02994DE9B007769E0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		63082DF92994E000007769E0 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				63082DE92994DE9A007769E0 /* MollectionApp.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		63082DFA2994E021007769E0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				63082DF72994DFA6007769E0 /* APIKey.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		63082DFB2994E07D007769E0 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				63082DEB2994DE9A007769E0 /* ContentView.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		63082DFC2994E0C0007769E0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				63082DFD2994E0CD007769E0 /* Fonts */,
+				63082DED2994DE9B007769E0 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		63082DFD2994E0CD007769E0 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				63082DFE2994E1CD007769E0 /* NotoSansKR-Bold.otf */,
+				63082DFF2994E1CD007769E0 /* NotoSansKR-Medium.otf */,
+				63082E002994E1CE007769E0 /* NotoSansKR-Regular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		63082E042994E210007769E0 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				63082E052994E21E007769E0 /* Extension */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		63082E052994E21E007769E0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				63082E062994E228007769E0 /* UI */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		63082E062994E228007769E0 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				63082E072994E238007769E0 /* Font+Custom.swift */,
+				63082E092994E2CE007769E0 /* Color+Custom.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +209,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63082E022994E1CE007769E0 /* NotoSansKR-Medium.otf in Resources */,
 				63082DF12994DE9B007769E0 /* Preview Assets.xcassets in Resources */,
+				63082E012994E1CE007769E0 /* NotoSansKR-Bold.otf in Resources */,
 				63082DEE2994DE9B007769E0 /* Assets.xcassets in Resources */,
+				63082E032994E1CE007769E0 /* NotoSansKR-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +225,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				63082DEC2994DE9A007769E0 /* ContentView.swift in Sources */,
+				63082E082994E238007769E0 /* Font+Custom.swift in Sources */,
+				63082DF82994DFA6007769E0 /* APIKey.swift in Sources */,
+				63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */,
 				63082DEA2994DE9A007769E0 /* MollectionApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,6 +360,7 @@
 				DEVELOPMENT_TEAM = QV329P6X5G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mollection/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +390,7 @@
 				DEVELOPMENT_TEAM = QV329P6X5G;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Mollection/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
