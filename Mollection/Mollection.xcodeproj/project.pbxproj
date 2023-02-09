@@ -21,6 +21,7 @@
 		63082E112994ED06007769E0 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E102994ED06007769E0 /* UserDefault.swift */; };
 		63082E142994EF33007769E0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E132994EF33007769E0 /* LoginView.swift */; };
 		63082E172994F588007769E0 /* SignInWithAppleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E162994F588007769E0 /* SignInWithAppleView.swift */; };
+		63082E1B2994FF77007769E0 /* SignupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E1A2994FF77007769E0 /* SignupView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		63082E132994EF33007769E0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		63082E152994F469007769E0 /* Mollection.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Mollection.entitlements; sourceTree = "<group>"; };
 		63082E162994F588007769E0 /* SignInWithAppleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInWithAppleView.swift; sourceTree = "<group>"; };
+		63082E1A2994FF77007769E0 /* SignupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,10 +185,27 @@
 		63082E122994EEC3007769E0 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
+				63082E182994FF41007769E0 /* LoginScene */,
+				63082E192994FF4F007769E0 /* SignupScene */,
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		63082E182994FF41007769E0 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
 				63082E132994EF33007769E0 /* LoginView.swift */,
 				63082E162994F588007769E0 /* SignInWithAppleView.swift */,
 			);
 			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		63082E192994FF4F007769E0 /* SignupScene */ = {
+			isa = PBXGroup;
+			children = (
+				63082E1A2994FF77007769E0 /* SignupView.swift */,
+			);
+			path = SignupScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +285,7 @@
 				63082E082994E238007769E0 /* Font+Custom.swift in Sources */,
 				63082DF82994DFA6007769E0 /* APIKey.swift in Sources */,
 				63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */,
+				63082E1B2994FF77007769E0 /* SignupView.swift in Sources */,
 				63082DEA2994DE9A007769E0 /* MollectionApp.swift in Sources */,
 				63082E112994ED06007769E0 /* UserDefault.swift in Sources */,
 				63082E142994EF33007769E0 /* LoginView.swift in Sources */,
