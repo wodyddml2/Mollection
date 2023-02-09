@@ -17,6 +17,7 @@
 		63082E032994E1CE007769E0 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 63082E002994E1CE007769E0 /* NotoSansKR-Regular.otf */; };
 		63082E082994E238007769E0 /* Font+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E072994E238007769E0 /* Font+Custom.swift */; };
 		63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E092994E2CE007769E0 /* Color+Custom.swift */; };
+		63082E0E2994EA03007769E0 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E0D2994EA03007769E0 /* SplashView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		63082E072994E238007769E0 /* Font+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Custom.swift"; sourceTree = "<group>"; };
 		63082E092994E2CE007769E0 /* Color+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Custom.swift"; sourceTree = "<group>"; };
 		63082E0B2994E3D2007769E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		63082E0D2994EA03007769E0 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				63082DEB2994DE9A007769E0 /* ContentView.swift */,
+				63082E0C2994E9E4007769E0 /* SplashScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -149,6 +152,14 @@
 				63082E092994E2CE007769E0 /* Color+Custom.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		63082E0C2994E9E4007769E0 /* SplashScene */ = {
+			isa = PBXGroup;
+			children = (
+				63082E0D2994EA03007769E0 /* SplashView.swift */,
+			);
+			path = SplashScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -229,6 +240,7 @@
 				63082DF82994DFA6007769E0 /* APIKey.swift in Sources */,
 				63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */,
 				63082DEA2994DE9A007769E0 /* MollectionApp.swift in Sources */,
+				63082E0E2994EA03007769E0 /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
