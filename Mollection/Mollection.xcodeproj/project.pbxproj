@@ -18,6 +18,7 @@
 		63082E082994E238007769E0 /* Font+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E072994E238007769E0 /* Font+Custom.swift */; };
 		63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E092994E2CE007769E0 /* Color+Custom.swift */; };
 		63082E0E2994EA03007769E0 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E0D2994EA03007769E0 /* SplashView.swift */; };
+		63082E112994ED06007769E0 /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E102994ED06007769E0 /* UserDefault.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		63082E092994E2CE007769E0 /* Color+Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Custom.swift"; sourceTree = "<group>"; };
 		63082E0B2994E3D2007769E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		63082E0D2994EA03007769E0 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		63082E102994ED06007769E0 /* UserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 		63082E042994E210007769E0 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				63082E0F2994ECE9007769E0 /* PropertyWrapper */,
 				63082E052994E21E007769E0 /* Extension */,
 			);
 			path = Utility;
@@ -160,6 +163,14 @@
 				63082E0D2994EA03007769E0 /* SplashView.swift */,
 			);
 			path = SplashScene;
+			sourceTree = "<group>";
+		};
+		63082E0F2994ECE9007769E0 /* PropertyWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				63082E102994ED06007769E0 /* UserDefault.swift */,
+			);
+			path = PropertyWrapper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +251,7 @@
 				63082DF82994DFA6007769E0 /* APIKey.swift in Sources */,
 				63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */,
 				63082DEA2994DE9A007769E0 /* MollectionApp.swift in Sources */,
+				63082E112994ED06007769E0 /* UserDefault.swift in Sources */,
 				63082E0E2994EA03007769E0 /* SplashView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
