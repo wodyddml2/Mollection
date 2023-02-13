@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct SignupView: View {
-    @State var nickname: String = ""
-    @State var favoriteGenre: String = ""
+    enum FocusedField {
+        case nickname
+        case genre
+    }
+    @FocusState private var focusedField: FocusedField?
+    
+    @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
+    @Binding var isLogged: Bool
     
     var body: some View {
         VStack {
             Spacer()
-                .frame(height: 80)
-            
+                .frame(height: 20)
+
             Text("""
             환영합니다 👐
             Mollection에서 미디어 컬렉션을 만들어봐요
@@ -33,8 +39,11 @@ struct SignupView: View {
                     .font(.notoSans(.Medium, size: 14))
                     .foregroundColor(.gray7)
                 
-                TextField("", text: $nickname)
+                TextField("required", text: $viewModel.nickname)
+                    .focused($focusedField, equals: .nickname)
+                    .submitLabel(.next)
                     .frame(height: 44)
+                    .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
                     .cornerRadius(5)
                 
@@ -45,18 +54,31 @@ struct SignupView: View {
                     .font(.notoSans(.Medium, size: 14))
                     .foregroundColor(.gray7)
                 
-                TextField("", text: $favoriteGenre)
+                TextField("option", text: $viewModel.favoriteGenre)
+                    .focused($focusedField, equals: .genre)
+                    .submitLabel(.done)
                     .frame(height: 44)
+                    .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
                     .cornerRadius(5)
             }
             .padding(.init(top: 0, leading: 60, bottom: 0, trailing: 60))
+            .onSubmit {
+                switch focusedField {
+                case .nickname:
+                    focusedField = .genre
+                default:
+                    break
+                }
+            }
             
             Spacer()
                 .frame(height: 100)
             
             Button {
-                print("Start")
+                if viewModel.isValid {
+                    isLogged = true
+                }
             } label: {
                 Text("Start")
                     .font(.notoSans(.Bold, size: 20))
@@ -65,16 +87,14 @@ struct SignupView: View {
             .frame(width: 90, height: 90)
             .background(Color.customPurple)
             .clipShape(Circle())
-
+            
             Spacer()
         }
-        
-        
     }
 }
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView()
+        SignupView(isLogged: .constant(false))
     }
 }

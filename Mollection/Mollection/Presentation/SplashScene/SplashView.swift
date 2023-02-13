@@ -9,14 +9,15 @@ import SwiftUI
 
 struct SplashView: View {
     @State var isActive: Bool = false
+    @State var isLogged: Bool = UserManager.login
     
     var body: some View {
         VStack {
             if isActive {
-                if UserManager.login {
-                    
+                if isLogged {
+                    HomeView()
                 } else {
-                    LoginView()
+                    LoginView(isLogged: $isLogged)
                 }
             } else {
                 Image(systemName: "play.fill")
@@ -25,6 +26,7 @@ struct SplashView: View {
             }
         }
         .onAppear {
+            isLogged = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 withAnimation {
                     isActive = true
