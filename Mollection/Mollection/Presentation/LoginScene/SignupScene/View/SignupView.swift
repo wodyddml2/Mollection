@@ -46,7 +46,7 @@ struct SignupView: View {
                     .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
                     .cornerRadius(5)
-                    
+                
                 Spacer()
                     .frame(height: 40)
                     
@@ -88,10 +88,8 @@ struct SignupView: View {
             .background(Color.customPurple)
             .clipShape(Circle())
             
-           
             Spacer()
         }
-      
     }
 }
 

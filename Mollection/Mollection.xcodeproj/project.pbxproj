@@ -30,6 +30,7 @@
 		63E3DECB299A004E00D4D70A /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DECA299A004E00D4D70A /* SignupViewModel.swift */; };
 		63E3DECF299A11D800D4D70A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DECE299A11D800D4D70A /* LoginViewModel.swift */; };
 		63E3DED2299A5E0000D4D70A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DED1299A5E0000D4D70A /* HomeView.swift */; };
+		63E3DED4299A705C00D4D70A /* FBStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DED3299A705C00D4D70A /* FBStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		63E3DECA299A004E00D4D70A /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		63E3DECE299A11D800D4D70A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		63E3DED1299A5E0000D4D70A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		63E3DED3299A705C00D4D70A /* FBStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				63082E332995151F007769E0 /* FBAuth.swift */,
+				63E3DED3299A705C00D4D70A /* FBStore.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				63082E112994ED06007769E0 /* UserDefault.swift in Sources */,
 				63082E142994EF33007769E0 /* LoginView.swift in Sources */,
 				63082E0E2994EA03007769E0 /* SplashView.swift in Sources */,
+				63E3DED4299A705C00D4D70A /* FBStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
