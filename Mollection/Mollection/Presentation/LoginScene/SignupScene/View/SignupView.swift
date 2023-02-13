@@ -6,18 +6,19 @@
 //
 
 import SwiftUI
+import Combine
 
 struct SignupView: View {
     
     @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
-    @State var nickname: String = ""
-    @State var favoriteGenre: String = ""
+    @State var signupButton: AnyCancellable?
+   
     
     var body: some View {
         VStack {
             Spacer()
-                .frame(height: 80)
-            
+                .frame(height: 20)
+
             Text("""
             환영합니다 👐
             Mollection에서 미디어 컬렉션을 만들어봐요
@@ -35,7 +36,7 @@ struct SignupView: View {
                     .font(.notoSans(.Medium, size: 14))
                     .foregroundColor(.gray7)
                 
-                TextField("required", text: $nickname)
+                TextField("required", text: $viewModel.nickname)
                     .frame(height: 44)
                     .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
@@ -48,7 +49,7 @@ struct SignupView: View {
                     .font(.notoSans(.Medium, size: 14))
                     .foregroundColor(.gray7)
                 
-                TextField("option", text: $favoriteGenre)
+                TextField("option", text: $viewModel.favoriteGenre)
                     .frame(height: 44)
                     .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
@@ -60,7 +61,11 @@ struct SignupView: View {
                 .frame(height: 100)
             
             Button {
-                print(nickname)
+                if viewModel.isValid {
+                    HomeView()
+                } else {
+                    print("B")
+                }
             } label: {
                 Text("Start")
                     .font(.notoSans(.Bold, size: 20))
@@ -69,7 +74,8 @@ struct SignupView: View {
             .frame(width: 90, height: 90)
             .background(Color.customPurple)
             .clipShape(Circle())
-
+            
+           
             Spacer()
         }
     }

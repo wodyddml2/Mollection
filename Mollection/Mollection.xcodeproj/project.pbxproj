@@ -29,6 +29,7 @@
 		63082E342995151F007769E0 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E332995151F007769E0 /* FBAuth.swift */; };
 		63E3DECB299A004E00D4D70A /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DECA299A004E00D4D70A /* SignupViewModel.swift */; };
 		63E3DECF299A11D800D4D70A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DECE299A11D800D4D70A /* LoginViewModel.swift */; };
+		63E3DED2299A5E0000D4D70A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DED1299A5E0000D4D70A /* HomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		63082E332995151F007769E0 /* FBAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 		63E3DECA299A004E00D4D70A /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
 		63E3DECE299A11D800D4D70A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		63E3DED1299A5E0000D4D70A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				63082DEB2994DE9A007769E0 /* ContentView.swift */,
+				63E3DED0299A5DEA00D4D70A /* HomeScene */,
 				63082E0C2994E9E4007769E0 /* SplashScene */,
 				63082E122994EEC3007769E0 /* LoginScene */,
 			);
@@ -265,6 +268,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		63E3DED0299A5DEA00D4D70A /* HomeScene */ = {
+			isa = PBXGroup;
+			children = (
+				63E3DED1299A5E0000D4D70A /* HomeView.swift */,
+			);
+			path = HomeScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -350,6 +361,7 @@
 			files = (
 				63082E342995151F007769E0 /* FBAuth.swift in Sources */,
 				63082DEC2994DE9A007769E0 /* ContentView.swift in Sources */,
+				63E3DED2299A5E0000D4D70A /* HomeView.swift in Sources */,
 				63082E082994E238007769E0 /* Font+Custom.swift in Sources */,
 				63082DF82994DFA6007769E0 /* APIKey.swift in Sources */,
 				63082E0A2994E2CE007769E0 /* Color+Custom.swift in Sources */,
