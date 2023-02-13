@@ -8,6 +8,6 @@
 import Foundation
 import Firebase
 
-class FirebaseManager: ObservableObject {
-    
+class FBStore: ObservableObject {
+    let db = Firestore.firestore()
 }

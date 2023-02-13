@@ -28,4 +28,7 @@ struct UserDefault<T> {
 class UserManager {
     @UserDefault(key: "login", defaultValue: false)
     static var login: Bool
+    
+    @UserDefault(key: "uid", defaultValue: nil)
+    static var uid: String?
 }

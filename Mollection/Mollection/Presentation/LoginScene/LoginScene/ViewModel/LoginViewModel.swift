@@ -27,7 +27,8 @@ class LoginViewModel: ObservableObject {
         
         FBAuth.signInWithApple(idTokenString: idTokenString, nonce: nonce) { [weak self] result in
             switch result {
-            case .success(_):
+            case .success(let result):
+                UserManager.uid = result.user.uid
                 self?.isLogin = true
             case .failure(let error):
                 print(error.localizedDescription)
