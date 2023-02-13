@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct SignupView: View {
+    enum FocusedField {
+        case nickname
+        case genre
+    }
+    @FocusState private var focusedField: FocusedField?
     
     @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
     @Binding var isLogged: Bool
-   
+    
     var body: some View {
         VStack {
             Spacer()
@@ -35,6 +40,8 @@ struct SignupView: View {
                     .foregroundColor(.gray7)
                 
                 TextField("required", text: $viewModel.nickname)
+                    .focused($focusedField, equals: .nickname)
+                    .submitLabel(.next)
                     .frame(height: 44)
                     .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
@@ -48,12 +55,22 @@ struct SignupView: View {
                     .foregroundColor(.gray7)
                 
                 TextField("option", text: $viewModel.favoriteGenre)
+                    .focused($focusedField, equals: .genre)
+                    .submitLabel(.done)
                     .frame(height: 44)
                     .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
                     .cornerRadius(5)
             }
             .padding(.init(top: 0, leading: 60, bottom: 0, trailing: 60))
+            .onSubmit {
+                switch focusedField {
+                case .nickname:
+                    focusedField = .genre
+                default:
+                    break
+                }
+            }
             
             Spacer()
                 .frame(height: 100)
@@ -74,6 +91,7 @@ struct SignupView: View {
            
             Spacer()
         }
+      
     }
 }
 
