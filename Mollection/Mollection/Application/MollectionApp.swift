@@ -11,7 +11,7 @@ import Firebase
 
 @main
 struct MollectionApp: App {
-    
+
     init() {
         FirebaseApp.configure()
     }
