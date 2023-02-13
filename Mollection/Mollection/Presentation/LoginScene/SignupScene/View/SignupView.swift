@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct SignupView: View {
+    
+    @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
     @State var nickname: String = ""
     @State var favoriteGenre: String = ""
     
@@ -33,13 +35,12 @@ struct SignupView: View {
                     .font(.notoSans(.Medium, size: 14))
                     .foregroundColor(.gray7)
                 
-                TextField("", text: $nickname)
+                TextField("required", text: $nickname)
                     .frame(height: 44)
                     .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
                     .cornerRadius(5)
                     
-                
                 Spacer()
                     .frame(height: 40)
                     
@@ -47,7 +48,7 @@ struct SignupView: View {
                     .font(.notoSans(.Medium, size: 14))
                     .foregroundColor(.gray7)
                 
-                TextField("", text: $favoriteGenre)
+                TextField("option", text: $favoriteGenre)
                     .frame(height: 44)
                     .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .background(Color.gray2)
@@ -59,7 +60,7 @@ struct SignupView: View {
                 .frame(height: 100)
             
             Button {
-                print("Start")
+                print(nickname)
             } label: {
                 Text("Start")
                     .font(.notoSans(.Bold, size: 20))
@@ -71,8 +72,6 @@ struct SignupView: View {
 
             Spacer()
         }
-        
-        
     }
 }
 
