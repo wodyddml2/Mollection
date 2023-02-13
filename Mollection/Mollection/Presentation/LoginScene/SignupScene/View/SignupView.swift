@@ -6,14 +6,12 @@
 //
 
 import SwiftUI
-import Combine
 
 struct SignupView: View {
     
     @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
-    @State var signupButton: AnyCancellable?
+    @Binding var isLogged: Bool
    
-    
     var body: some View {
         VStack {
             Spacer()
@@ -62,9 +60,7 @@ struct SignupView: View {
             
             Button {
                 if viewModel.isValid {
-                    HomeView()
-                } else {
-                    print("B")
+                    isLogged = true
                 }
             } label: {
                 Text("Start")
@@ -83,6 +79,6 @@ struct SignupView: View {
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView()
+        SignupView(isLogged: .constant(false))
     }
 }

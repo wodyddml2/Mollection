@@ -11,6 +11,7 @@ import AuthenticationServices
 struct LoginView: View {
     
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
+    @Binding var isLogged: Bool
     
     var body: some View {
         NavigationStack {
@@ -48,7 +49,7 @@ struct LoginView: View {
                 .frame(width: 280, height: 40)
                 .navigationTitle("")
                 .navigationDestination(isPresented: $viewModel.isLogin) {
-                    SignupView()
+                    SignupView(isLogged: $isLogged)
                 }
 
             }
@@ -59,6 +60,6 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(isLogged: .constant(false))
     }
 }
