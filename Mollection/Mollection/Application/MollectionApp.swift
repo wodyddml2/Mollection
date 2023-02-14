@@ -8,9 +8,10 @@
 import SwiftUI
 import Firebase
 
-
 @main
 struct MollectionApp: App {
+    
+    @StateObject var firestoreManager = FBStore()
 
     init() {
         FirebaseApp.configure()
@@ -19,6 +20,7 @@ struct MollectionApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(firestoreManager)
         }
     }
 }
