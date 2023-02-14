@@ -1,5 +1,5 @@
 //
-//  SearchInfo.swift
+//  SearchResponse.swift
 //  Mollection
 //
 //  Created by J on 2023/02/14.
@@ -7,8 +7,9 @@
 
 import Foundation
 
-// MARK: - SearchInfo
-struct SearchInfo: Codable {
+// MARK: - SearchResponse
+struct SearchResponse: Codable, Identifiable {
+    var id = UUID()
     let page: Int
     let results: [Result]
     let totalResults, totalPages: Int
