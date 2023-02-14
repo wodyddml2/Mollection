@@ -25,9 +25,7 @@ struct TabView: View {
                     .navigationTitle("Home")
                 case .ellipsis:
                     NavigationView {
-                        VStack {
-                            Text("third")
-                        }
+                        SettingView()
                     }
                 default:
                    EmptyView()
@@ -65,7 +63,9 @@ struct TabView: View {
                         }
                     }
                     .sheet(isPresented: $showSearchView) {
-                        HomeView()
+                        NavigationView {
+                            SearchView()
+                        }
                     }
                     Spacer()
                 }
