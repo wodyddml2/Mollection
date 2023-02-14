@@ -33,7 +33,7 @@
 		63E3DED4299A705C00D4D70A /* FBStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DED3299A705C00D4D70A /* FBStore.swift */; };
 		63E3DED8299B2BB100D4D70A /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DED7299B2BB100D4D70A /* Users.swift */; };
 		63E3DEDC299B4CB700D4D70A /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEDB299B4CB700D4D70A /* TabView.swift */; };
-		63E3DEE1299B614000D4D70A /* TabBarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEE0299B614000D4D70A /* TabBarImage.swift */; };
+		63E3DEE1299B614000D4D70A /* TabBarIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEE0299B614000D4D70A /* TabBarIndex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +62,7 @@
 		63E3DED3299A705C00D4D70A /* FBStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStore.swift; sourceTree = "<group>"; };
 		63E3DED7299B2BB100D4D70A /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		63E3DEDB299B4CB700D4D70A /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
-		63E3DEE0299B614000D4D70A /* TabBarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarImage.swift; sourceTree = "<group>"; };
+		63E3DEE0299B614000D4D70A /* TabBarIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarIndex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,7 +315,7 @@
 		63E3DEDF299B612100D4D70A /* Constant */ = {
 			isa = PBXGroup;
 			children = (
-				63E3DEE0299B614000D4D70A /* TabBarImage.swift */,
+				63E3DEE0299B614000D4D70A /* TabBarIndex.swift */,
 			);
 			path = Constant;
 			sourceTree = "<group>";
@@ -415,7 +415,7 @@
 				63082DEA2994DE9A007769E0 /* MollectionApp.swift in Sources */,
 				63E3DEDC299B4CB700D4D70A /* TabView.swift in Sources */,
 				63E3DECF299A11D800D4D70A /* LoginViewModel.swift in Sources */,
-				63E3DEE1299B614000D4D70A /* TabBarImage.swift in Sources */,
+				63E3DEE1299B614000D4D70A /* TabBarIndex.swift in Sources */,
 				63082E112994ED06007769E0 /* UserDefault.swift in Sources */,
 				63082E142994EF33007769E0 /* LoginView.swift in Sources */,
 				63082E0E2994EA03007769E0 /* SplashView.swift in Sources */,
