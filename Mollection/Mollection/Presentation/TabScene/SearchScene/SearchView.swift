@@ -39,10 +39,9 @@ struct SearchView: View {
                                 .foregroundColor(.accentColor)
                         }
                     }
-                   
-
                 }
             }
+            .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         .searchable(text: $query)
