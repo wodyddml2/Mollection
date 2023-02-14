@@ -9,14 +9,26 @@ import SwiftUI
 
 struct TabBarButton: View {
     
+    var systemName: String
+    var color: Color
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button {
+            
+        } label: {
+            VStack(spacing: 8) {
+                Image(systemName: systemName)
+                    .font(.system(size: 24))
+                    .foregroundColor(color)
+                
+            }
+        }
+
     }
 }
 
 struct TabBarButton_Previews: PreviewProvider {
     static var previews: some View {
-        TabBarButton()
+        TabBarButton(systemName: "star", color: .red)
     }
 }
