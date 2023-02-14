@@ -14,9 +14,10 @@ struct SignupView: View {
     }
     @FocusState private var focusedField: FocusedField?
     
-    @EnvironmentObject private var fbStore: FBStore
+//    @EnvironmentObject private var fbStore: FBStore
     @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
     @Binding var isLogged: Bool
+    @State private var isShowAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -78,7 +79,10 @@ struct SignupView: View {
             
             Button {
                 if viewModel.isValid {
+//                    fbStore.addData(nickname: viewModel.nickname, genre: viewModel.favoriteGenre)
                     isLogged = true
+                } else {
+                    isShowAlert = true
                 }
             } label: {
                 Text("Start")
@@ -88,6 +92,9 @@ struct SignupView: View {
             .frame(width: 90, height: 90)
             .background(Color.customPurple)
             .clipShape(Circle())
+            .alert(isPresented: $isShowAlert) {
+                Alert(title: Text("닉네임을 입력해주세요"))
+            }
             
             Spacer()
         }

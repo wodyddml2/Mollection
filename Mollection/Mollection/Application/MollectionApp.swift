@@ -8,11 +8,10 @@
 import SwiftUI
 import Firebase
 
-
 @main
 struct MollectionApp: App {
     
-    let firestoreManager = FBStore()
+    @StateObject var firestoreManager = FBStore()
 
     init() {
         FirebaseApp.configure()

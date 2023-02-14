@@ -19,8 +19,9 @@ class FBStore: ObservableObject {
         let db = Firestore.firestore()
         db.collection("Users").addDocument(data: ["nickname": nickname, "genre": genre]) { error in
             if error == nil {
-                return
+//                self.fetchData()
             } else {
+                print(error?.localizedDescription)
                 // Handle the error
             }
         }
