@@ -32,6 +32,7 @@
 		63E3DED2299A5E0000D4D70A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DED1299A5E0000D4D70A /* HomeView.swift */; };
 		63E3DED4299A705C00D4D70A /* FBStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DED3299A705C00D4D70A /* FBStore.swift */; };
 		63E3DED8299B2BB100D4D70A /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DED7299B2BB100D4D70A /* Users.swift */; };
+		63E3DEDC299B4CB700D4D70A /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEDB299B4CB700D4D70A /* TabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		63E3DED1299A5E0000D4D70A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		63E3DED3299A705C00D4D70A /* FBStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBStore.swift; sourceTree = "<group>"; };
 		63E3DED7299B2BB100D4D70A /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		63E3DEDB299B4CB700D4D70A /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,10 +99,10 @@
 			children = (
 				63082E152994F469007769E0 /* Mollection.entitlements */,
 				63082E0B2994E3D2007769E0 /* Info.plist */,
-				63E3DED5299B2B8B00D4D70A /* Domain */,
 				63082DF92994E000007769E0 /* Application */,
 				63082DFB2994E07D007769E0 /* Presentation */,
 				63082DFA2994E021007769E0 /* Network */,
+				63E3DED5299B2B8B00D4D70A /* Domain */,
 				63082E042994E210007769E0 /* Utility */,
 				63082DFC2994E0C0007769E0 /* Resources */,
 				63082DEF2994DE9B007769E0 /* Preview Content */,
@@ -137,9 +139,9 @@
 			isa = PBXGroup;
 			children = (
 				63082DEB2994DE9A007769E0 /* ContentView.swift */,
-				63E3DED0299A5DEA00D4D70A /* HomeScene */,
 				63082E0C2994E9E4007769E0 /* SplashScene */,
 				63082E122994EEC3007769E0 /* LoginScene */,
+				63E3DED0299A5DEA00D4D70A /* TabScene */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -274,12 +276,13 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		63E3DED0299A5DEA00D4D70A /* HomeScene */ = {
+		63E3DED0299A5DEA00D4D70A /* TabScene */ = {
 			isa = PBXGroup;
 			children = (
-				63E3DED1299A5E0000D4D70A /* HomeView.swift */,
+				63E3DEDB299B4CB700D4D70A /* TabView.swift */,
+				63E3DEDA299B4C5C00D4D70A /* HomeScene */,
 			);
-			path = HomeScene;
+			path = TabScene;
 			sourceTree = "<group>";
 		};
 		63E3DED5299B2B8B00D4D70A /* Domain */ = {
@@ -296,6 +299,14 @@
 				63E3DED7299B2BB100D4D70A /* Users.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		63E3DEDA299B4C5C00D4D70A /* HomeScene */ = {
+			isa = PBXGroup;
+			children = (
+				63E3DED1299A5E0000D4D70A /* HomeView.swift */,
+			);
+			path = HomeScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,6 +402,7 @@
 				63E3DED8299B2BB100D4D70A /* Users.swift in Sources */,
 				63E3DECB299A004E00D4D70A /* SignupViewModel.swift in Sources */,
 				63082DEA2994DE9A007769E0 /* MollectionApp.swift in Sources */,
+				63E3DEDC299B4CB700D4D70A /* TabView.swift in Sources */,
 				63E3DECF299A11D800D4D70A /* LoginViewModel.swift in Sources */,
 				63082E112994ED06007769E0 /* UserDefault.swift in Sources */,
 				63082E142994EF33007769E0 /* LoginView.swift in Sources */,

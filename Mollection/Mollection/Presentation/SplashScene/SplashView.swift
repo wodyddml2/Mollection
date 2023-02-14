@@ -15,9 +15,10 @@ struct SplashView: View {
         VStack {
             if isActive {
                 if isLogged {
-                    HomeView()
+                    TabView()
                 } else {
-                    LoginView(isLogged: $isLogged)
+                    TabView()
+//                    LoginView(isLogged: $isLogged)
                 }
             } else {
                 Image(systemName: "play.fill")
