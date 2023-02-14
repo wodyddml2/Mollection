@@ -14,6 +14,7 @@ struct SignupView: View {
     }
     @FocusState private var focusedField: FocusedField?
     
+    @EnvironmentObject private var fbStore: FBStore
     @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
     @Binding var isLogged: Bool
     

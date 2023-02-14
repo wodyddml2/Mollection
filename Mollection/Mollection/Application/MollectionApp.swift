@@ -11,6 +11,8 @@ import Firebase
 
 @main
 struct MollectionApp: App {
+    
+    let firestoreManager = FBStore()
 
     init() {
         FirebaseApp.configure()
@@ -19,6 +21,7 @@ struct MollectionApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(firestoreManager)
         }
     }
 }

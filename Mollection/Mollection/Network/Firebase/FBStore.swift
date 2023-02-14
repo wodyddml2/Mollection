@@ -9,11 +9,21 @@ import Foundation
 import Firebase
 
 class FBStore: ObservableObject {
-    @Published var nickname: String = ""
-    @Published var genre: String = ""
+    @Published var users: Users?
     
     init() {
         fetchData()
+    }
+    
+    func addData(nickname: String, genre: String) {
+        let db = Firestore.firestore()
+        db.collection("Users").addDocument(data: ["nickname": nickname, "genre": genre]) { error in
+            if error == nil {
+                return
+            } else {
+                // Handle the error
+            }
+        }
     }
     
     func fetchData() {
@@ -28,8 +38,9 @@ class FBStore: ObservableObject {
             if let document = document, document.exists {
                 let data = document.data()
                 if let data = data {
-                    self.nickname = data["nickname"] as? String ?? ""
-                    self.genre = data["genre"] as? String ?? ""
+                    self.users?.id = document.documentID
+                    self.users?.nickname = data["nickname"] as? String ?? ""
+                    self.users?.genre = data["genre"] as? String ?? ""
                 }
             }
         }
