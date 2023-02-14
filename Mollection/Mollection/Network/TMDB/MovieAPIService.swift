@@ -14,5 +14,8 @@ class MovieAPIService {
     
     private init() { }
     
+    func requestMovieAPI() {
+        AF.request(<#T##convertible: URLRequestConvertible##URLRequestConvertible#>).
+    }
     
 }

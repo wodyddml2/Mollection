@@ -41,7 +41,8 @@
 		63E3DEF1299B6D3500D4D70A /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 63E3DEF0299B6D3500D4D70A /* Kingfisher */; };
 		63E3DEF4299B6DD900D4D70A /* PosterImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEF3299B6DD900D4D70A /* PosterImageView.swift */; };
 		63E3DEF7299B6F8800D4D70A /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEF6299B6F8800D4D70A /* MovieAPI.swift */; };
-		63E3DEF9299B79AA00D4D70A /* MovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEF8299B79AA00D4D70A /* MovieInfo.swift */; };
+		63E3DEF9299B79AA00D4D70A /* SearchInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEF8299B79AA00D4D70A /* SearchInfo.swift */; };
+		63E3DEFF299B822100D4D70A /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DEFE299B822100D4D70A /* SearchRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,7 +77,8 @@
 		63E3DEED299B6AD900D4D70A /* MovieAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIService.swift; sourceTree = "<group>"; };
 		63E3DEF3299B6DD900D4D70A /* PosterImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImageView.swift; sourceTree = "<group>"; };
 		63E3DEF6299B6F8800D4D70A /* MovieAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPI.swift; sourceTree = "<group>"; };
-		63E3DEF8299B79AA00D4D70A /* MovieInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfo.swift; sourceTree = "<group>"; };
+		63E3DEF8299B79AA00D4D70A /* SearchInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchInfo.swift; sourceTree = "<group>"; };
+		63E3DEFE299B822100D4D70A /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 				63082E0B2994E3D2007769E0 /* Info.plist */,
 				63082DF92994E000007769E0 /* Application */,
 				63082DFB2994E07D007769E0 /* Presentation */,
+				63E3DEFC299B803800D4D70A /* Data */,
 				63082DFA2994E021007769E0 /* Network */,
 				63E3DED5299B2B8B00D4D70A /* Domain */,
 				63082E042994E210007769E0 /* Utility */,
@@ -147,6 +150,7 @@
 		63082DFA2994E021007769E0 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				63E3DEFD299B820F00D4D70A /* Router */,
 				63082E322995150D007769E0 /* Firebase */,
 				63E3DEE9299B6A4400D4D70A /* TMDB */,
 				63082DF72994DFA6007769E0 /* APIKey.swift */,
@@ -319,8 +323,6 @@
 		63E3DED6299B2B9C00D4D70A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				63E3DED7299B2BB100D4D70A /* Users.swift */,
-				63E3DEF8299B79AA00D4D70A /* MovieInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -380,6 +382,23 @@
 				63E3DEF6299B6F8800D4D70A /* MovieAPI.swift */,
 			);
 			path = URL;
+			sourceTree = "<group>";
+		};
+		63E3DEFC299B803800D4D70A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				63E3DED7299B2BB100D4D70A /* Users.swift */,
+				63E3DEF8299B79AA00D4D70A /* SearchInfo.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		63E3DEFD299B820F00D4D70A /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				63E3DEFE299B822100D4D70A /* SearchRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -481,13 +500,14 @@
 				63082DEA2994DE9A007769E0 /* MollectionApp.swift in Sources */,
 				63E3DEE7299B66C900D4D70A /* SettingView.swift in Sources */,
 				63E3DEE5299B66A300D4D70A /* SearchView.swift in Sources */,
+				63E3DEFF299B822100D4D70A /* SearchRouter.swift in Sources */,
 				63E3DEDC299B4CB700D4D70A /* TabView.swift in Sources */,
 				63E3DECF299A11D800D4D70A /* LoginViewModel.swift in Sources */,
 				63E3DEE1299B614000D4D70A /* TabBarIndex.swift in Sources */,
 				63E3DEF7299B6F8800D4D70A /* MovieAPI.swift in Sources */,
 				63082E112994ED06007769E0 /* UserDefault.swift in Sources */,
 				63082E142994EF33007769E0 /* LoginView.swift in Sources */,
-				63E3DEF9299B79AA00D4D70A /* MovieInfo.swift in Sources */,
+				63E3DEF9299B79AA00D4D70A /* SearchInfo.swift in Sources */,
 				63082E0E2994EA03007769E0 /* SplashView.swift in Sources */,
 				63E3DED4299A705C00D4D70A /* FBStore.swift in Sources */,
 				63E3DEF4299B6DD900D4D70A /* PosterImageView.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  MovieInfo.swift
+//  SearchInfo.swift
 //  Mollection
 //
 //  Created by J on 2023/02/14.
@@ -7,9 +7,8 @@
 
 import Foundation
 
-// MARK: - MovieInfo
-struct MovieInfo: Codable, Identifiable {
-    var id = UUID()
+// MARK: - SearchInfo
+struct SearchInfo: Codable {
     let page: Int
     let results: [Result]
     let totalResults, totalPages: Int
