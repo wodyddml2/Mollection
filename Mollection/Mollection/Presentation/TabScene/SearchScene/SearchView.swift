@@ -9,7 +9,8 @@ import SwiftUI
 
 struct SearchView: View {
 
-    @ObservedObject var viewModel = SearchViewModel()
+    @ObservedObject private var viewModel = SearchViewModel()
+    @State private var isShowingDetail: Bool = false
     
     var body: some View {
         List {
@@ -35,8 +36,9 @@ struct SearchView: View {
                         
                         HStack {
                             Spacer()
+                            
                             Button {
-                                print("AA")
+                                isShowingDetail = true
                             } label: {
                                 Text("더 보기")
                                     .font(.notoSans(.Regular, size: 12))
@@ -55,6 +57,9 @@ struct SearchView: View {
             if newValue != "" {
                 viewModel.fetchData()
             }
+        }
+        .navigationDestination(isPresented: $isShowingDetail) {
+            DetailView()
         }
     }
 }
