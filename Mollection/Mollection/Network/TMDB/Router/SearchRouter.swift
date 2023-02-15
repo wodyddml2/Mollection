@@ -22,6 +22,7 @@ case search(query: String, page: Int)
         switch self {
         case .search(let query, let page):
             return [
+                "api_key": APIKey.media,
                 "language": "ko-KR",
                 "query": query,
                 "page": page
@@ -42,7 +43,7 @@ case search(query: String, page: Int)
         request.method = method
         switch self {
         case .search:
-            return try URLEncoding(arrayEncoding: .noBrackets).encode(request, with: parameters)
+            return try URLEncoding.default.encode(request, with: parameters)
         }
     }
 }

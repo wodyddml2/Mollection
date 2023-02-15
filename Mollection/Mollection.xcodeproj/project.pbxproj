@@ -164,6 +164,7 @@
 			children = (
 				63E3DEF2299B6DC600D4D70A /* Common */,
 				63082DEB2994DE9A007769E0 /* ContentView.swift */,
+				63E3DEF3299B6DD900D4D70A /* PosterImageView.swift */,
 				63082E0C2994E9E4007769E0 /* SplashScene */,
 				63082E122994EEC3007769E0 /* LoginScene */,
 				63E3DED0299A5DEA00D4D70A /* TabScene */,
@@ -374,7 +375,6 @@
 		63E3DEF2299B6DC600D4D70A /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				63E3DEF3299B6DD900D4D70A /* PosterImageView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
