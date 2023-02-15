@@ -11,26 +11,7 @@ import Kingfisher
 struct DetailView: View {
     @ObservedObject private var viewModel = DetailViewModel()
     var movieData: MovieResult
-    
-    var genre: String {
-        let genreList = viewModel.genreList
-        var genreName = ""
-        
-        if !genreList.isEmpty {
-            if genreList.count > 1 {
-                for i in 0...genreList.count - 1 {
-                    if i == genreList.count - 1 {
-                        genreName += genreList[i].name
-                    } else {
-                        genreName += "\(genreList[i].name) / "
-                    }
-                }
-            } else {
-                genreName = viewModel.genreList[0].name
-            }
-        }
-        return genreName
-    }
+   
     
     var body: some View {
         VStack {
@@ -59,7 +40,7 @@ struct DetailView: View {
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
                 
-                Text(genre)
+                Text(viewModel.genre)
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
             }
@@ -108,7 +89,7 @@ struct DetailView: View {
         }
         .onAppear {
             if movieData.mediaType != .person {
-                viewModel.fetchData(media: movieData.mediaType.rawValue)
+                
             }
         }
     }

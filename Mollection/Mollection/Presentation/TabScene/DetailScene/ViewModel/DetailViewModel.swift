@@ -9,27 +9,23 @@ import Foundation
 import Combine
 
 class DetailViewModel: ObservableObject {
-    @Published var genreList = [Genre]()
+    @Published var genre: String = ""
     
     private var cancellableSet = Set<AnyCancellable>()
     
-    func fetchData(media: String) {
-        MovieAPIService.shared.requestMovieAPI(type: GenreResponse.self, router: Router.genre(media: media))
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    print(error)
-                case .finished:
-                    break
+    func genre() {
+        if !result.genres.isEmpty {
+            if result.genres.count > 1 {
+                for i in 0...result.genres.count - 1 {
+                    if i == result.genres.count - 1 {
+                        self?.genre += result.genres[i].name
+                    } else {
+                        self?.genre += "\(result.genres[i].name) / "
+                    }
                 }
-            } receiveValue: { [weak self] response in
-                switch response.result {
-                case .success(let result):
-                    self?.genreList = result.genres
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            } else {
+                self?.genre = result.genres[0].name
             }
-            .store(in: &cancellableSet)
+        }
     }
 }

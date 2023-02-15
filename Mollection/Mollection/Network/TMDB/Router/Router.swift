@@ -10,15 +10,12 @@ import Alamofire
 
 enum Router: URLRequestConvertible {
     case search(query: String, page: Int)
-    case genre(media: String)
     case cast(media: String, id: Int)
     
     var baseURL: URL {
         switch self {
         case .search:
             return URL(string: MovieAPI.baseURL + MovieAPI.Search.multi)!
-        case .genre(let media):
-            return URL(string: MovieAPI.baseURL + "/genre/\(media)/list")!
         case .cast(let media, let id):
             return URL(string: MovieAPI.baseURL + "/\(media)/\(id)/credits")!
         }
@@ -33,7 +30,7 @@ enum Router: URLRequestConvertible {
                 "query": query,
                 "page": page
             ]
-        case .genre, .cast:
+        case .cast:
             return [
                 "api_key": APIKey.media,
                 "language": "ko-KR"
@@ -43,7 +40,7 @@ enum Router: URLRequestConvertible {
     
     var method: HTTPMethod {
         switch self {
-        case .search, .genre, .cast:
+        case .search, .cast:
             return .get
         }
     }
@@ -53,7 +50,7 @@ enum Router: URLRequestConvertible {
         var request = URLRequest(url: url)
         request.method = method
         switch self {
-        case .search, .genre, .cast:
+        case .search, .cast:
             return try URLEncoding.default.encode(request, with: parameters)
         }
     }
