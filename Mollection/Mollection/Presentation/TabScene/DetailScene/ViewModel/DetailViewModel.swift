@@ -9,10 +9,12 @@ import Foundation
 import Combine
 
 class DetailViewModel: ObservableObject {
+    @Published var genreList = [Genre]()
+    
     private var cancellableSet = Set<AnyCancellable>()
-    @Published var media: String = ""
-    func fetchData() {
-        MovieAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: Router.genre(media: media))
+    
+    func fetchData(media: String) {
+        MovieAPIService.shared.requestMovieAPI(type: GenreResponse.self, router: Router.genre(media: media))
             .sink { completion in
                 switch completion {
                 case .failure(let error):
@@ -23,7 +25,7 @@ class DetailViewModel: ObservableObject {
             } receiveValue: { [weak self] response in
                 switch response.result {
                 case .success(let result):
-                    self?.movieList = result.results.filter { $0.title != nil }
+                    self?.genreList = result.genres
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

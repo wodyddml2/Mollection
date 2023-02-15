@@ -9,13 +9,28 @@ import SwiftUI
 import Kingfisher
 
 struct DetailView: View {
+    @ObservedObject private var viewModel = DetailViewModel()
     var movieData: MovieResult
     
-//    var genre: String {
-//        movieData.genreIDS?.forEach({ <#Int#> in
-//            <#code#>
-//        })
-//    }
+    var genre: String {
+        let genreList = viewModel.genreList
+        var genreName = ""
+        
+        if !genreList.isEmpty {
+            if genreList.count > 1 {
+                for i in 0...genreList.count - 1 {
+                    if i == genreList.count - 1 {
+                        genreName += genreList[i].name
+                    } else {
+                        genreName += "\(genreList[i].name) / "
+                    }
+                }
+            } else {
+                genreName = viewModel.genreList[0].name
+            }
+        }
+        return genreName
+    }
     
     var body: some View {
         VStack {
@@ -44,7 +59,7 @@ struct DetailView: View {
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
                 
-                Text("로맨스 / 판타지")
+                Text(genre)
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
             }
@@ -52,7 +67,7 @@ struct DetailView: View {
                 .frame(height: 0)
             List {
                 Section {
-                    Text("세계 최강의 무기업체를 이끄는 CEO이자, 타고난 매력으로 화려한 삶을 살아가던 토니 스타크. 기자회견을 통해 자신이 아이언맨이라고 정체를 밝힌 이후, 정부로부터 아이언맨 수트를 국가에 귀속시키라는 압박을 받지만 이를 거부한다. 스타크 인더스트리의 운영권까지 수석 비서였던 페퍼 포츠에게 일임하고 히어로로서의 인기를 만끽하며 지내던 토니 스타크. 하지만 그 시각, 아이언맨의 수트 기술을 스타크 가문에 빼앗긴 후 쓸쓸히 돌아가신 아버지의 복수를 다짐해 온 위플래시는 수트의 원천 기술 개발에 성공, 치명적인 무기를 들고 직접 토니 스타크를 찾아 나선다.")
+                    Text(movieData.overview ?? "정보 없음")
                         .font(.notoSans(.Regular, size: 12))
                 } header: {
                     Text("줄거리")
@@ -89,6 +104,11 @@ struct DetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Image(systemName: "bookmark.fill")
                     .foregroundColor(.customPurple)
+            }
+        }
+        .onAppear {
+            if movieData.mediaType != .person {
+                viewModel.fetchData(media: movieData.mediaType.rawValue)
             }
         }
     }
