@@ -24,7 +24,7 @@ struct SearchView: View {
                         Text(data.title ?? "")
                             .font(.notoSans(.Medium, size: 14))
                         
-                        Text("⭐️ \(data.voteAverage ?? 0.0)")
+                        Text("⭐️ \(data.voteAverage ?? 0.0, specifier: "%.1f")")
                             .font(.notoSans(.Regular, size: 12))
                         
                         Text(data.overview ?? "")

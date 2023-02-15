@@ -26,7 +26,7 @@ class SearchViewModel: ObservableObject {
             } receiveValue: { [weak self] response in
                 switch response.result {
                 case .success(let result):
-                    self?.movieList = result.results
+                    self?.movieList = result.results.filter { $0.title != nil }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
