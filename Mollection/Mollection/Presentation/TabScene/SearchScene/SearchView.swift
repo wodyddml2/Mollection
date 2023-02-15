@@ -31,6 +31,8 @@ struct SearchView: View {
                             .font(.notoSans(.Regular, size: 12))
                             .lineLimit(3)
                         
+                        Spacer().frame(height: 8)
+                        
                         HStack {
                             Spacer()
                             Button {
@@ -45,8 +47,8 @@ struct SearchView: View {
                 }
                 .listRowSeparator(.hidden)
             }
-          
         }
+        .scrollDismissesKeyboard(.immediately)
         .listStyle(.plain)
         .searchable(text: $viewModel.query)
         .onChange(of: viewModel.query) { newValue in
