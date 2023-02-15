@@ -10,24 +10,24 @@ import Combine
 
 class DetailViewModel: ObservableObject {
     private var cancellableSet = Set<AnyCancellable>()
-//    
-//    func fetchData() {
-//        MovieAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: Router.search(query: query, page: 1))
-//            .sink { completion in
-//                switch completion {
-//                case .failure(let error):
-//                    print(error)
-//                case .finished:
-//                    break
-//                }
-//            } receiveValue: { [weak self] response in
-//                switch response.result {
-//                case .success(let result):
-//                    self?.movieList = result.results.filter { $0.title != nil }
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
-//            }
-//            .store(in: &cancellableSet)
-//    }
+    @Published var media: String = ""
+    func fetchData() {
+        MovieAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: Router.genre(media: media))
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] response in
+                switch response.result {
+                case .success(let result):
+                    self?.movieList = result.results.filter { $0.title != nil }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .store(in: &cancellableSet)
+    }
 }

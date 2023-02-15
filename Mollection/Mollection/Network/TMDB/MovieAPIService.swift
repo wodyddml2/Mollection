@@ -19,21 +19,6 @@ class MovieAPIService {
             .publishDecodable(type: T.self)
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-//            .sink { completion in
-//                switch completion {
-//                case .finished:
-//                    break
-//                case .failure(let error):
-//                    print(error.localizedDescription)
-//                }
-//            } receiveValue: { response in
-//                switch response.result {
-//                case .success(let success):
-//                    print(success)
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            }
     }
     
 }
