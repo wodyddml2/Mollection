@@ -73,13 +73,16 @@ struct DetailView: View {
                     Text("출연진")
                         .font(.notoSans(.Medium, size: 18))
                 }
-
-
             }
-            
             .listStyle(.plain)
             
             Spacer()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Image(systemName: "bookmark.fill")
+                    .foregroundColor(.customPurple)
+            }
         }
     }
 }

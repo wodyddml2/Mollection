@@ -61,6 +61,7 @@ struct SearchView: View {
         .navigationDestination(isPresented: $isShowingDetail) {
             DetailView()
         }
+        .navigationTitle("")
     }
 }
 
