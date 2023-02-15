@@ -22,7 +22,7 @@ struct SearchResponse: Codable, Identifiable {
 }
 
 // MARK: - MovieResult
-struct MovieResult: Codable, Hashable {
+struct MovieResult: Codable, Identifiable {
     let ids = UUID()
     let posterPath: String?
     let popularity: Double

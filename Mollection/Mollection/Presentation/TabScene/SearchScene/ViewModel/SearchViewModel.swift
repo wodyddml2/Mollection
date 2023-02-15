@@ -10,6 +10,7 @@ import Combine
 
 class SearchViewModel: ObservableObject {
     @Published var query: String = ""
+    
     @Published var movieList = [MovieResult]()
     
     private var cancellableSet = Set<AnyCancellable>()

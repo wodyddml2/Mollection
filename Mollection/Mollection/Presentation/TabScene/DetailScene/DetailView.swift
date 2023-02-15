@@ -9,19 +9,26 @@ import SwiftUI
 import Kingfisher
 
 struct DetailView: View {
-    @State var url = MovieAPI.imageURL + "/8jsvRzKyB1s7YU9e40prhBJyIez.jpg"
+    var movieData: MovieResult
+    
+//    var genre: String {
+//        movieData.genreIDS?.forEach({ <#Int#> in
+//            <#code#>
+//        })
+//    }
+    
     var body: some View {
         VStack {
-            KFImage(URL(string: url))
+            KFImage(URL(string: MovieAPI.imageURL + (movieData.backdropPath ?? "")))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .overlay(alignment: .bottomLeading) {
-                    PosterImageView(url: MovieAPI.imageURL +  "/28iTo42JqjBXzq3aLtKfNwWzO4K.jpg")
+                    PosterImageView(url: MovieAPI.imageURL +  (movieData.posterPath ?? ""))
                         .frame(width: 90)
                         .padding(.init(top: 0, leading: 28, bottom: 20, trailing: 0))
                 }
                 .overlay(alignment: .topLeading) {
-                    Text("쇼 미 더 머니")
+                    Text(movieData.title!)
                         .font(.notoSans(.Bold, size: 20))
                         .foregroundColor(.white)
                         .lineLimit(1)
@@ -33,7 +40,7 @@ struct DetailView: View {
             
             VStack(alignment: .trailing) {
                 Divider().opacity(0)
-                Text("2008-12-25")
+                Text(movieData.releaseDate ?? "")
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
                 
@@ -89,6 +96,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        DetailView(movieData: MovieResult(posterPath: nil, popularity: 1.0, id: 1, overview: nil, backdropPath: nil, voteAverage: nil, mediaType: "D", firstAirDate: nil, originCountry: nil, genreIDS: nil, originalLanguage: nil, voteCount: nil, name: nil, originalName: nil, adult: nil, releaseDate: nil, originalTitle: nil, title: nil, video: nil, profilePath: nil, knownFor: nil))
     }
 }

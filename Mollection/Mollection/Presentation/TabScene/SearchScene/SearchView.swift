@@ -10,56 +10,58 @@ import SwiftUI
 struct SearchView: View {
 
     @ObservedObject private var viewModel = SearchViewModel()
-    @State private var isShowingDetail: Bool = false
+    @State var isShowingDetail: Bool = false
+    @State var movieData: MovieResult?
     
     var body: some View {
-        List {
-            ForEach(viewModel.movieList, id: \.ids) { data in
-                HStack(alignment: .top) {
-                    PosterImageView(url: MovieAPI.imageURL + (data.posterPath ?? ""))
-                        .frame(width: 80)
-                    Spacer()
+        List(viewModel.movieList) { data in
+            HStack(alignment: .top) {
+                PosterImageView(url: MovieAPI.imageURL + (data.posterPath ?? ""))
+                    .frame(width: 80)
+                Spacer()
+                    
+                VStack(alignment: .leading) {
+                    Divider().opacity(0)
+                    Text(data.title ?? "")
+                        .font(.notoSans(.Medium, size: 14))
+                    
+                    Text("⭐️ \(data.voteAverage ?? 0.0, specifier: "%.1f")")
+                        .font(.notoSans(.Regular, size: 12))
+                    
+                    Text(data.overview ?? "")
+                        .font(.notoSans(.Regular, size: 12))
+                        .lineLimit(3)
+                    
+                    Spacer().frame(height: 8)
+                    
+                    HStack {
+                        Spacer()
                         
-                    VStack(alignment: .leading) {
-                        Divider().opacity(0)
-                        Text(data.title ?? "")
-                            .font(.notoSans(.Medium, size: 14))
-                        
-                        Text("⭐️ \(data.voteAverage ?? 0.0, specifier: "%.1f")")
-                            .font(.notoSans(.Regular, size: 12))
-                        
-                        Text(data.overview ?? "")
-                            .font(.notoSans(.Regular, size: 12))
-                            .lineLimit(3)
-                        
-                        Spacer().frame(height: 8)
-                        
-                        HStack {
-                            Spacer()
-                            
-                            Button {
-                                isShowingDetail = true
-                            } label: {
-                                Text("더 보기")
-                                    .font(.notoSans(.Regular, size: 12))
-                                    .foregroundColor(.accentColor)
-                            }
+                        Button {
+                            isShowingDetail = true
+                            movieData = data
+                        } label: {
+                            Text("더 보기")
+                                .font(.notoSans(.Regular, size: 12))
+                                .foregroundColor(.accentColor)
                         }
                     }
                 }
-                .listRowSeparator(.hidden)
             }
+            .listRowSeparator(.hidden)
         }
         .scrollDismissesKeyboard(.immediately)
         .listStyle(.plain)
-        .searchable(text: $viewModel.query)
+        .searchable(text: $viewModel.query, prompt: "검색해주세요")
         .onChange(of: viewModel.query) { newValue in
             if newValue != "" {
                 viewModel.fetchData()
             }
         }
         .navigationDestination(isPresented: $isShowingDetail) {
-            DetailView()
+            if let movieData = movieData {
+                DetailView(movieData: movieData)
+            }
         }
         .navigationTitle("")
     }

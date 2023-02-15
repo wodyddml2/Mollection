@@ -277,8 +277,16 @@
 			isa = PBXGroup;
 			children = (
 				63C272ED299CEE50001C126E /* DetailView.swift */,
+				63C272EF299D03B8001C126E /* ViewModel */,
 			);
 			path = DetailScene;
+			sourceTree = "<group>";
+		};
+		63C272EF299D03B8001C126E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		63E3DEC8299A003400D4D70A /* View */ = {
