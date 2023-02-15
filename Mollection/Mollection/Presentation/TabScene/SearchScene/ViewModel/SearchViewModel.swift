@@ -9,16 +9,24 @@ import Foundation
 import Combine
 
 class SearchViewModel: ObservableObject {
+    @Published var query: String = ""
+    @Published var movieList = [MovieResult]()
+    
     private var cancellableSet = Set<AnyCancellable>()
     
-    func fetch() {
-        MovieAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: SearchRouter.search(query: "iron", page: 1))
+    func fetchData() {
+        MovieAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: SearchRouter.search(query: query, page: 1))
             .sink { completion in
-                print(completion)
-            } receiveValue: { response in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] response in
                 switch response.result {
-                case .success(let a):
-                    print(a)
+                case .success(let result):
+                    self?.movieList = result.results
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

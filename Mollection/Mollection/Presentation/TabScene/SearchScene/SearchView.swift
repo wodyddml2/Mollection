@@ -8,46 +8,51 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State private var query = ""
+
     @ObservedObject var viewModel = SearchViewModel()
     
     var body: some View {
         List {
-            HStack(alignment: .top) {
-                PosterImageView(url: MovieAPI.imageURL + "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg")
-                    .frame(width: 80)
-                Spacer()
-                    
-                VStack(alignment: .leading) {
-                    Divider().opacity(0)
-                    Text("AAAAAAA")
-                        .font(.notoSans(.Medium, size: 14))
-                    
-                    Text("⭐️ 9.2")
-                        .font(.notoSans(.Regular, size: 12))
-                    
-                    Text("1918년 제1차 세계 대전 말 뉴올리언즈. 80세의 외모를 가진 사내 아이가 태어난다. 그의 이름은 벤자민 버튼. 생김새때문에 양로원에 버려져 노인들과 함께")
-                        .font(.notoSans(.Regular, size: 12))
-                        .lineLimit(3)
-                    
-                    HStack {
-                        Spacer()
-                        Button {
-                            print("AA")
-                        } label: {
-                            Text("더 보기")
-                                .font(.notoSans(.Regular, size: 12))
-                                .foregroundColor(.accentColor)
+            ForEach(viewModel.movieList, id: \.ids) { data in
+                HStack(alignment: .top) {
+                    PosterImageView(url: MovieAPI.imageURL + (data.posterPath ?? ""))
+                        .frame(width: 80)
+                    Spacer()
+                        
+                    VStack(alignment: .leading) {
+                        Divider().opacity(0)
+                        Text(data.title ?? "")
+                            .font(.notoSans(.Medium, size: 14))
+                        
+                        Text("⭐️ \(data.voteAverage ?? 0.0)")
+                            .font(.notoSans(.Regular, size: 12))
+                        
+                        Text(data.overview ?? "")
+                            .font(.notoSans(.Regular, size: 12))
+                            .lineLimit(3)
+                        
+                        HStack {
+                            Spacer()
+                            Button {
+                                print("AA")
+                            } label: {
+                                Text("더 보기")
+                                    .font(.notoSans(.Regular, size: 12))
+                                    .foregroundColor(.accentColor)
+                            }
                         }
                     }
                 }
+                .listRowSeparator(.hidden)
             }
-            .listRowSeparator(.hidden)
+          
         }
         .listStyle(.plain)
-        .searchable(text: $query)
-        .onAppear {
-            viewModel.fetch()
+        .searchable(text: $viewModel.query)
+        .onChange(of: viewModel.query) { newValue in
+            if newValue != "" {
+                viewModel.fetchData()
+            }
         }
     }
 }
