@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @State private var query = ""
+    @ObservedObject var viewModel = SearchViewModel()
     
     var body: some View {
         List {
@@ -45,6 +46,9 @@ struct SearchView: View {
         }
         .listStyle(.plain)
         .searchable(text: $query)
+        .onAppear {
+            viewModel.fetch()
+        }
     }
 }
 
