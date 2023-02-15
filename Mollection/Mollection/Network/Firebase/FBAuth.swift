@@ -11,7 +11,7 @@ import CryptoKit
 import FirebaseAuth
 
 struct FBAuth {
-    static func signInWithApple(idTokenString: String, nonce: String, completion: @escaping (Result<AuthDataResult, Error>) -> ()) {
+    static func signInWithApple(idTokenString: String, nonce: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void) {
         let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                   idToken: idTokenString,
                                                   rawNonce: nonce)
