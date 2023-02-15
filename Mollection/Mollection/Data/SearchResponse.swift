@@ -30,7 +30,7 @@ struct MovieResult: Codable, Identifiable {
     let overview: String?
     let backdropPath: String?
     let voteAverage: Double?
-    let mediaType: String
+    let mediaType: MediaType
     let firstAirDate: String?
     let originCountry: [String]?
     let genreIDS: [Int]?
@@ -63,4 +63,10 @@ struct MovieResult: Codable, Identifiable {
         case profilePath = "profile_path"
         case knownFor = "known_for"
     }
+}
+
+enum MediaType: String, Codable {
+    case movie = "movie"
+    case person = "person"
+    case tv = "tv"
 }

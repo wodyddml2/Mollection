@@ -1,5 +1,5 @@
 //
-//  SearchRouter.swift
+//  Router.swift
 //  Mollection
 //
 //  Created by J on 2023/02/14.
@@ -8,13 +8,16 @@
 import Foundation
 import Alamofire
 
-enum SearchRouter: URLRequestConvertible {
-case search(query: String, page: Int)
+enum Router: URLRequestConvertible {
+    case search(query: String, page: Int)
+    case genre(media: String)
     
     var baseURL: URL {
         switch self {
         case .search:
             return URL(string: MovieAPI.baseURL + MovieAPI.Search.multi)!
+        case .genre(let media):
+            return URL(string: MovieAPI.baseURL + "/genre/\(media)/list")!
         }
     }
     
@@ -27,12 +30,17 @@ case search(query: String, page: Int)
                 "query": query,
                 "page": page
             ]
+        case .genre:
+            return [
+                "api_key": APIKey.media,
+                "language": "ko-KR"
+            ]
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .search:
+        case .search, .genre:
             return .get
         }
     }
@@ -42,7 +50,7 @@ case search(query: String, page: Int)
         var request = URLRequest(url: url)
         request.method = method
         switch self {
-        case .search:
+        case .search, .genre:
             return try URLEncoding.default.encode(request, with: parameters)
         }
     }

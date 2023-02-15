@@ -96,6 +96,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(movieData: MovieResult(posterPath: nil, popularity: 1.0, id: 1, overview: nil, backdropPath: nil, voteAverage: nil, mediaType: "D", firstAirDate: nil, originCountry: nil, genreIDS: nil, originalLanguage: nil, voteCount: nil, name: nil, originalName: nil, adult: nil, releaseDate: nil, originalTitle: nil, title: nil, video: nil, profilePath: nil, knownFor: nil))
+        DetailView(movieData: MovieResult(posterPath: nil, popularity: 1.0, id: 1, overview: nil, backdropPath: nil, voteAverage: nil, mediaType: MediaType.movie, firstAirDate: nil, originCountry: nil, genreIDS: nil, originalLanguage: nil, voteCount: nil, name: nil, originalName: nil, adult: nil, releaseDate: nil, originalTitle: nil, title: nil, video: nil, profilePath: nil, knownFor: nil))
     }
 }

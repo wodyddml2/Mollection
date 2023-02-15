@@ -16,7 +16,7 @@ class SearchViewModel: ObservableObject {
     private var cancellableSet = Set<AnyCancellable>()
     
     func fetchData() {
-        MovieAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: SearchRouter.search(query: query, page: 1))
+        MovieAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: Router.search(query: query, page: 1))
             .sink { completion in
                 switch completion {
                 case .failure(let error):
