@@ -63,7 +63,7 @@ struct TabView: View {
                         }
                     }
                     .sheet(isPresented: $showSearchView) {
-                        NavigationView {
+                        NavigationStack {
                             SearchView()
                         }
                     }

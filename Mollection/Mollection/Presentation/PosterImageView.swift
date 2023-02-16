@@ -12,15 +12,24 @@ struct PosterImageView: View {
     var url: String
     
     var body: some View {
-            KFImage(URL(string: url))
+        if url == "" {
+            Image(systemName: "person")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .foregroundColor(.customPurple)
                 .cornerRadius(5)
+        } else {
+            KFImage(URL(string: MediaAPI.imageURL + url))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(5)
+        }
+       
     }
 }
 
 struct PosterImageView_Previews: PreviewProvider {
     static var previews: some View {
-        PosterImageView(url: MovieAPI.imageURL + "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg")
+        PosterImageView(url: MediaAPI.imageURL + "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg")
     }
 }

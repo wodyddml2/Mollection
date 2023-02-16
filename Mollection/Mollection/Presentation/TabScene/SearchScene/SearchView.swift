@@ -8,32 +8,38 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State private var query = ""
-    @ObservedObject var viewModel = SearchViewModel()
+
+    @ObservedObject private var viewModel = SearchViewModel()
+    @State var isShowingDetail: Bool = false
+    @State var mediaData: MediaResult?
     
     var body: some View {
-        List {
+        List(viewModel.mediaList) { data in
             HStack(alignment: .top) {
-                PosterImageView(url: MovieAPI.imageURL + "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg")
+                PosterImageView(url: MediaAPI.imageURL + (data.posterPath ?? ""))
                     .frame(width: 80)
                 Spacer()
                     
                 VStack(alignment: .leading) {
                     Divider().opacity(0)
-                    Text("AAAAAAA")
+                    Text(data.title ?? "")
                         .font(.notoSans(.Medium, size: 14))
                     
-                    Text("⭐️ 9.2")
+                    Text("⭐️ \(data.voteAverage ?? 0.0, specifier: "%.1f")")
                         .font(.notoSans(.Regular, size: 12))
                     
-                    Text("1918년 제1차 세계 대전 말 뉴올리언즈. 80세의 외모를 가진 사내 아이가 태어난다. 그의 이름은 벤자민 버튼. 생김새때문에 양로원에 버려져 노인들과 함께")
+                    Text(data.overview ?? "")
                         .font(.notoSans(.Regular, size: 12))
                         .lineLimit(3)
                     
+                    Spacer().frame(height: 8)
+                    
                     HStack {
                         Spacer()
+                        
                         Button {
-                            print("AA")
+                            isShowingDetail = true
+                            mediaData = data
                         } label: {
                             Text("더 보기")
                                 .font(.notoSans(.Regular, size: 12))
@@ -44,11 +50,21 @@ struct SearchView: View {
             }
             .listRowSeparator(.hidden)
         }
+        .scrollIndicators(.hidden)
+        .scrollDismissesKeyboard(.immediately)
         .listStyle(.plain)
-        .searchable(text: $query)
-        .onAppear {
-            viewModel.fetch()
+        .searchable(text: $viewModel.query, prompt: "검색해주세요")
+        .onChange(of: viewModel.query) { newValue in
+            if newValue != "" {
+                viewModel.fetchData()
+            }
         }
+        .navigationDestination(isPresented: $isShowingDetail) {
+            if let mediaData = mediaData {
+                DetailView(mediaData: mediaData)
+            }
+        }
+        .navigationTitle("")
     }
 }
 
