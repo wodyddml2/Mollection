@@ -9,9 +9,11 @@ import Foundation
 import Combine
 
 class DetailViewModel: ObservableObject {
-    @Published var genre: String = ""
+    
     @Published var castData = [Cast]()
+    @Published var genre: String = ""
     private let genreList = GenreList()
+    
     private var cancellableSet = Set<AnyCancellable>()
     
     func configureGenre(mediaInfo: MediaVO) {

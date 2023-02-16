@@ -93,7 +93,7 @@ struct DetailView: View {
                 Image(systemName: "bookmark.fill")
                     .foregroundColor(.customPurple)
                     .onTapGesture {
-                        
+                        // 어캐 처리할 지
                     }
             }
         }

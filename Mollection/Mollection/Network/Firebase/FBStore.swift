@@ -11,7 +11,7 @@ import Firebase
 class FBStore: ObservableObject {
     private let db = Firestore.firestore()
     
-    @Published var users: Users?
+    @Published var userInfo: UserInfo?
     
     func addUserData(nickname: String, genre: String) {
         let data = [
@@ -23,14 +23,14 @@ class FBStore: ObservableObject {
             .setData(data)
     }
     
-    func addMediaData(documentPath: String) {
+    func addMediaData(documentPath: String, mediaInfo: MediaVO) {
         db.collection("Users").document(UserManager.uid ?? "")
             .collection("media")
             .document(documentPath)
-//            .setData(<#T##documentData: [String : Any]##[String : Any]#>)
+            .setData(["info": mediaInfo])
     }
     
-    func fetchData() {
+    func fetchUserData() {
         guard let uid = UserManager.uid else {return}
         let docRef = db.collection("Users").document(uid).collection("info").document("info")
         docRef.getDocument { document, error in
@@ -38,12 +38,15 @@ class FBStore: ObservableObject {
                 return
             }
             if let document = document, document.exists {
-                   let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                   print("Document data: \(dataDescription)")
-               } else {
-                   print("Document does not exist")
-               }
+                let data = document.data()
+                      
+                if let data = data {
+                    self.userInfo = UserInfo(
+                        nickname: data["nickname"] as? String ?? "",
+                        genre: data["genre"] as? String ?? ""
+                    )
+                }
+            }
         }
     }
-    
 }
