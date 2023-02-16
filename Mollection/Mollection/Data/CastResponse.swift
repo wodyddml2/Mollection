@@ -14,7 +14,8 @@ struct CastResponse: Codable {
 }
 
 // MARK: - Cast
-struct Cast: Codable {
+struct Cast: Codable, Hashable {
+    var ids = UUID()
     let adult: Bool
     let gender, id: Int
     let knownForDepartment: Department

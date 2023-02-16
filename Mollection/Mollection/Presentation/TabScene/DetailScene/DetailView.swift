@@ -39,6 +39,9 @@ struct DetailView: View {
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
                 
+                Spacer()
+                    .frame(height: 6)
+                
                 Text(viewModel.genre)
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
@@ -56,29 +59,32 @@ struct DetailView: View {
                 }
                 
                 Section {
-                    HStack {
-                        PosterImageView(url: MediaAPI.imageURL +  "/28iTo42JqjBXzq3aLtKfNwWzO4K.jpg")
-                            .frame(width: 52)
-                        VStack(alignment: .leading) {
-                            Spacer()
-                                .frame(height: 18)
-                            Text("브래드")
-                                .font(.notoSans(.Medium, size: 14))
-                            Spacer()
-                                .frame(height: 12)
-                            Text("ㄸㄸㄸㄸ / ㄸㄸ")
-                                .font(.notoSans(.Regular, size: 12))
-                                .foregroundColor(.gray7)
-                            Spacer()
+                    ForEach(viewModel.castData, id: \.ids) { data in
+                        HStack {
+                            PosterImageView(url: MediaAPI.imageURL + (data.profilePath ?? ""))
+                                .frame(width: 52)
+                            VStack(alignment: .leading) {
+                                Spacer()
+                                    .frame(height: 18)
+                                Text(data.name)
+                                    .font(.notoSans(.Medium, size: 14))
+                                Spacer()
+                                    .frame(height: 12)
+                                Text("\(data.character ?? "") / \(data.knownForDepartment.rawValue)")
+                                    .font(.notoSans(.Regular, size: 12))
+                                    .foregroundColor(.gray7)
+                                Spacer()
+                            }
                         }
+
                     }
                 } header: {
-                    Text("출연진")
+                    Text("출연진 / 제작진")
                         .font(.notoSans(.Medium, size: 18))
                 }
             }
             .listStyle(.plain)
-            
+            .scrollIndicators(.hidden)
             Spacer()
         }
         
@@ -90,6 +96,7 @@ struct DetailView: View {
         }
         .onAppear {
             viewModel.configureGenre(mediaInfo: mediaData)
+            viewModel.fetchCastInfo(mediaInfo: mediaData)
         }
        
     }

@@ -10,7 +10,7 @@ import Combine
 
 class DetailViewModel: ObservableObject {
     @Published var genre: String = ""
-    
+    @Published var castData = [Cast]()
     private let genreList = GenreList()
     private var cancellableSet = Set<AnyCancellable>()
     
@@ -37,5 +37,26 @@ class DetailViewModel: ObservableObject {
         })
         
         genre.remove(at: genre.index(before: genre.endIndex))
+    }
+    
+    func fetchCastInfo(mediaInfo: MediaResult) {
+        MediaAPIService.shared.requestMediaAPI(type: CastResponse.self, router: Router.cast(media: mediaInfo.mediaType.rawValue, id: mediaInfo.id))
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    print(error)
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] response in
+                switch response.result {
+                case .success(let result):
+                    self?.castData = result.cast
+                    self?.castData.append(contentsOf: result.crew)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+            .store(in: &cancellableSet)
     }
 }

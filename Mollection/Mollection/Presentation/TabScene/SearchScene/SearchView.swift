@@ -50,6 +50,7 @@ struct SearchView: View {
             }
             .listRowSeparator(.hidden)
         }
+        .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.immediately)
         .listStyle(.plain)
         .searchable(text: $viewModel.query, prompt: "검색해주세요")
