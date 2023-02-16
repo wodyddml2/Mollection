@@ -9,10 +9,11 @@ import Foundation
 import Firebase
 
 class FBStore: ObservableObject {
-    @Published var users: Users?
-    let db = Firestore.firestore()
+    private let db = Firestore.firestore()
     
-    func addData(nickname: String, genre: String) {
+    @Published var users: Users?
+    
+    func addUserData(nickname: String, genre: String) {
         let data = [
             "nickname": nickname,
             "genre": genre
@@ -20,6 +21,13 @@ class FBStore: ObservableObject {
         db.collection("Users").document(UserManager.uid ?? "")
             .collection("info").document("info")
             .setData(data)
+    }
+    
+    func addMediaData(documentPath: String) {
+        db.collection("Users").document(UserManager.uid ?? "")
+            .collection("media")
+            .document(documentPath)
+//            .setData(<#T##documentData: [String : Any]##[String : Any]#>)
     }
     
     func fetchData() {

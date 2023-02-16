@@ -29,6 +29,7 @@
 		63082E342995151F007769E0 /* FBAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63082E332995151F007769E0 /* FBAuth.swift */; };
 		6337F884299D07A900730374 /* GenreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337F883299D07A900730374 /* GenreInfo.swift */; };
 		6337F889299D0F1900730374 /* CastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337F888299D0F1900730374 /* CastResponse.swift */; };
+		6337F88B299E1B1400730374 /* MediaVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337F88A299E1B1400730374 /* MediaVO.swift */; };
 		63C272EE299CEE50001C126E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C272ED299CEE50001C126E /* DetailView.swift */; };
 		63C272F1299D03F9001C126E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C272F0299D03F9001C126E /* DetailViewModel.swift */; };
 		63E3DECB299A004E00D4D70A /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DECA299A004E00D4D70A /* SignupViewModel.swift */; };
@@ -72,6 +73,7 @@
 		63082E332995151F007769E0 /* FBAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBAuth.swift; sourceTree = "<group>"; };
 		6337F883299D07A900730374 /* GenreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreInfo.swift; sourceTree = "<group>"; };
 		6337F888299D0F1900730374 /* CastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastResponse.swift; sourceTree = "<group>"; };
+		6337F88A299E1B1400730374 /* MediaVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MediaVO.swift; path = Mollection/Data/MediaVO.swift; sourceTree = SOURCE_ROOT; };
 		63C272ED299CEE50001C126E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		63C272F0299D03F9001C126E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		63E3DECA299A004E00D4D70A /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 		63E3DED6299B2B9C00D4D70A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				6337F88A299E1B1400730374 /* MediaVO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63082E342995151F007769E0 /* FBAuth.swift in Sources */,
+				6337F88B299E1B1400730374 /* MediaVO.swift in Sources */,
 				63082DEC2994DE9A007769E0 /* ContentView.swift in Sources */,
 				63E3DED2299A5E0000D4D70A /* HomeView.swift in Sources */,
 				63082E082994E238007769E0 /* Font+Custom.swift in Sources */,

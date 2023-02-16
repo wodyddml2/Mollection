@@ -11,7 +11,7 @@ struct SearchView: View {
 
     @ObservedObject private var viewModel = SearchViewModel()
     @State var isShowingDetail: Bool = false
-    @State var mediaData: MediaResult?
+    @State var mediaData: MediaVO?
     
     var body: some View {
         List(viewModel.mediaList) { data in

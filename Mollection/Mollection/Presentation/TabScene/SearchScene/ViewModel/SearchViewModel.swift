@@ -11,7 +11,7 @@ import Combine
 class SearchViewModel: ObservableObject {
     @Published var query: String = ""
     
-    @Published var mediaList = [MediaResult]()
+    @Published var mediaList = [MediaVO]()
     
     private var cancellableSet = Set<AnyCancellable>()
     
@@ -28,6 +28,9 @@ class SearchViewModel: ObservableObject {
                 switch response.result {
                 case .success(let result):
                     self?.mediaList = result.results.filter { $0.title != nil }
+                        .map({ result in
+                            result.toDomain()
+                        })
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

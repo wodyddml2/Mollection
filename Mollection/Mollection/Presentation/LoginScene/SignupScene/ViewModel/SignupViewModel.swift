@@ -25,7 +25,7 @@ final class SignupViewModel: ObservableObject {
     }
     
     func userInfoAdd() {
-        FBStore().addData(nickname: nickname, genre: favoriteGenre)
+        FBStore().addUserData(nickname: nickname, genre: favoriteGenre)
     }
     
     init() {
