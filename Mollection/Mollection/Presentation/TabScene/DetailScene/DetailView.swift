@@ -18,7 +18,7 @@ struct DetailView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .overlay(alignment: .bottomLeading) {
-                    PosterImageView(url: MediaAPI.imageURL +  (mediaData.posterPath ?? ""))
+                    PosterImageView(url: mediaData.posterPath ?? "")
                         .frame(width: 90)
                         .padding(.init(top: 0, leading: 28, bottom: 20, trailing: 0))
                 }
@@ -61,7 +61,7 @@ struct DetailView: View {
                 Section {
                     ForEach(viewModel.castData, id: \.ids) { data in
                         HStack {
-                            PosterImageView(url: MediaAPI.imageURL + (data.profilePath ?? ""))
+                            PosterImageView(url: data.profilePath ?? "")
                                 .frame(width: 52)
                             VStack(alignment: .leading) {
                                 Spacer()

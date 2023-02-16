@@ -12,10 +12,19 @@ struct PosterImageView: View {
     var url: String
     
     var body: some View {
-            KFImage(URL(string: url))
+        if url == "" {
+            Image(systemName: "person")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .foregroundColor(.customPurple)
                 .cornerRadius(5)
+        } else {
+            KFImage(URL(string: MediaAPI.imageURL + url))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(5)
+        }
+       
     }
 }
 
