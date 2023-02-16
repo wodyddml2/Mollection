@@ -24,7 +24,6 @@ struct PosterImageView: View {
                     .aspectRatio(contentMode: .fit)
                     .cornerRadius(5)
         }
-       
     }
 }
 

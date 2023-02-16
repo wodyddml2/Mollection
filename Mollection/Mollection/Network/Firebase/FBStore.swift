@@ -10,40 +10,31 @@ import Firebase
 
 class FBStore: ObservableObject {
     @Published var users: Users?
-    
-    init() {
-        fetchData()
-    }
+    let db = Firestore.firestore()
     
     func addData(nickname: String, genre: String) {
-        let db = Firestore.firestore()
-        db.collection("Users").addDocument(data: ["nickname": nickname, "genre": genre]) { error in
-            if error == nil {
-//                self.fetchData()
-            } else {
-                print(error?.localizedDescription)
-                // Handle the error
-            }
-        }
+        let data = [
+            "nickname": nickname,
+            "genre": genre
+        ]
+        db.collection("Users").document(UserManager.uid ?? "")
+            .collection("info").document("info")
+            .setData(data)
     }
     
     func fetchData() {
-        let db = Firestore.firestore()
         guard let uid = UserManager.uid else {return}
-        let docRef = db.collection("Users").document(uid)
+        let docRef = db.collection("Users").document(uid).collection("info").document("info")
         docRef.getDocument { document, error in
             guard error == nil else {
                 return
             }
-            
             if let document = document, document.exists {
-                let data = document.data()
-                if let data = data {
-                    self.users?.id = document.documentID
-                    self.users?.nickname = data["nickname"] as? String ?? ""
-                    self.users?.genre = data["genre"] as? String ?? ""
-                }
-            }
+                   let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                   print("Document data: \(dataDescription)")
+               } else {
+                   print("Document does not exist")
+               }
         }
     }
     

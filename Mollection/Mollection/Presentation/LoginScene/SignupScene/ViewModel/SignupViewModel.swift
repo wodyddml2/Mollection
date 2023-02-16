@@ -24,6 +24,10 @@ final class SignupViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    func userInfoAdd() {
+        FBStore().addData(nickname: nickname, genre: favoriteGenre)
+    }
+    
     init() {
         isNicknameValid
             .receive(on: RunLoop.main)
