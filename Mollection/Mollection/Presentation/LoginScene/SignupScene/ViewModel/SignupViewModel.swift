@@ -14,7 +14,6 @@ final class SignupViewModel: ObservableObject {
     
     @Published var isValid: Bool = false
     
-    let fbStore = FBStore()
     private var cancellables = Set<AnyCancellable>()
     
     private var isNicknameValid: AnyPublisher<Bool, Never> {
@@ -23,6 +22,10 @@ final class SignupViewModel: ObservableObject {
                 return input.count > 0
             }
             .eraseToAnyPublisher()
+    }
+    
+    func userInfoAdd() {
+        FBStore().addData(nickname: nickname, genre: favoriteGenre)
     }
     
     init() {

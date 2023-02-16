@@ -17,8 +17,7 @@ struct SplashView: View {
                 if isLogged {
                     TabView()
                 } else {
-                    TabView()
-//                    LoginView(isLogged: $isLogged)
+                    LoginView(isLogged: $isLogged)
                 }
             } else {
                 Image(systemName: "play.fill")
@@ -27,7 +26,6 @@ struct SplashView: View {
             }
         }
         .onAppear {
-            isLogged = false
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 withAnimation {
                     isActive = true

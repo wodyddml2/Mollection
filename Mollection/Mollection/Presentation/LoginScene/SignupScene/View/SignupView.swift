@@ -79,7 +79,8 @@ struct SignupView: View {
             
             Button {
                 if viewModel.isValid {
-//                    fbStore.addData(nickname: viewModel.nickname, genre: viewModel.favoriteGenre)
+                    viewModel.userInfoAdd()
+                    UserManager.login = true
                     isLogged = true
                 } else {
                     isShowAlert = true
