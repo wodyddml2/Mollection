@@ -9,22 +9,21 @@ import SwiftUI
 import Kingfisher
 
 struct DetailView: View {
-    @ObservedObject private var viewModel = DetailViewModel()
-    var movieData: MovieResult
+    @StateObject private var viewModel = DetailViewModel()
+    var mediaData: MediaResult
    
-    
     var body: some View {
         VStack {
-            KFImage(URL(string: MovieAPI.imageURL + (movieData.backdropPath ?? "")))
+            KFImage(URL(string: MediaAPI.imageURL + (mediaData.backdropPath ?? "")))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .overlay(alignment: .bottomLeading) {
-                    PosterImageView(url: MovieAPI.imageURL +  (movieData.posterPath ?? ""))
+                    PosterImageView(url: MediaAPI.imageURL +  (mediaData.posterPath ?? ""))
                         .frame(width: 90)
                         .padding(.init(top: 0, leading: 28, bottom: 20, trailing: 0))
                 }
                 .overlay(alignment: .topLeading) {
-                    Text(movieData.title!)
+                    Text(mediaData.title!)
                         .font(.notoSans(.Bold, size: 20))
                         .foregroundColor(.white)
                         .lineLimit(1)
@@ -36,19 +35,20 @@ struct DetailView: View {
             
             VStack(alignment: .trailing) {
                 Divider().opacity(0)
-                Text(movieData.releaseDate ?? "")
+                Text(mediaData.releaseDate ?? "")
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
                 
                 Text(viewModel.genre)
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
+                    
             }
             Spacer()
                 .frame(height: 0)
             List {
                 Section {
-                    Text(movieData.overview ?? "정보 없음")
+                    Text(mediaData.overview ?? "정보 없음")
                         .font(.notoSans(.Regular, size: 12))
                 } header: {
                     Text("줄거리")
@@ -57,7 +57,7 @@ struct DetailView: View {
                 
                 Section {
                     HStack {
-                        PosterImageView(url: MovieAPI.imageURL +  "/28iTo42JqjBXzq3aLtKfNwWzO4K.jpg")
+                        PosterImageView(url: MediaAPI.imageURL +  "/28iTo42JqjBXzq3aLtKfNwWzO4K.jpg")
                             .frame(width: 52)
                         VStack(alignment: .leading) {
                             Spacer()
@@ -81,6 +81,7 @@ struct DetailView: View {
             
             Spacer()
         }
+        
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Image(systemName: "bookmark.fill")
@@ -88,15 +89,14 @@ struct DetailView: View {
             }
         }
         .onAppear {
-            if movieData.mediaType != .person {
-                
-            }
+            viewModel.configureGenre(mediaInfo: mediaData)
         }
+       
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(movieData: MovieResult(posterPath: nil, popularity: 1.0, id: 1, overview: nil, backdropPath: nil, voteAverage: nil, mediaType: MediaType.movie, firstAirDate: nil, originCountry: nil, genreIDS: nil, originalLanguage: nil, voteCount: nil, name: nil, originalName: nil, adult: nil, releaseDate: nil, originalTitle: nil, title: nil, video: nil, profilePath: nil, knownFor: nil))
+        DetailView(mediaData: MediaResult(posterPath: nil, popularity: 1.0, id: 1, overview: nil, backdropPath: nil, voteAverage: nil, mediaType: MediaType.movie, firstAirDate: nil, originCountry: nil, genreIDS: nil, originalLanguage: nil, voteCount: nil, name: nil, originalName: nil, adult: nil, releaseDate: nil, originalTitle: nil, title: nil, video: nil, profilePath: nil, knownFor: nil))
     }
 }

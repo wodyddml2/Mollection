@@ -21,6 +21,6 @@ struct PosterImageView: View {
 
 struct PosterImageView_Previews: PreviewProvider {
     static var previews: some View {
-        PosterImageView(url: MovieAPI.imageURL + "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg")
+        PosterImageView(url: MediaAPI.imageURL + "/6WBeq4fCfn7AN0o21W9qNcRF2l9.jpg")
     }
 }

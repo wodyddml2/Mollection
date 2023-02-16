@@ -11,21 +11,31 @@ import Combine
 class DetailViewModel: ObservableObject {
     @Published var genre: String = ""
     
+    private let genreList = GenreList()
     private var cancellableSet = Set<AnyCancellable>()
     
-    func genre() {
-        if !result.genres.isEmpty {
-            if result.genres.count > 1 {
-                for i in 0...result.genres.count - 1 {
-                    if i == result.genres.count - 1 {
-                        self?.genre += result.genres[i].name
-                    } else {
-                        self?.genre += "\(result.genres[i].name) / "
-                    }
-                }
-            } else {
-                self?.genre = result.genres[0].name
-            }
+    func configureGenre(mediaInfo: MediaResult) {
+        guard let mediaGenre = mediaInfo.genreIDS else {return}
+        
+        switch mediaInfo.mediaType {
+        case .movie:
+            listOfGenres(mediaGenre: mediaGenre, genreType: genreList.movieGenre)
+        case .tv:
+            listOfGenres(mediaGenre: mediaGenre, genreType: genreList.tvGenre)
+        case .person:
+            break
         }
+    }
+    
+    func listOfGenres(mediaGenre: [Int], genreType: [GenreInfo]) {
+        mediaGenre.forEach({ value in
+            genreType.forEach { info in
+                if info.id == value {
+                    genre += "\(info.name) "
+                }
+            }
+        })
+        
+        genre.remove(at: genre.index(before: genre.endIndex))
     }
 }

@@ -11,12 +11,12 @@ struct SearchView: View {
 
     @ObservedObject private var viewModel = SearchViewModel()
     @State var isShowingDetail: Bool = false
-    @State var movieData: MovieResult?
+    @State var mediaData: MediaResult?
     
     var body: some View {
-        List(viewModel.movieList) { data in
+        List(viewModel.mediaList) { data in
             HStack(alignment: .top) {
-                PosterImageView(url: MovieAPI.imageURL + (data.posterPath ?? ""))
+                PosterImageView(url: MediaAPI.imageURL + (data.posterPath ?? ""))
                     .frame(width: 80)
                 Spacer()
                     
@@ -39,7 +39,7 @@ struct SearchView: View {
                         
                         Button {
                             isShowingDetail = true
-                            movieData = data
+                            mediaData = data
                         } label: {
                             Text("더 보기")
                                 .font(.notoSans(.Regular, size: 12))
@@ -59,8 +59,8 @@ struct SearchView: View {
             }
         }
         .navigationDestination(isPresented: $isShowingDetail) {
-            if let movieData = movieData {
-                DetailView(movieData: movieData)
+            if let mediaData = mediaData {
+                DetailView(mediaData: mediaData)
             }
         }
         .navigationTitle("")

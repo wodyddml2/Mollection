@@ -11,12 +11,12 @@ import Combine
 class SearchViewModel: ObservableObject {
     @Published var query: String = ""
     
-    @Published var movieList = [MovieResult]()
+    @Published var mediaList = [MediaResult]()
     
     private var cancellableSet = Set<AnyCancellable>()
     
     func fetchData() {
-        MovieAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: Router.search(query: query, page: 1))
+        MediaAPIService.shared.requestMovieAPI(type: SearchResponse.self, router: Router.search(query: query, page: 1))
             .sink { completion in
                 switch completion {
                 case .failure(let error):
@@ -27,7 +27,7 @@ class SearchViewModel: ObservableObject {
             } receiveValue: { [weak self] response in
                 switch response.result {
                 case .success(let result):
-                    self?.movieList = result.results.filter { $0.title != nil }
+                    self?.mediaList = result.results.filter { $0.title != nil }
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

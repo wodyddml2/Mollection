@@ -15,9 +15,9 @@ enum Router: URLRequestConvertible {
     var baseURL: URL {
         switch self {
         case .search:
-            return URL(string: MovieAPI.baseURL + MovieAPI.Search.multi)!
+            return URL(string: MediaAPI.baseURL + MediaAPI.Search.multi)!
         case .cast(let media, let id):
-            return URL(string: MovieAPI.baseURL + "/\(media)/\(id)/credits")!
+            return URL(string: MediaAPI.baseURL + "/\(media)/\(id)/credits")!
         }
     }
     

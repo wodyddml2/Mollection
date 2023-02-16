@@ -11,7 +11,7 @@ import Foundation
 struct SearchResponse: Codable, Identifiable {
     var id = UUID()
     let page: Int
-    let results: [MovieResult]
+    let results: [MediaResult]
     let totalResults, totalPages: Int
 
     enum CodingKeys: String, CodingKey {
@@ -21,8 +21,8 @@ struct SearchResponse: Codable, Identifiable {
     }
 }
 
-// MARK: - MovieResult
-struct MovieResult: Codable, Identifiable {
+// MARK: - MediaResult
+struct MediaResult: Codable, Identifiable {
     let ids = UUID()
     let posterPath: String?
     let popularity: Double
@@ -41,7 +41,7 @@ struct MovieResult: Codable, Identifiable {
     let releaseDate, originalTitle, title: String?
     let video: Bool?
     let profilePath: String?
-    let knownFor: [MovieResult]?
+    let knownFor: [MediaResult]?
 
     enum CodingKeys: String, CodingKey {
         case posterPath = "poster_path"
