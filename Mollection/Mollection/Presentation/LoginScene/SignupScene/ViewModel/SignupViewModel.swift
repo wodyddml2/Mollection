@@ -14,6 +14,7 @@ final class SignupViewModel: ObservableObject {
     
     @Published var isValid: Bool = false
     
+    let fbStore = FBStore()
     private var cancellables = Set<AnyCancellable>()
     
     private var isNicknameValid: AnyPublisher<Bool, Never> {
