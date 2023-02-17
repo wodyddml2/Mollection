@@ -10,7 +10,7 @@ import SwiftUI
 struct SplashView: View {
     @State var isActive: Bool = false
     @State var isLogged: Bool = UserManager.login
-    @EnvironmentObject var fbStore: FBStore
+    @EnvironmentObject private var fbStore: FBStore
     var body: some View {
         VStack {
             if isActive {

@@ -22,7 +22,6 @@ struct TabView: View {
                     NavigationView {
                         HomeView()
                     }
-                    .navigationTitle("Home")
                 case .ellipsis:
                     NavigationView {
                         SettingView()

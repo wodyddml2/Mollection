@@ -24,9 +24,6 @@ final class SignupViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    func userInfoAdd() {
-        FBStore().addUserData(nickname: nickname, genre: favoriteGenre)
-    }
     
     init() {
         isNicknameValid
