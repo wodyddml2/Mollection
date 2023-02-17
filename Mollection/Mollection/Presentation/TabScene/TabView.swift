@@ -31,7 +31,7 @@ struct TabView: View {
                 }
             }
             
-            Spacer()
+            Spacer().frame(height: 0)
             
             Divider()
             
