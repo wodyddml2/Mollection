@@ -22,7 +22,6 @@ struct TabView: View {
                     NavigationView {
                         HomeView()
                     }
-                    .navigationTitle("Home")
                 case .ellipsis:
                     NavigationView {
                         SettingView()
@@ -32,7 +31,7 @@ struct TabView: View {
                 }
             }
             
-            Spacer()
+            Spacer().frame(height: 0)
             
             Divider()
             

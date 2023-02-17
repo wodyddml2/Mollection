@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Users: Identifiable {
-    var id: String
+struct UserInfo: Identifiable {
+    var id = UUID()
     var nickname: String
     var genre: String
 }

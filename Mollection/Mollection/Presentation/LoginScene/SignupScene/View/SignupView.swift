@@ -14,7 +14,7 @@ struct SignupView: View {
     }
     @FocusState private var focusedField: FocusedField?
     
-//    @EnvironmentObject private var fbStore: FBStore
+    @EnvironmentObject private var fbStore: FBStore
     @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
     @Binding var isLogged: Bool
     @State private var isShowAlert: Bool = false
@@ -79,7 +79,7 @@ struct SignupView: View {
             
             Button {
                 if viewModel.isValid {
-                    viewModel.userInfoAdd()
+                    fbStore.addUserData(nickname: viewModel.nickname, genre: viewModel.favoriteGenre)
                     UserManager.login = true
                     isLogged = true
                 } else {

@@ -10,7 +10,7 @@ import SwiftUI
 struct SplashView: View {
     @State var isActive: Bool = false
     @State var isLogged: Bool = UserManager.login
-    
+    @EnvironmentObject private var fbStore: FBStore
     var body: some View {
         VStack {
             if isActive {
@@ -26,6 +26,7 @@ struct SplashView: View {
             }
         }
         .onAppear {
+            fbStore.fetchUserData()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 withAnimation {
                     isActive = true

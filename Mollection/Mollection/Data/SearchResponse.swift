@@ -65,6 +65,12 @@ struct MediaResult: Codable, Identifiable {
     }
 }
 
+extension MediaResult {
+    func toDomain() -> MediaVO {
+        return .init(id: id, backdropPath: backdropPath, posterPath: posterPath, title: title, releaseDate: releaseDate, overview: overview, voteAverage: voteAverage, mediaType: mediaType, genreIDS: genreIDS)
+    }
+}
+
 enum MediaType: String, Codable {
     case movie = "movie"
     case person = "person"

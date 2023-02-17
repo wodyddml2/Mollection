@@ -9,12 +9,14 @@ import Foundation
 import Combine
 
 class DetailViewModel: ObservableObject {
-    @Published var genre: String = ""
+    
     @Published var castData = [Cast]()
+    @Published var genre: String = ""
     private let genreList = GenreList()
+    
     private var cancellableSet = Set<AnyCancellable>()
     
-    func configureGenre(mediaInfo: MediaResult) {
+    func configureGenre(mediaInfo: MediaVO) {
         guard let mediaGenre = mediaInfo.genreIDS else {return}
         
         switch mediaInfo.mediaType {
@@ -39,7 +41,7 @@ class DetailViewModel: ObservableObject {
         genre.remove(at: genre.index(before: genre.endIndex))
     }
     
-    func fetchCastInfo(mediaInfo: MediaResult) {
+    func fetchCastInfo(mediaInfo: MediaVO) {
         MediaAPIService.shared.requestMediaAPI(type: CastResponse.self, router: Router.cast(media: mediaInfo.mediaType.rawValue, id: mediaInfo.id))
             .sink { completion in
                 switch completion {

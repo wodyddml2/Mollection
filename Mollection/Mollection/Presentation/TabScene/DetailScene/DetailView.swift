@@ -10,7 +10,7 @@ import Kingfisher
 
 struct DetailView: View {
     @StateObject private var viewModel = DetailViewModel()
-    var mediaData: MediaResult
+    var mediaData: MediaVO
    
     var body: some View {
         VStack {
@@ -92,6 +92,9 @@ struct DetailView: View {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Image(systemName: "bookmark.fill")
                     .foregroundColor(.customPurple)
+                    .onTapGesture {
+                        // 어캐 처리할 지
+                    }
             }
         }
         .onAppear {
@@ -104,6 +107,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(mediaData: MediaResult(posterPath: nil, popularity: 1.0, id: 1, overview: nil, backdropPath: nil, voteAverage: nil, mediaType: MediaType.movie, firstAirDate: nil, originCountry: nil, genreIDS: nil, originalLanguage: nil, voteCount: nil, name: nil, originalName: nil, adult: nil, releaseDate: nil, originalTitle: nil, title: nil, video: nil, profilePath: nil, knownFor: nil))
+        DetailView(mediaData: MediaVO(id: 1, mediaType: .movie))
     }
 }
