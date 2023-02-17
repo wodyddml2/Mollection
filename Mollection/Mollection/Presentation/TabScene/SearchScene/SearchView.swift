@@ -52,6 +52,8 @@ struct SearchView: View {
         }
         .scrollIndicators(.hidden)
         .scrollDismissesKeyboard(.immediately)
+        .navigationTitle("미디어 검색")
+        .navigationBarTitleDisplayMode(.inline)
         .listStyle(.plain)
         .searchable(text: $viewModel.query, prompt: "검색해주세요")
         .onChange(of: viewModel.query) { newValue in
@@ -64,7 +66,6 @@ struct SearchView: View {
                 DetailView(mediaData: mediaData)
             }
         }
-        .navigationTitle("")
     }
 }
 
