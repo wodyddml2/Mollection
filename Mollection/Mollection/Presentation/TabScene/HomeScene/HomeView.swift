@@ -15,7 +15,7 @@ struct HomeView: View {
         MediaAPI.imageURL + "/6Ujbtp0NklUoQ67s32HyW6R5540.jpg"
     ]
     
-    @State private var categoryTitle = "aaa"
+    @State private var categoryTitle = "카테고리 Name"
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 10), count: 3)
     
@@ -38,6 +38,11 @@ struct HomeView: View {
         }
         .navigationTitle(Text(categoryTitle))
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Image(systemName: "menucard")
+            }
+        }
     
     }
 }
