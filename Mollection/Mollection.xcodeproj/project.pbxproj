@@ -174,8 +174,7 @@
 			children = (
 				63E3DEF2299B6DC600D4D70A /* Common */,
 				63082DEB2994DE9A007769E0 /* ContentView.swift */,
-				63E3DEF3299B6DD900D4D70A /* PosterImageView.swift */,
-				63082E0C2994E9E4007769E0 /* SplashScene */,
+				63082E0D2994EA03007769E0 /* SplashView.swift */,
 				63082E122994EEC3007769E0 /* LoginScene */,
 				63E3DED0299A5DEA00D4D70A /* TabScene */,
 			);
@@ -229,14 +228,6 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		63082E0C2994E9E4007769E0 /* SplashScene */ = {
-			isa = PBXGroup;
-			children = (
-				63082E0D2994EA03007769E0 /* SplashView.swift */,
-			);
-			path = SplashScene;
-			sourceTree = "<group>";
-		};
 		63082E0F2994ECE9007769E0 /* PropertyWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +270,14 @@
 				63E3DED3299A705C00D4D70A /* FBStore.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		6337F88C299FB5C000730374 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				63C272EC299CEE44001C126E /* DetailScene */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		63C272EC299CEE44001C126E /* DetailScene */ = {
@@ -333,8 +332,8 @@
 		63E3DED0299A5DEA00D4D70A /* TabScene */ = {
 			isa = PBXGroup;
 			children = (
+				6337F88C299FB5C000730374 /* Common */,
 				63E3DEDB299B4CB700D4D70A /* TabView.swift */,
-				63C272EC299CEE44001C126E /* DetailScene */,
 				63E3DEDA299B4C5C00D4D70A /* HomeScene */,
 				63E3DEE2299B668700D4D70A /* SearchScene */,
 				63E3DEE3299B669100D4D70A /* SettingScene */,
@@ -404,6 +403,7 @@
 		63E3DEF2299B6DC600D4D70A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				63E3DEF3299B6DD900D4D70A /* PosterImageView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";

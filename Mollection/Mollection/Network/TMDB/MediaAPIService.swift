@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import Alamofire
 
-class MediaAPIService {
+final class MediaAPIService {
     static let shared = MediaAPIService()
     
     private init() { }

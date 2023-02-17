@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-class FBStore: ObservableObject {
+final class FBStore: ObservableObject {
     private let db = Firestore.firestore()
     
     @Published var userInfo: UserInfo?

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class DetailViewModel: ObservableObject {
+final class DetailViewModel: ObservableObject {
     
     @Published var castData = [Cast]()
     @Published var genre: String = ""
@@ -29,7 +29,7 @@ class DetailViewModel: ObservableObject {
         }
     }
     
-    func listOfGenres(mediaGenre: [Int], genreType: [GenreInfo]) {
+    private func listOfGenres(mediaGenre: [Int], genreType: [GenreInfo]) {
         mediaGenre.forEach({ value in
             genreType.forEach { info in
                 if info.id == value {

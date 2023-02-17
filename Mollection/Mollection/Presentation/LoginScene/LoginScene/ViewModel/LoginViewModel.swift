@@ -8,7 +8,7 @@
 import Foundation
 import AuthenticationServices
 
-class LoginViewModel: ObservableObject {
+final class LoginViewModel: ObservableObject {
     @Published var isLogin: Bool = false
     @Published var currentNonce: String?
     
