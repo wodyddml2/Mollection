@@ -10,6 +10,9 @@ import Kingfisher
 
 struct DetailView: View {
     @StateObject private var viewModel = DetailViewModel()
+    @EnvironmentObject private var fbStore: FBStore
+    
+    @State private var isShowAlert: Bool = false
     var mediaData: MediaVO
    
     var body: some View {
@@ -94,12 +97,25 @@ struct DetailView: View {
                     .foregroundColor(.customPurple)
                     .onTapGesture {
                         // 어캐 처리할 지
+                        isShowAlert = true
                     }
             }
         }
         .onAppear {
             viewModel.configureGenre(mediaInfo: mediaData)
             viewModel.fetchCastInfo(mediaInfo: mediaData)
+        }
+        .alert(isPresented: $isShowAlert) {
+            let ok = Alert.Button.default(Text("확인")) {
+                if fbStore.mediaInfos.isEmpty {
+                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+                } else {
+                    fbStore.addMediaData(documentPath: "ABC", mediaInfo: mediaData)
+                }
+            }
+            let cancel = Alert.Button.cancel(Text("취소"))
+            
+            return Alert(title: Text("저장하시겠습니까?"), primaryButton: ok, secondaryButton: cancel)
         }
        
     }
