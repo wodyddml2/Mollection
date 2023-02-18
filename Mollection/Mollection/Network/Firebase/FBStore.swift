@@ -7,13 +7,13 @@
 
 import Foundation
 import Firebase
-
+import FirebaseFirestoreSwift
 enum FireStoreMedia: String {
     case id
     case title
-    case background, poster
-    case overview, release, average
-    case mediaType, genre
+    case backdropPath, posterPath
+    case overview, releaseDate, voteAverage
+    case mediaType, genreIDS
 }
 
 final class FBStore: ObservableObject {
@@ -53,43 +53,66 @@ final class FBStore: ObservableObject {
             }
         }
     }
-
+    
     //MARK: Media
     func addMediaData(documentPath: String, mediaInfo: MediaVO) {
         let data: [String : Any] = [
             FireStoreMedia.id.rawValue: mediaInfo.id,
             FireStoreMedia.title.rawValue: mediaInfo.title ?? "",
-            FireStoreMedia.background.rawValue: mediaInfo.backdropPath ?? "",
-            FireStoreMedia.poster.rawValue: mediaInfo.posterPath ?? "",
+            FireStoreMedia.backdropPath.rawValue: mediaInfo.backdropPath ?? "",
+            FireStoreMedia.posterPath.rawValue: mediaInfo.posterPath ?? "",
             FireStoreMedia.overview.rawValue: mediaInfo.overview ?? "",
-            FireStoreMedia.release.rawValue: mediaInfo.releaseDate ?? "",
-            FireStoreMedia.average.rawValue: mediaInfo.voteAverage ?? "",
+            FireStoreMedia.releaseDate.rawValue: mediaInfo.releaseDate ?? "",
+            FireStoreMedia.voteAverage.rawValue: mediaInfo.voteAverage ?? 0.0,
             FireStoreMedia.mediaType.rawValue: mediaInfo.mediaType.rawValue,
-            FireStoreMedia.genre.rawValue: mediaInfo.genreIDS ?? []
+            FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? []
         ]
         
         db.collection("Users").document(UserManager.uid ?? "")
             .collection("media")
-            .document(documentPath)
+            .document("Mollection")
             .collection(documentPath)
-            .addDocument(data: data)
+            .addDocument(from: <#T##Encodable#>)
+//            .addDocument(data: data)
     }
     
     func getMediaData() {
         guard let uid = UserManager.uid else {return}
-        let docRef = db.collection("Users").document(uid).collection("media")
-        docRef.getDocuments { [weak self] snapshot, error in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                    for document in snapshot!.documents {
-//                        self?.mediaInfos.append(MediaInfo(mediaInfo: document.data()["info"] as! MediaVO, category: document.documentID))
-                        print("\(document.documentID) => \(document.data())")
-                    }
-                    
-                    self?.navigationTitle = self?.mediaInfos.first?.category ?? "Mollection"                
+        db.collection("Users").document(uid).collection("media")
+            .document("Mollection")
+            .getDocument { document, error in
+                if let document = document {
+                   let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                   print("Cached document data: \(dataDescription)")
+                 } else {
+                   print("Document does not exist in cache")
+                 }
             }
-        }
+           
     }
-    
+//.collection("Mollection")
+//        .getDocuments { [weak self] snapshot, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//            } else {
+//
+//                for document in snapshot!.documents {
+//                    //                        self?.mediaInfos.append(MediaInfo(
+//                    //                            mediaInfo: MediaVO(
+//                    //                                id: document.data()[FireStoreMedia.id.rawValue] as! Int,
+//                    //                                backdropPath: document.data()[FireStoreMedia.background.rawValue] as? String,
+//                    //                                posterPath: document.data()[FireStoreMedia.poster.rawValue] as? String,
+//                    //                                title: document.data()[FireStoreMedia.title.rawValue] as? String,
+//                    //                                releaseDate: document.data()[FireStoreMedia.release.rawValue] as? String,
+//                    //                                overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
+//                    //                                voteAverage: document.data()[FireStoreMedia.average.rawValue] as? Double,
+//                    //                                mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
+//                    //                                genreIDS: document.data()[FireStoreMedia.genre.rawValue] as? [Int]),
+//                    //                            category: document.documentID))
+//                    print("\(document.documentID) => \(document.data())")
+//                }
+//
+//                self?.navigationTitle = self?.mediaInfos.first?.category ?? "Mollection"
+//            }
+//        }
 }

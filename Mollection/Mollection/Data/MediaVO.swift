@@ -18,3 +18,4 @@ struct MediaVO: Identifiable {
     var mediaType: MediaType
     var genreIDS: [Int]?
 }
+

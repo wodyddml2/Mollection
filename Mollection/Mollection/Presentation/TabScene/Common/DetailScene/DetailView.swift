@@ -123,7 +123,7 @@ struct DetailView: View {
             viewModel.fetchCastInfo(mediaInfo: mediaData)
         }
         .alert(isPresented: $isShowAlert) {
-            print(selectionIndex)
+            
             let ok = Alert.Button.default(Text("확인")) {
                 if fbStore.mediaInfos.isEmpty {
                     fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
