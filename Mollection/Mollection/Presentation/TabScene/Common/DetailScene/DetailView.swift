@@ -94,23 +94,24 @@ struct DetailView: View {
         }
         
         .toolbar {
-            
-            
             ToolbarItem(placement: .navigationBarTrailing) {
-                //                Image(systemName: "bookmark.fill")
-                //                    .foregroundColor(.customPurple)
-                //                    .onTapGesture {
-                //                        // 어캐 처리할 지
-                ////                        isShowAlert = true
-                //
-                //                    }
                 Menu {
-                    Picker(selection: $selectionIndex) {
-                        
+                    Picker(selection: Binding(get: {selectionIndex}, set: {
+                        selectionIndex = $0
+                        isShowAlert = true
+                    }) ) {
+                        if fbStore.mediaInfos.isEmpty {
+                            ForEach(0..<1) { _ in
+                                Text("Mollection")
+                            }
+                        } else {
+                            ForEach(fbStore.mediaInfos, id: \.id) { value in
+                                Text(value.category)
+                            }
+                        }
                     } label: {
                         EmptyView()
                     }
-                    
                 } label: {
                     Image(systemName: "bookmark.fill")
                         .foregroundColor(.customPurple)
@@ -122,6 +123,7 @@ struct DetailView: View {
             viewModel.fetchCastInfo(mediaInfo: mediaData)
         }
         .alert(isPresented: $isShowAlert) {
+            print(selectionIndex)
             let ok = Alert.Button.default(Text("확인")) {
                 if fbStore.mediaInfos.isEmpty {
                     fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
