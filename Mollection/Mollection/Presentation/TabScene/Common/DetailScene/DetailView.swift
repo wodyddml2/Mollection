@@ -10,8 +10,13 @@ import Kingfisher
 
 struct DetailView: View {
     @StateObject private var viewModel = DetailViewModel()
+    @EnvironmentObject private var fbStore: FBStore
+    
+    @State private var selectionIndex = 0
+    
+    @State private var isShowAlert: Bool = false
     var mediaData: MediaVO
-   
+    
     var body: some View {
         VStack {
             KFImage(URL(string: MediaAPI.imageURL + (mediaData.backdropPath ?? "")))
@@ -45,7 +50,7 @@ struct DetailView: View {
                 Text(viewModel.genre)
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
-                    
+                
             }
             Spacer()
                 .frame(height: 0)
@@ -76,7 +81,7 @@ struct DetailView: View {
                                 Spacer()
                             }
                         }
-
+                        
                     }
                 } header: {
                     Text("출연진 / 제작진")
@@ -90,18 +95,47 @@ struct DetailView: View {
         
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Image(systemName: "bookmark.fill")
-                    .foregroundColor(.customPurple)
-                    .onTapGesture {
-                        // 어캐 처리할 지
+                Menu {
+                    Picker(selection: Binding(get: {selectionIndex}, set: {
+                        selectionIndex = $0
+                        isShowAlert = true
+                    }) ) {
+                        if fbStore.mediaInfos.isEmpty {
+                            ForEach(0..<1) { _ in
+                                Text("Mollection")
+                            }
+                        } else {
+                            ForEach(fbStore.mediaInfos, id: \.id) { value in
+                                Text(value.category)
+                            }
+                        }
+                    } label: {
+                        EmptyView()
                     }
+                } label: {
+                    Image(systemName: "bookmark.fill")
+                        .foregroundColor(.customPurple)
+                }
             }
         }
         .onAppear {
             viewModel.configureGenre(mediaInfo: mediaData)
             viewModel.fetchCastInfo(mediaInfo: mediaData)
         }
-       
+        .alert(isPresented: $isShowAlert) {
+            
+            let ok = Alert.Button.default(Text("확인")) {
+                if fbStore.mediaInfos.isEmpty {
+                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+                } else {
+                    fbStore.addMediaData(documentPath: "ABC", mediaInfo: mediaData)
+                }
+            }
+            let cancel = Alert.Button.cancel(Text("취소"))
+            
+            return Alert(title: Text(mediaData.title ?? ""), message: Text("해당 자료를 저장하시겠습니까?"), primaryButton: ok, secondaryButton: cancel)
+        }
+        
     }
 }
 

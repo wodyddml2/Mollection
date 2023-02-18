@@ -26,7 +26,8 @@ struct SplashView: View {
             }
         }
         .onAppear {
-            fbStore.fetchUserData()
+            fbStore.getUserData()
+            fbStore.getMediaData()
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                 withAnimation {
                     isActive = true

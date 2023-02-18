@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class SearchViewModel: ObservableObject {
+final class SearchViewModel: ObservableObject {
     @Published var query: String = ""
     
     @Published var mediaList = [MediaVO]()

@@ -14,8 +14,8 @@ struct HomeView: View {
         MediaAPI.imageURL + "/pGMfidaVkjMVHXNIl7yippnipFT.jpg",
         MediaAPI.imageURL + "/6Ujbtp0NklUoQ67s32HyW6R5540.jpg"
     ]
+    @EnvironmentObject private var fbStore: FBStore
     
-    @State private var categoryTitle = "카테고리 Name"
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 10), count: 3)
     
@@ -36,7 +36,7 @@ struct HomeView: View {
             }
             .padding(10)
         }
-        .navigationTitle(Text(categoryTitle))
+        .navigationTitle(Text(fbStore.navigationTitle))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

@@ -30,6 +30,7 @@
 		6337F884299D07A900730374 /* GenreInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337F883299D07A900730374 /* GenreInfo.swift */; };
 		6337F889299D0F1900730374 /* CastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337F888299D0F1900730374 /* CastResponse.swift */; };
 		6337F88B299E1B1400730374 /* MediaVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337F88A299E1B1400730374 /* MediaVO.swift */; };
+		638D6D8229A0E7DF002F7476 /* MediaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638D6D8129A0E7DF002F7476 /* MediaInfo.swift */; };
 		63C272EE299CEE50001C126E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C272ED299CEE50001C126E /* DetailView.swift */; };
 		63C272F1299D03F9001C126E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C272F0299D03F9001C126E /* DetailViewModel.swift */; };
 		63E3DECB299A004E00D4D70A /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DECA299A004E00D4D70A /* SignupViewModel.swift */; };
@@ -74,6 +75,7 @@
 		6337F883299D07A900730374 /* GenreInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreInfo.swift; sourceTree = "<group>"; };
 		6337F888299D0F1900730374 /* CastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CastResponse.swift; sourceTree = "<group>"; };
 		6337F88A299E1B1400730374 /* MediaVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MediaVO.swift; path = Mollection/Data/MediaVO.swift; sourceTree = SOURCE_ROOT; };
+		638D6D8129A0E7DF002F7476 /* MediaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInfo.swift; sourceTree = "<group>"; };
 		63C272ED299CEE50001C126E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		63C272F0299D03F9001C126E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		63E3DECA299A004E00D4D70A /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
@@ -174,8 +176,7 @@
 			children = (
 				63E3DEF2299B6DC600D4D70A /* Common */,
 				63082DEB2994DE9A007769E0 /* ContentView.swift */,
-				63E3DEF3299B6DD900D4D70A /* PosterImageView.swift */,
-				63082E0C2994E9E4007769E0 /* SplashScene */,
+				63082E0D2994EA03007769E0 /* SplashView.swift */,
 				63082E122994EEC3007769E0 /* LoginScene */,
 				63E3DED0299A5DEA00D4D70A /* TabScene */,
 			);
@@ -229,14 +230,6 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		63082E0C2994E9E4007769E0 /* SplashScene */ = {
-			isa = PBXGroup;
-			children = (
-				63082E0D2994EA03007769E0 /* SplashView.swift */,
-			);
-			path = SplashScene;
-			sourceTree = "<group>";
-		};
 		63082E0F2994ECE9007769E0 /* PropertyWrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +272,14 @@
 				63E3DED3299A705C00D4D70A /* FBStore.swift */,
 			);
 			path = Firebase;
+			sourceTree = "<group>";
+		};
+		6337F88C299FB5C000730374 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				63C272EC299CEE44001C126E /* DetailScene */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 		63C272EC299CEE44001C126E /* DetailScene */ = {
@@ -333,8 +334,8 @@
 		63E3DED0299A5DEA00D4D70A /* TabScene */ = {
 			isa = PBXGroup;
 			children = (
+				6337F88C299FB5C000730374 /* Common */,
 				63E3DEDB299B4CB700D4D70A /* TabView.swift */,
-				63C272EC299CEE44001C126E /* DetailScene */,
 				63E3DEDA299B4C5C00D4D70A /* HomeScene */,
 				63E3DEE2299B668700D4D70A /* SearchScene */,
 				63E3DEE3299B669100D4D70A /* SettingScene */,
@@ -404,6 +405,7 @@
 		63E3DEF2299B6DC600D4D70A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				63E3DEF3299B6DD900D4D70A /* PosterImageView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -423,6 +425,7 @@
 				6337F883299D07A900730374 /* GenreInfo.swift */,
 				63E3DEF8299B79AA00D4D70A /* SearchResponse.swift */,
 				6337F888299D0F1900730374 /* CastResponse.swift */,
+				638D6D8129A0E7DF002F7476 /* MediaInfo.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				63082E342995151F007769E0 /* FBAuth.swift in Sources */,
 				6337F88B299E1B1400730374 /* MediaVO.swift in Sources */,
 				63082DEC2994DE9A007769E0 /* ContentView.swift in Sources */,
+				638D6D8229A0E7DF002F7476 /* MediaInfo.swift in Sources */,
 				63E3DED2299A5E0000D4D70A /* HomeView.swift in Sources */,
 				63082E082994E238007769E0 /* Font+Custom.swift in Sources */,
 				63C272F1299D03F9001C126E /* DetailViewModel.swift in Sources */,
