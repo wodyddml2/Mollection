@@ -10,7 +10,7 @@ import AuthenticationServices
 
 struct LoginView: View {
     
-    @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
+    @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
     @Binding var isLogged: Bool
     
     var body: some View {
@@ -51,7 +51,6 @@ struct LoginView: View {
                 .navigationDestination(isPresented: $viewModel.isLogin) {
                     SignupView(isLogged: $isLogged)
                 }
-
             }
         }
     }

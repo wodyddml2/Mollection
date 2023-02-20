@@ -8,42 +8,39 @@
 import SwiftUI
 
 struct HomeView: View {
-    let a = [
-        MediaAPI.imageURL + "/91V6NI1JXCTDhaSSkoY7T87hk09.jpg",
-        MediaAPI.imageURL + "/zyzD9DGJWyA3VDMrS6ZzmW61SAd.jpg",
-        MediaAPI.imageURL + "/pGMfidaVkjMVHXNIl7yippnipFT.jpg",
-        MediaAPI.imageURL + "/6Ujbtp0NklUoQ67s32HyW6R5540.jpg"
-    ]
     @EnvironmentObject private var fbStore: FBStore
-    
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 10), count: 3)
     
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 15) {
-                ForEach(a, id: \.self) { data in
-                    VStack {
-                        PosterImageView(url: data)
-                            .frame(height: 170)
-                        
-                        Text("벤자민 버튼의 시간은 거꾸로 간다")
-                            .font(.notoSans(.Regular, size: 12))
-                            .lineLimit(1)
+                ForEach(fbStore.mediaInfos, id: \.id) { data in
+                    NavigationLink {
+                        DetailView(mediaData: data.mediaInfo)
+                    } label: {
+                        VStack {
+                            PosterImageView(url: data.mediaInfo.posterPath ?? "")
+                                .frame(height: 170)
+                            
+                            Text(data.mediaInfo.title ?? "")
+                                .font(.notoSans(.Regular, size: 12))
+                                .foregroundColor(.black)
+                                .lineLimit(1)
+                        }
                     }
-                    
                 }
             }
             .padding(10)
         }
-        .navigationTitle(Text(fbStore.navigationTitle))
+        .navigationTitle(Text("Mollection"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Image(systemName: "menucard")
             }
         }
-    
+        
     }
 }
 

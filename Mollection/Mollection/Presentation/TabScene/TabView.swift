@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TabView: View {
     
+    @EnvironmentObject private var fbStore: FBStore
     @State var selectedIndex: TabBarIndex = .house
     @State var showSearchView: Bool = false
 
@@ -69,6 +70,9 @@ struct TabView: View {
                     Spacer()
                 }
             }
+        }.onAppear {
+            fbStore.getUserData()
+            fbStore.getMediaData()
         }
     }
 }

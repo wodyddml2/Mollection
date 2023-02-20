@@ -7,7 +7,7 @@
 
 import Foundation
 import Firebase
-import FirebaseFirestoreSwift
+
 enum FireStoreMedia: String {
     case id
     case title
@@ -67,52 +67,78 @@ final class FBStore: ObservableObject {
             FireStoreMedia.mediaType.rawValue: mediaInfo.mediaType.rawValue,
             FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? []
         ]
-        
+  
         db.collection("Users").document(UserManager.uid ?? "")
             .collection("media")
             .document("Mollection")
             .collection(documentPath)
-            .addDocument(from: <#T##Encodable#>)
-//            .addDocument(data: data)
+            .addDocument(data: data)
     }
     
     func getMediaData() {
         guard let uid = UserManager.uid else {return}
+        
         db.collection("Users").document(uid).collection("media")
             .document("Mollection")
-            .getDocument { document, error in
-                if let document = document {
-                   let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                   print("Cached document data: \(dataDescription)")
-                 } else {
-                   print("Document does not exist in cache")
-                 }
+            .collection("Mollection")
+            .addSnapshotListener { [weak self] snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("no")
+                    return
+                }
+                
+                self?.mediaInfos.removeAll()
+                
+                for document in documents {
+                    self?.mediaInfos.append(MediaInfo(
+                        mediaInfo: MediaVO(
+                            id: document.data()[FireStoreMedia.id.rawValue] as! Int,
+                            backdropPath: document.data()[FireStoreMedia.backdropPath.rawValue] as? String,
+                            posterPath: document.data()[FireStoreMedia.posterPath.rawValue] as? String,
+                            title: document.data()[FireStoreMedia.title.rawValue] as? String,
+                            releaseDate: document.data()[FireStoreMedia.releaseDate.rawValue] as? String,
+                            overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
+                            voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
+                            mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
+                            genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
+                        category: document.documentID))
+                }
             }
-           
     }
-//.collection("Mollection")
-//        .getDocuments { [weak self] snapshot, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//            } else {
-//
-//                for document in snapshot!.documents {
-//                    //                        self?.mediaInfos.append(MediaInfo(
-//                    //                            mediaInfo: MediaVO(
-//                    //                                id: document.data()[FireStoreMedia.id.rawValue] as! Int,
-//                    //                                backdropPath: document.data()[FireStoreMedia.background.rawValue] as? String,
-//                    //                                posterPath: document.data()[FireStoreMedia.poster.rawValue] as? String,
-//                    //                                title: document.data()[FireStoreMedia.title.rawValue] as? String,
-//                    //                                releaseDate: document.data()[FireStoreMedia.release.rawValue] as? String,
-//                    //                                overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
-//                    //                                voteAverage: document.data()[FireStoreMedia.average.rawValue] as? Double,
-//                    //                                mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
-//                    //                                genreIDS: document.data()[FireStoreMedia.genre.rawValue] as? [Int]),
-//                    //                            category: document.documentID))
-//                    print("\(document.documentID) => \(document.data())")
-//                }
-//
-//                self?.navigationTitle = self?.mediaInfos.first?.category ?? "Mollection"
-//            }
-//        }
+    
+    //        .document("Mollection")
+    //        .collection("Mollection")
+    //        .getDocuments { [weak self] snapshot, error in
+    //            if let error = error {
+    //                print(error.localizedDescription)
+    //            } else {
+    //
+    //                for document in snapshot!.documents {
+    //                    //                        self?.mediaInfos.append(MediaInfo(
+    //                    //                            mediaInfo: MediaVO(
+    //                    //                                id: document.data()[FireStoreMedia.id.rawValue] as! Int,
+    //                    //                                backdropPath: document.data()[FireStoreMedia.background.rawValue] as? String,
+    //                    //                                posterPath: document.data()[FireStoreMedia.poster.rawValue] as? String,
+    //                    //                                title: document.data()[FireStoreMedia.title.rawValue] as? String,
+    //                    //                                releaseDate: document.data()[FireStoreMedia.release.rawValue] as? String,
+    //                    //                                overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
+    //                    //                                voteAverage: document.data()[FireStoreMedia.average.rawValue] as? Double,
+    //                    //                                mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
+    //                    //                                genreIDS: document.data()[FireStoreMedia.genre.rawValue] as? [Int]),
+    //                    //                            category: document.documentID))
+    //                    print("\(document.documentID) => \(document.data())")
+    //                }
+    //
+    //                self?.navigationTitle = self?.mediaInfos.first?.category ?? "Mollection"
+    //            }
+    //        }
+    
+    //        .getDocument { document, error in
+    //            if let document = document {
+    //                print("Cached document data: \(document.data())")
+    //             } else {
+    //               print("Document does not exist in cache")
+    //             }
+    //        }
+    
 }
