@@ -50,10 +50,11 @@ struct DetailView: View {
                 Text(viewModel.genre)
                     .font(.notoSans(.Regular, size: 14))
                     .padding(.trailing)
-                
             }
+            
             Spacer()
                 .frame(height: 0)
+            
             List {
                 Section {
                     Text(mediaData.overview ?? "정보 없음")
@@ -95,27 +96,32 @@ struct DetailView: View {
         
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Menu {
-                    Picker(selection: Binding(get: {selectionIndex}, set: {
-                        selectionIndex = $0
+                Image(systemName: "bookmark.fill")
+                    .foregroundColor(.customPurple)
+                    .onTapGesture {
                         isShowAlert = true
-                    }) ) {
-                        if fbStore.mediaInfos.isEmpty {
-                            ForEach(0..<1) { _ in
-                                Text("Mollection")
-                            }
-                        } else {
-                            ForEach(fbStore.mediaInfos, id: \.id) { value in
-                                Text(value.category)
-                            }
-                        }
-                    } label: {
-                        EmptyView()
                     }
-                } label: {
-                    Image(systemName: "bookmark.fill")
-                        .foregroundColor(.customPurple)
-                }
+//                Menu {
+//                    Picker(selection: Binding(get: {selectionIndex}, set: {
+//                        selectionIndex = $0
+//                        isShowAlert = true
+//                    }) ) {
+//                        if fbStore.mediaInfos.isEmpty {
+//                            ForEach(0..<1) { _ in
+//                                Text("Mollection")
+//                            }
+//                        } else {
+//                            ForEach(fbStore.mediaInfos, id: \.id) { value in
+//                                Text(value.category)
+//                            }
+//                        }
+//                    } label: {
+//                        EmptyView()
+//                    }
+//                } label: {
+//                    Image(systemName: "bookmark.fill")
+//                        .foregroundColor(.customPurple)
+//                }
             }
         }
         .onAppear {
@@ -125,11 +131,12 @@ struct DetailView: View {
         .alert(isPresented: $isShowAlert) {
             
             let ok = Alert.Button.default(Text("확인")) {
-                if fbStore.mediaInfos.isEmpty {
-                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
-                } else {
-                    fbStore.addMediaData(documentPath: "ABC", mediaInfo: mediaData)
-                }
+                fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+//                if fbStore.mediaInfos.isEmpty {
+//                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+//                } else {
+//                    fbStore.addMediaData(documentPath: "ABC", mediaInfo: mediaData)
+//                }
             }
             let cancel = Alert.Button.cancel(Text("취소"))
             

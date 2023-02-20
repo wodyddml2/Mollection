@@ -77,6 +77,7 @@ final class FBStore: ObservableObject {
     
     func getMediaData() {
         guard let uid = UserManager.uid else {return}
+        
         db.collection("Users").document(uid).collection("media")
             .document("Mollection")
             .collection("Mollection")
@@ -85,7 +86,7 @@ final class FBStore: ObservableObject {
                     print("no")
                     return
                 }
-   
+                self?.mediaInfos.removeAll()
                 for document in documents {
                     self?.mediaInfos.append(MediaInfo(
                         mediaInfo: MediaVO(
@@ -101,7 +102,6 @@ final class FBStore: ObservableObject {
                         category: document.documentID))
                 }
             }
-        
     }
     
     //        .document("Mollection")
