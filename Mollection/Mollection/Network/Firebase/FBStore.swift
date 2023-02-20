@@ -86,7 +86,9 @@ final class FBStore: ObservableObject {
                     print("no")
                     return
                 }
+                
                 self?.mediaInfos.removeAll()
+                
                 for document in documents {
                     self?.mediaInfos.append(MediaInfo(
                         mediaInfo: MediaVO(
