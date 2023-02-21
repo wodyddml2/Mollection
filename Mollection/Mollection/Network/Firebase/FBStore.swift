@@ -67,7 +67,7 @@ final class FBStore: ObservableObject {
             FireStoreMedia.mediaType.rawValue: mediaInfo.mediaType.rawValue,
             FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? []
         ]
-  
+        
         db.collection("Users").document(UserManager.uid ?? "")
             .collection("media")
             .document("Mollection")
@@ -104,6 +104,15 @@ final class FBStore: ObservableObject {
                         category: document.documentID))
                 }
             }
+    }
+    
+    func deleteMediaData(documentPath: String) {
+        guard let uid = UserManager.uid else {return}
+        db.collection("Users").document(uid).collection("media")
+            .document("Mollection")
+            .collection("Mollection")
+            .document(documentPath)
+            .delete()
     }
     
     //        .document("Mollection")

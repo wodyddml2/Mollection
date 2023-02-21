@@ -12,6 +12,8 @@ final class DetailViewModel: ObservableObject {
     
     @Published var castData = [Cast]()
     @Published var genre: String = ""
+    @Published var isShowAlert: Bool = false
+    
     private let genreList = GenreList()
     
     private var cancellableSet = Set<AnyCancellable>()
