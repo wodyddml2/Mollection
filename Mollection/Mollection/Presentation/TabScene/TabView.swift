@@ -72,8 +72,9 @@ struct TabView: View {
                 }
             }
         }.onAppear {
-            fbStore.getUserData()
+            fbStore.getCategoryData()
             fbStore.getMediaData()
+            fbStore.getUserData()
         }
     }
 }

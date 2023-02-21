@@ -33,12 +33,25 @@ struct HomeView: View {
             }
             .padding(10)
         }
-        .navigationTitle(Text("Mollection"))
+        .navigationTitle(fbStore.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Image(systemName: "menucard")
+        .toolbarTitleMenu(content: {
+            ForEach(fbStore.categorys, id: \.self) { category in
+                Button {
+                    
+                } label: {
+                    Text(category)
+                }
+
             }
+        })
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Image(systemName: "menucard")
+//            }
+//        }
+        .onAppear {
+            print(fbStore.categorys)
         }
         
     }

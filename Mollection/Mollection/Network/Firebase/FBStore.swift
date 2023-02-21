@@ -12,8 +12,10 @@ final class FBStore: ObservableObject {
     private let db = Firestore.firestore()
     
     @Published var userInfo: UserInfo?
-    @Published var navigationTitle: String = ""
+    @Published var navigationTitle: String = "Mollection"
     @Published var mediaInfos = [MediaInfo]()
+    @Published var categorys = [String]()
+    var checkCategory: Bool = false
     
     //MARK: User
     func addUserData(nickname: String, genre: String) {
@@ -113,5 +115,33 @@ final class FBStore: ObservableObject {
         guard let uid = UserManager.uid else {return}
         db.collection(FireStoreID.Users.rawValue).document(uid).collection("Category")
             .addDocument(data: ["category": category])
+    }
+    
+    func getCategoryData() {
+        guard let uid = UserManager.uid else {return}
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection("Category")
+            .addSnapshotListener { [weak self] snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("no document")
+                    return
+                }
+                
+                self?.categorys.removeAll()
+                
+                for document in documents {
+                    self?.categorys.append(document.data()["category"] as! String)
+                }
+            }
+    }
+    
+    func checkCategoryData() {
+        guard let uid = UserManager.uid else {return}
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection("Category")
+            .getDocuments { [weak self] snapshot, error in
+                guard let document = snapshot?.documents else {return}
+                if document.isEmpty {
+                    self?.checkCategory.toggle()
+                }
+            }
     }
 }
