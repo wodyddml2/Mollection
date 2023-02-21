@@ -9,7 +9,6 @@ import SwiftUI
 import AuthenticationServices
 
 struct LoginView: View {
-    
     @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
     @Binding var isLogged: Bool
     
