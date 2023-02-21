@@ -32,6 +32,7 @@
 		6337F88B299E1B1400730374 /* MediaVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6337F88A299E1B1400730374 /* MediaVO.swift */; };
 		638D6D8229A0E7DF002F7476 /* MediaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638D6D8129A0E7DF002F7476 /* MediaInfo.swift */; };
 		638D6D8C29A4A78A002F7476 /* FireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638D6D8B29A4A78A002F7476 /* FireStore.swift */; };
+		63AC128629A4E19100A2F812 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AC128529A4E19100A2F812 /* HomeViewModel.swift */; };
 		63C272EE299CEE50001C126E /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C272ED299CEE50001C126E /* DetailView.swift */; };
 		63C272F1299D03F9001C126E /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C272F0299D03F9001C126E /* DetailViewModel.swift */; };
 		63E3DECB299A004E00D4D70A /* SignupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E3DECA299A004E00D4D70A /* SignupViewModel.swift */; };
@@ -78,6 +79,7 @@
 		6337F88A299E1B1400730374 /* MediaVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MediaVO.swift; path = Mollection/Data/MediaVO.swift; sourceTree = SOURCE_ROOT; };
 		638D6D8129A0E7DF002F7476 /* MediaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInfo.swift; sourceTree = "<group>"; };
 		638D6D8B29A4A78A002F7476 /* FireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FireStore.swift; sourceTree = "<group>"; };
+		63AC128529A4E19100A2F812 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		63C272ED299CEE50001C126E /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		63C272F0299D03F9001C126E /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		63E3DECA299A004E00D4D70A /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			isa = PBXGroup;
 			children = (
 				63E3DED1299A5E0000D4D70A /* HomeView.swift */,
+				63AC128529A4E19100A2F812 /* HomeViewModel.swift */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";
@@ -521,6 +524,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63082E342995151F007769E0 /* FBAuth.swift in Sources */,
+				63AC128629A4E19100A2F812 /* HomeViewModel.swift in Sources */,
 				6337F88B299E1B1400730374 /* MediaVO.swift in Sources */,
 				63082DEC2994DE9A007769E0 /* ContentView.swift in Sources */,
 				638D6D8229A0E7DF002F7476 /* MediaInfo.swift in Sources */,

@@ -12,7 +12,7 @@ final class FBStore: ObservableObject {
     private let db = Firestore.firestore()
     
     @Published var userInfo: UserInfo?
-    @Published var navigationTitle: String = "Mollection"
+
     @Published var mediaInfos = [MediaInfo]()
     @Published var categorys = [String]()
     var checkCategory: Bool = false
@@ -71,12 +71,13 @@ final class FBStore: ObservableObject {
             .addDocument(data: data)
     }
     
-    func getMediaData() {
+    func getMediaData(category: String) {
         guard let uid = UserManager.uid else {return}
         
         db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.media.rawValue)
             .document(FireStoreID.Mollection.rawValue)
             .collection(FireStoreID.Mollection.rawValue)
+            .whereField("category", isEqualTo: category)
             .addSnapshotListener { [weak self] snapshot, error in
                 guard let documents = snapshot?.documents else {
                     print("no document")

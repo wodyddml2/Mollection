@@ -73,7 +73,7 @@ struct TabView: View {
             }
         }.onAppear {
             fbStore.getCategoryData()
-            fbStore.getMediaData()
+            fbStore.getMediaData(category: "Mollection")
             fbStore.getUserData()
         }
     }

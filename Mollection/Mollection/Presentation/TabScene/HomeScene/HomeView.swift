@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var fbStore: FBStore
+    @StateObject private var viewModel = HomeViewModel()
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 10), count: 3)
     
@@ -33,27 +34,21 @@ struct HomeView: View {
             }
             .padding(10)
         }
-        .navigationTitle(fbStore.navigationTitle)
+        .navigationTitle(viewModel.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarTitleMenu(content: {
             ForEach(fbStore.categorys, id: \.self) { category in
                 Button {
-                    
+                    viewModel.subject.send(category) 
                 } label: {
                     Text(category)
                 }
 
             }
         })
-//        .toolbar {
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                Image(systemName: "menucard")
-//            }
-//        }
         .onAppear {
-            print(fbStore.categorys)
+            viewModel.categoryChange(fbStore: fbStore)
         }
-        
     }
 }
 
