@@ -12,10 +12,8 @@ struct DetailView: View {
     @StateObject private var viewModel = DetailViewModel()
     @EnvironmentObject private var fbStore: FBStore
     
-    @State private var selectionIndex = 0
-    
-    @State private var isShowAlert: Bool = false
     var mediaData: MediaVO
+    var documentID: String? = nil
     
     var body: some View {
         VStack {
@@ -96,11 +94,20 @@ struct DetailView: View {
         
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Image(systemName: "bookmark.fill")
-                    .foregroundColor(.customPurple)
-                    .onTapGesture {
-                        isShowAlert = true
-                    }
+                if documentID != nil {
+                    Image(systemName: "trash")
+                        .foregroundColor(.red)
+                        .onTapGesture {
+                            viewModel.isShowAlert = true
+                        }
+                } else {
+                    Image(systemName: "bookmark.fill")
+                        .foregroundColor(.customPurple)
+                        .onTapGesture {
+                            viewModel.isShowAlert = true
+                        }
+                }
+               
 //                Menu {
 //                    Picker(selection: Binding(get: {selectionIndex}, set: {
 //                        selectionIndex = $0
@@ -128,10 +135,15 @@ struct DetailView: View {
             viewModel.configureGenre(mediaInfo: mediaData)
             viewModel.fetchCastInfo(mediaInfo: mediaData)
         }
-        .alert(isPresented: $isShowAlert) {
+        .alert(isPresented: $viewModel.isShowAlert) {
             
             let ok = Alert.Button.default(Text("확인")) {
-                fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+                if let documentID = documentID {
+                    fbStore.deleteMediaData(documentPath: documentID)
+                } else {
+                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+                }
+                
 //                if fbStore.mediaInfos.isEmpty {
 //                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
 //                } else {
@@ -140,7 +152,7 @@ struct DetailView: View {
             }
             let cancel = Alert.Button.cancel(Text("취소"))
             
-            return Alert(title: Text(mediaData.title ?? ""), message: Text("해당 자료를 저장하시겠습니까?"), primaryButton: ok, secondaryButton: cancel)
+            return Alert(title: Text(mediaData.title ?? ""), message: Text(documentID == nil ? "해당 자료를 저장하시겠습니까?" : "삭제하시겠습니까?"), primaryButton: ok, secondaryButton: cancel)
         }
         
     }

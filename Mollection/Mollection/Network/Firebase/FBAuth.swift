@@ -73,5 +73,15 @@ struct FBAuth {
         return hashString
     }
     
+    static func logoutMollection() {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            UserManager.login = false
+//            UserManager.uid = ""
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
+    }
     
 }

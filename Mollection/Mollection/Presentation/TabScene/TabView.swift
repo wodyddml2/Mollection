@@ -12,6 +12,7 @@ struct TabView: View {
     @EnvironmentObject private var fbStore: FBStore
     @State var selectedIndex: TabBarIndex = .house
     @State var showSearchView: Bool = false
+    @Binding var isLogged: Bool
 
     let tabBarArr = TabBarIndex.allCases
     
@@ -25,7 +26,7 @@ struct TabView: View {
                     }
                 case .ellipsis:
                     NavigationView {
-                        SettingView()
+                        SettingView(isLogged: $isLogged)
                     }
                 default:
                    EmptyView()
@@ -79,6 +80,6 @@ struct TabView: View {
 
 struct TabView_Previews: PreviewProvider {
     static var previews: some View {
-        TabView()
+        TabView(isLogged: .constant(false))
     }
 }
