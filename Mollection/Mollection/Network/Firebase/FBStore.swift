@@ -21,14 +21,14 @@ final class FBStore: ObservableObject {
             "nickname": nickname,
             "genre": genre
         ]
-        db.collection(FireStoreID.User.rawValue).document(UserManager.uid ?? "")
+        db.collection(FireStoreID.Users.rawValue).document(UserManager.uid ?? "")
             .collection(FireStoreID.info.rawValue).document(FireStoreID.info.rawValue)
             .setData(data)
     }
     
     func getUserData() {
         guard let uid = UserManager.uid else {return}
-        db.collection(FireStoreID.User.rawValue).document(uid)
+        db.collection(FireStoreID.Users.rawValue).document(uid)
             .collection(FireStoreID.info.rawValue).document(FireStoreID.info.rawValue)
             .getDocument { document, error in
                 guard error == nil else {
@@ -61,7 +61,7 @@ final class FBStore: ObservableObject {
             FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? []
         ]
         
-        db.collection(FireStoreID.User.rawValue).document(UserManager.uid ?? "")
+        db.collection(FireStoreID.Users.rawValue).document(UserManager.uid ?? "")
             .collection(FireStoreID.media.rawValue)
             .document(FireStoreID.Mollection.rawValue)
             .collection(documentPath)
@@ -71,7 +71,7 @@ final class FBStore: ObservableObject {
     func getMediaData() {
         guard let uid = UserManager.uid else {return}
         
-        db.collection(FireStoreID.User.rawValue).document(uid).collection(FireStoreID.media.rawValue)
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.media.rawValue)
             .document(FireStoreID.Mollection.rawValue)
             .collection(FireStoreID.Mollection.rawValue)
             .addSnapshotListener { [weak self] snapshot, error in
@@ -94,53 +94,24 @@ final class FBStore: ObservableObject {
                             voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
                             mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
                             genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
-                        category: document.documentID))
+                        documentID: document.documentID))
                 }
             }
     }
     
     func deleteMediaData(documentPath: String) {
         guard let uid = UserManager.uid else {return}
-        db.collection(FireStoreID.User.rawValue).document(uid).collection(FireStoreID.media.rawValue)
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.media.rawValue)
             .document(FireStoreID.Mollection.rawValue)
             .collection(FireStoreID.Mollection.rawValue)
             .document(documentPath)
             .delete()
     }
-    
-    //        .document("Mollection")
-    //        .collection("Mollection")
-    //        .getDocuments { [weak self] snapshot, error in
-    //            if let error = error {
-    //                print(error.localizedDescription)
-    //            } else {
-    //
-    //                for document in snapshot!.documents {
-    //                    //                        self?.mediaInfos.append(MediaInfo(
-    //                    //                            mediaInfo: MediaVO(
-    //                    //                                id: document.data()[FireStoreMedia.id.rawValue] as! Int,
-    //                    //                                backdropPath: document.data()[FireStoreMedia.background.rawValue] as? String,
-    //                    //                                posterPath: document.data()[FireStoreMedia.poster.rawValue] as? String,
-    //                    //                                title: document.data()[FireStoreMedia.title.rawValue] as? String,
-    //                    //                                releaseDate: document.data()[FireStoreMedia.release.rawValue] as? String,
-    //                    //                                overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
-    //                    //                                voteAverage: document.data()[FireStoreMedia.average.rawValue] as? Double,
-    //                    //                                mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
-    //                    //                                genreIDS: document.data()[FireStoreMedia.genre.rawValue] as? [Int]),
-    //                    //                            category: document.documentID))
-    //                    print("\(document.documentID) => \(document.data())")
-    //                }
-    //
-    //                self?.navigationTitle = self?.mediaInfos.first?.category ?? "Mollection"
-    //            }
-    //        }
-    
-    //        .getDocument { document, error in
-    //            if let document = document {
-    //                print("Cached document data: \(document.data())")
-    //             } else {
-    //               print("Document does not exist in cache")
-    //             }
-    //        }
-    
+    // 걍 싹 다 저장하는데 카테고리 부분에 이름을 넣어서 가져올 때 쿼리로 처리
+    //MARK: Category
+    func addCategoryData(category: String) {
+        guard let uid = UserManager.uid else {return}
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection("Category")
+            .addDocument(data: ["category": category])
+    }
 }

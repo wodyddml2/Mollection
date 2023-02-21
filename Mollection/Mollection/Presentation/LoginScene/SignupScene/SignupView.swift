@@ -80,6 +80,7 @@ struct SignupView: View {
             Button {
                 if viewModel.isValid {
                     fbStore.addUserData(nickname: viewModel.nickname, genre: viewModel.favoriteGenre)
+                    fbStore.addCategoryData(category: viewModel.favoriteGenre == "" ? "Mollection" : viewModel.favoriteGenre)
                     UserManager.login = true
                     isLogged = true
                 } else {

@@ -16,6 +16,6 @@ enum FireStoreMedia: String {
 }
 
 enum FireStoreID: String {
-    case User, Mollection
+    case Users, Mollection
     case info, media
 }

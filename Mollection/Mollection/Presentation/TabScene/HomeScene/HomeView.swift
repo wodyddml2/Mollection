@@ -17,7 +17,7 @@ struct HomeView: View {
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(fbStore.mediaInfos, id: \.id) { data in
                     NavigationLink {
-                        DetailView(mediaData: data.mediaInfo, documentID: data.category)
+                        DetailView(mediaData: data.mediaInfo, documentID: data.documentID)
                     } label: {
                         VStack {
                             PosterImageView(url: data.mediaInfo.posterPath ?? "")

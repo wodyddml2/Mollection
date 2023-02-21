@@ -10,5 +10,5 @@ import Foundation
 struct MediaInfo: Identifiable {
     var id = UUID()
     var mediaInfo: MediaVO
-    var category: String
+    var documentID: String
 }
