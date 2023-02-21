@@ -18,6 +18,7 @@ final class DetailViewModel: ObservableObject {
     @Published var genre: String = ""
     @Published var isShowAlert: Bool = false
     @Published var isactiveAlert: ActiveAlert = .normal
+    @Published var selectionIndex: Int = 0
     
     private let genreList = GenreList()
     

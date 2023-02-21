@@ -50,7 +50,7 @@ final class FBStore: ObservableObject {
     }
     
     //MARK: Media
-    func addMediaData(documentPath: String, mediaInfo: MediaVO) {
+    func addMediaData(documentPath: String, mediaInfo: MediaVO, category: String) {
         let data: [String : Any] = [
             FireStoreMedia.id.rawValue: mediaInfo.id,
             FireStoreMedia.title.rawValue: mediaInfo.title ?? "",
@@ -60,7 +60,8 @@ final class FBStore: ObservableObject {
             FireStoreMedia.releaseDate.rawValue: mediaInfo.releaseDate ?? "",
             FireStoreMedia.voteAverage.rawValue: mediaInfo.voteAverage ?? 0.0,
             FireStoreMedia.mediaType.rawValue: mediaInfo.mediaType.rawValue,
-            FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? []
+            FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? [],
+            "category": category
         ]
         
         db.collection(FireStoreID.Users.rawValue).document(UserManager.uid ?? "")
@@ -96,7 +97,7 @@ final class FBStore: ObservableObject {
                             voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
                             mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
                             genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
-                        documentID: document.documentID))
+                        documentID: document.documentID, category: ""))
                 }
             }
     }
@@ -109,6 +110,7 @@ final class FBStore: ObservableObject {
             .document(documentPath)
             .delete()
     }
+    
     // 걍 싹 다 저장하는데 카테고리 부분에 이름을 넣어서 가져올 때 쿼리로 처리
     //MARK: Category
     func addCategoryData(category: String) {

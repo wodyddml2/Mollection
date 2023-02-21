@@ -11,4 +11,5 @@ struct MediaInfo: Identifiable {
     var id = UUID()
     var mediaInfo: MediaVO
     var documentID: String
+    var category: String
 }
