@@ -98,62 +98,74 @@ struct DetailView: View {
                     Image(systemName: "trash")
                         .foregroundColor(.red)
                         .onTapGesture {
+                            viewModel.isactiveAlert = .normal
                             viewModel.isShowAlert = true
                         }
                 } else {
                     Image(systemName: "bookmark.fill")
                         .foregroundColor(.customPurple)
                         .onTapGesture {
+                            if fbStore.mediaInfos.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
+                                viewModel.isactiveAlert = .normal
+                            } else {
+                                viewModel.isactiveAlert = .duplicated
+                            }
                             viewModel.isShowAlert = true
                         }
                 }
-               
-//                Menu {
-//                    Picker(selection: Binding(get: {selectionIndex}, set: {
-//                        selectionIndex = $0
-//                        isShowAlert = true
-//                    }) ) {
-//                        if fbStore.mediaInfos.isEmpty {
-//                            ForEach(0..<1) { _ in
-//                                Text("Mollection")
-//                            }
-//                        } else {
-//                            ForEach(fbStore.mediaInfos, id: \.id) { value in
-//                                Text(value.category)
-//                            }
-//                        }
-//                    } label: {
-//                        EmptyView()
-//                    }
-//                } label: {
-//                    Image(systemName: "bookmark.fill")
-//                        .foregroundColor(.customPurple)
-//                }
+                
+                //                Menu {
+                //                    Picker(selection: Binding(get: {selectionIndex}, set: {
+                //                        selectionIndex = $0
+                //                        isShowAlert = true
+                //                    }) ) {
+                //                        if fbStore.mediaInfos.isEmpty {
+                //                            ForEach(0..<1) { _ in
+                //                                Text("Mollection")
+                //                            }
+                //                        } else {
+                //                            ForEach(fbStore.mediaInfos, id: \.id) { value in
+                //                                Text(value.category)
+                //                            }
+                //                        }
+                //                    } label: {
+                //                        EmptyView()
+                //                    }
+                //                } label: {
+                //                    Image(systemName: "bookmark.fill")
+                //                        .foregroundColor(.customPurple)
+                //                }
             }
+            
         }
         .onAppear {
             viewModel.configureGenre(mediaInfo: mediaData)
             viewModel.fetchCastInfo(mediaInfo: mediaData)
         }
         .alert(isPresented: $viewModel.isShowAlert) {
-            
-            let ok = Alert.Button.default(Text("확인")) {
-                if let documentID = documentID {
-                    fbStore.deleteMediaData(documentPath: documentID)
-                } else {
-                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+            switch viewModel.isactiveAlert {
+            case .normal:
+                let ok = Alert.Button.default(Text("확인")) {
+                    if let documentID = documentID {
+                        fbStore.deleteMediaData(documentPath: documentID)
+                    } else {
+                        fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+                    }
+                    //                if fbStore.mediaInfos.isEmpty {
+                    //                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+                    //                } else {
+                    //                    fbStore.addMediaData(documentPath: "ABC", mediaInfo: mediaData)
+                    //                }
                 }
+                let cancel = Alert.Button.cancel(Text("취소"))
                 
-//                if fbStore.mediaInfos.isEmpty {
-//                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
-//                } else {
-//                    fbStore.addMediaData(documentPath: "ABC", mediaInfo: mediaData)
-//                }
+                return Alert(title: Text(mediaData.title ?? ""), message: Text(documentID == nil ? "해당 자료를 저장하시겠습니까?" : "삭제하시겠습니까?"), primaryButton: ok, secondaryButton: cancel)
+            case .duplicated:
+                return  Alert(title: Text("이미 저장된 미디어입니다"))
             }
-            let cancel = Alert.Button.cancel(Text("취소"))
             
-            return Alert(title: Text(mediaData.title ?? ""), message: Text(documentID == nil ? "해당 자료를 저장하시겠습니까?" : "삭제하시겠습니까?"), primaryButton: ok, secondaryButton: cancel)
         }
+        
         
     }
 }

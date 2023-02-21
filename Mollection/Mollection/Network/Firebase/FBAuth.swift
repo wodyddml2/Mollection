@@ -78,7 +78,6 @@ struct FBAuth {
         do {
             try firebaseAuth.signOut()
             UserManager.login = false
-//            UserManager.uid = ""
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }

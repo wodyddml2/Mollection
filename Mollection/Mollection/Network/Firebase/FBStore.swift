@@ -8,14 +8,6 @@
 import Foundation
 import Firebase
 
-enum FireStoreMedia: String {
-    case id
-    case title
-    case backdropPath, posterPath
-    case overview, releaseDate, voteAverage
-    case mediaType, genreIDS
-}
-
 final class FBStore: ObservableObject {
     private let db = Firestore.firestore()
     
@@ -29,29 +21,30 @@ final class FBStore: ObservableObject {
             "nickname": nickname,
             "genre": genre
         ]
-        db.collection("Users").document(UserManager.uid ?? "")
-            .collection("info").document("info")
+        db.collection(FireStoreID.User.rawValue).document(UserManager.uid ?? "")
+            .collection(FireStoreID.info.rawValue).document(FireStoreID.info.rawValue)
             .setData(data)
     }
     
     func getUserData() {
         guard let uid = UserManager.uid else {return}
-        let docRef = db.collection("Users").document(uid).collection("info").document("info")
-        docRef.getDocument { document, error in
-            guard error == nil else {
-                return
-            }
-            if let document = document, document.exists {
-                let data = document.data()
-                
-                if let data = data {
-                    self.userInfo = UserInfo(
-                        nickname: data["nickname"] as? String ?? "",
-                        genre: data["genre"] as? String ?? ""
-                    )
+        db.collection(FireStoreID.User.rawValue).document(uid)
+            .collection(FireStoreID.info.rawValue).document(FireStoreID.info.rawValue)
+            .getDocument { document, error in
+                guard error == nil else {
+                    return
+                }
+                if let document = document, document.exists {
+                    let data = document.data()
+                    
+                    if let data = data {
+                        self.userInfo = UserInfo(
+                            nickname: data["nickname"] as? String ?? "",
+                            genre: data["genre"] as? String ?? ""
+                        )
+                    }
                 }
             }
-        }
     }
     
     //MARK: Media
@@ -68,9 +61,9 @@ final class FBStore: ObservableObject {
             FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? []
         ]
         
-        db.collection("Users").document(UserManager.uid ?? "")
-            .collection("media")
-            .document("Mollection")
+        db.collection(FireStoreID.User.rawValue).document(UserManager.uid ?? "")
+            .collection(FireStoreID.media.rawValue)
+            .document(FireStoreID.Mollection.rawValue)
             .collection(documentPath)
             .addDocument(data: data)
     }
@@ -78,12 +71,12 @@ final class FBStore: ObservableObject {
     func getMediaData() {
         guard let uid = UserManager.uid else {return}
         
-        db.collection("Users").document(uid).collection("media")
-            .document("Mollection")
-            .collection("Mollection")
+        db.collection(FireStoreID.User.rawValue).document(uid).collection(FireStoreID.media.rawValue)
+            .document(FireStoreID.Mollection.rawValue)
+            .collection(FireStoreID.Mollection.rawValue)
             .addSnapshotListener { [weak self] snapshot, error in
                 guard let documents = snapshot?.documents else {
-                    print("no")
+                    print("no document")
                     return
                 }
                 
@@ -108,9 +101,9 @@ final class FBStore: ObservableObject {
     
     func deleteMediaData(documentPath: String) {
         guard let uid = UserManager.uid else {return}
-        db.collection("Users").document(uid).collection("media")
-            .document("Mollection")
-            .collection("Mollection")
+        db.collection(FireStoreID.User.rawValue).document(uid).collection(FireStoreID.media.rawValue)
+            .document(FireStoreID.Mollection.rawValue)
+            .collection(FireStoreID.Mollection.rawValue)
             .document(documentPath)
             .delete()
     }

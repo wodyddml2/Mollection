@@ -9,10 +9,15 @@ import Foundation
 import Combine
 
 final class DetailViewModel: ObservableObject {
-    
+    enum ActiveAlert {
+        case normal
+        case duplicated
+    }
+
     @Published var castData = [Cast]()
     @Published var genre: String = ""
     @Published var isShowAlert: Bool = false
+    @Published var isactiveAlert: ActiveAlert = .normal
     
     private let genreList = GenreList()
     
