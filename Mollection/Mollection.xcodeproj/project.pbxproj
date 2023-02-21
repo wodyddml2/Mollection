@@ -298,6 +298,14 @@
 			path = CategoryScene;
 			sourceTree = "<group>";
 		};
+		63AC128C29A4F4D400A2F812 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				63AC128529A4E19100A2F812 /* HomeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		63C272EC299CEE44001C126E /* DetailScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,7 +371,7 @@
 			isa = PBXGroup;
 			children = (
 				63E3DED1299A5E0000D4D70A /* HomeView.swift */,
-				63AC128529A4E19100A2F812 /* HomeViewModel.swift */,
+				63AC128C29A4F4D400A2F812 /* ViewModel */,
 			);
 			path = HomeScene;
 			sourceTree = "<group>";

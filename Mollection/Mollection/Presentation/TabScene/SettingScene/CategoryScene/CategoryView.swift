@@ -64,6 +64,7 @@ struct CategoryView: View {
             
             Button {
                 fbStore.addCategoryData(category: categoryName)
+                categoryName = ""
             } label: {
                 Text("저장")
             }
