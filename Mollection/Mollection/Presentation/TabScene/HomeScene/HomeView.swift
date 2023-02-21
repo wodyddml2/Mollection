@@ -43,7 +43,6 @@ struct HomeView: View {
                 } label: {
                     Text(category)
                 }
-
             }
         })
         .onAppear {
