@@ -15,7 +15,7 @@ struct SplashView: View {
         VStack {
             if isActive {
                 if isLogged {
-                    TabView()
+                    TabView(isLogged: $isLogged)
                 } else {
                     LoginView(isLogged: $isLogged)
                 }

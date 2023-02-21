@@ -17,6 +17,8 @@ enum Setting: String, CaseIterable, Identifiable {
 
 struct SettingView: View {
     @EnvironmentObject private var fbStore: FBStore
+    @State private var isShowAlert: Bool = false
+    @Binding var isLogged: Bool
     
     var body: some View {
         VStack {
@@ -48,17 +50,35 @@ struct SettingView: View {
                         .font(.notoSans(.Bold, size: 14))
                         .foregroundColor(.gray6)
                 }
+                
+                Section {
+                    Text("로그아웃")
+                        .font(.notoSans(.Medium, size: 14))
+                        .foregroundColor(.red)
+                        .onTapGesture {
+                            
+                            isShowAlert = true
+                        }
+                }
             }
             .listStyle(.insetGrouped)
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
-    
+            .alert(isPresented: $isShowAlert) {
+                let ok = Alert.Button.default(Text("확인")) {
+                    isLogged = false
+                    FBAuth.logoutMollection()
+                }
+                let cancel = Alert.Button.cancel(Text("취소"))
+                
+                return Alert(title: Text("Mollection"), message: Text("로그아웃 하시겠습니까?"), primaryButton: ok, secondaryButton: cancel)
+            }
         }
     }
 }
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView(isLogged: .constant(false))
     }
 }
