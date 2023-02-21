@@ -34,15 +34,16 @@ struct SettingView: View {
                 
                 Section {
                     ForEach(Setting.allCases) { value in
-                        HStack {
+                        NavigationLink {
+                            switch value {
+                            case .category:
+                                CategoryView()
+                            default:
+                                EmptyView()
+                            }
+                        } label: {
                             Text(value.rawValue)
                                 .font(.notoSans(.Medium, size: 14))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 14))
-                                .foregroundColor(.gray7)
                         }
                     }
                 } header: {

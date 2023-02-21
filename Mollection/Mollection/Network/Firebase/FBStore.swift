@@ -12,8 +12,10 @@ final class FBStore: ObservableObject {
     private let db = Firestore.firestore()
     
     @Published var userInfo: UserInfo?
-    @Published var navigationTitle: String = ""
+
     @Published var mediaInfos = [MediaInfo]()
+    @Published var categoryInfo = [CategoryInfo]()
+    var checkCategory: Bool = false
     
     //MARK: User
     func addUserData(nickname: String, genre: String) {
@@ -21,14 +23,14 @@ final class FBStore: ObservableObject {
             "nickname": nickname,
             "genre": genre
         ]
-        db.collection(FireStoreID.User.rawValue).document(UserManager.uid ?? "")
+        db.collection(FireStoreID.Users.rawValue).document(UserManager.uid ?? "")
             .collection(FireStoreID.info.rawValue).document(FireStoreID.info.rawValue)
             .setData(data)
     }
     
     func getUserData() {
         guard let uid = UserManager.uid else {return}
-        db.collection(FireStoreID.User.rawValue).document(uid)
+        db.collection(FireStoreID.Users.rawValue).document(uid)
             .collection(FireStoreID.info.rawValue).document(FireStoreID.info.rawValue)
             .getDocument { document, error in
                 guard error == nil else {
@@ -48,7 +50,7 @@ final class FBStore: ObservableObject {
     }
     
     //MARK: Media
-    func addMediaData(documentPath: String, mediaInfo: MediaVO) {
+    func addMediaData(documentPath: String, mediaInfo: MediaVO, category: String) {
         let data: [String : Any] = [
             FireStoreMedia.id.rawValue: mediaInfo.id,
             FireStoreMedia.title.rawValue: mediaInfo.title ?? "",
@@ -58,22 +60,24 @@ final class FBStore: ObservableObject {
             FireStoreMedia.releaseDate.rawValue: mediaInfo.releaseDate ?? "",
             FireStoreMedia.voteAverage.rawValue: mediaInfo.voteAverage ?? 0.0,
             FireStoreMedia.mediaType.rawValue: mediaInfo.mediaType.rawValue,
-            FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? []
+            FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? [],
+            FireStoreMedia.category.rawValue: category
         ]
         
-        db.collection(FireStoreID.User.rawValue).document(UserManager.uid ?? "")
+        db.collection(FireStoreID.Users.rawValue).document(UserManager.uid ?? "")
             .collection(FireStoreID.media.rawValue)
             .document(FireStoreID.Mollection.rawValue)
             .collection(documentPath)
             .addDocument(data: data)
     }
     
-    func getMediaData() {
+    func getMediaData(category: String) {
         guard let uid = UserManager.uid else {return}
         
-        db.collection(FireStoreID.User.rawValue).document(uid).collection(FireStoreID.media.rawValue)
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.media.rawValue)
             .document(FireStoreID.Mollection.rawValue)
             .collection(FireStoreID.Mollection.rawValue)
+            .whereField("category", isEqualTo: category)
             .addSnapshotListener { [weak self] snapshot, error in
                 guard let documents = snapshot?.documents else {
                     print("no document")
@@ -94,53 +98,61 @@ final class FBStore: ObservableObject {
                             voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
                             mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
                             genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
-                        category: document.documentID))
+                        documentID: document.documentID, category: ""))
                 }
             }
     }
     
     func deleteMediaData(documentPath: String) {
         guard let uid = UserManager.uid else {return}
-        db.collection(FireStoreID.User.rawValue).document(uid).collection(FireStoreID.media.rawValue)
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.media.rawValue)
             .document(FireStoreID.Mollection.rawValue)
             .collection(FireStoreID.Mollection.rawValue)
             .document(documentPath)
             .delete()
     }
     
-    //        .document("Mollection")
-    //        .collection("Mollection")
-    //        .getDocuments { [weak self] snapshot, error in
-    //            if let error = error {
-    //                print(error.localizedDescription)
-    //            } else {
-    //
-    //                for document in snapshot!.documents {
-    //                    //                        self?.mediaInfos.append(MediaInfo(
-    //                    //                            mediaInfo: MediaVO(
-    //                    //                                id: document.data()[FireStoreMedia.id.rawValue] as! Int,
-    //                    //                                backdropPath: document.data()[FireStoreMedia.background.rawValue] as? String,
-    //                    //                                posterPath: document.data()[FireStoreMedia.poster.rawValue] as? String,
-    //                    //                                title: document.data()[FireStoreMedia.title.rawValue] as? String,
-    //                    //                                releaseDate: document.data()[FireStoreMedia.release.rawValue] as? String,
-    //                    //                                overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
-    //                    //                                voteAverage: document.data()[FireStoreMedia.average.rawValue] as? Double,
-    //                    //                                mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
-    //                    //                                genreIDS: document.data()[FireStoreMedia.genre.rawValue] as? [Int]),
-    //                    //                            category: document.documentID))
-    //                    print("\(document.documentID) => \(document.data())")
-    //                }
-    //
-    //                self?.navigationTitle = self?.mediaInfos.first?.category ?? "Mollection"
-    //            }
-    //        }
+    //MARK: Category
+    func addCategoryData(category: String) {
+        guard let uid = UserManager.uid else {return}
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.Category.rawValue)
+            .addDocument(data: ["category": category])
+    }
     
-    //        .getDocument { document, error in
-    //            if let document = document {
-    //                print("Cached document data: \(document.data())")
-    //             } else {
-    //               print("Document does not exist in cache")
-    //             }
-    //        }
+    func getCategoryData() {
+        guard let uid = UserManager.uid else {return}
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.Category.rawValue)
+            .addSnapshotListener { [weak self] snapshot, error in
+                guard let documents = snapshot?.documents else {
+                    print("no document")
+                    return
+                }
+                
+                self?.categoryInfo.removeAll()
+                
+                for document in documents {
+                    self?.categoryInfo.append(CategoryInfo(
+                        category: document.data()["category"] as! String,
+                        documentID: document.documentID))
+                }
+            }
+    }
     
+    func checkCategoryData() {
+        guard let uid = UserManager.uid else {return}
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.Category.rawValue)
+            .getDocuments { [weak self] snapshot, error in
+                guard let document = snapshot?.documents else {return}
+                if document.isEmpty {
+                    self?.checkCategory.toggle()
+                }
+            }
+    }
+    
+    func deleteCategoryData(documentPath: String) {
+        guard let uid = UserManager.uid else {return}
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.Category.rawValue)
+            .document(documentPath)
+            .delete()
+    }
 }

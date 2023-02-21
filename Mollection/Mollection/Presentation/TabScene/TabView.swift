@@ -72,8 +72,9 @@ struct TabView: View {
                 }
             }
         }.onAppear {
+            fbStore.getCategoryData()
+            fbStore.getMediaData(category: "Mollection")
             fbStore.getUserData()
-            fbStore.getMediaData()
         }
     }
 }

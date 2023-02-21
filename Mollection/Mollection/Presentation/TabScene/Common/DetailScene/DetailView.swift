@@ -102,41 +102,39 @@ struct DetailView: View {
                             viewModel.isShowAlert = true
                         }
                 } else {
-                    Image(systemName: "bookmark.fill")
-                        .foregroundColor(.customPurple)
-                        .onTapGesture {
+//                    Image(systemName: "bookmark.fill")
+//                        .foregroundColor(.customPurple)
+//                        .onTapGesture {
+//                            if fbStore.mediaInfos.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
+//                                viewModel.isactiveAlert = .normal
+//                            } else {
+//                                viewModel.isactiveAlert = .duplicated
+//                            }
+//                            viewModel.isShowAlert = true
+//                        }
+//
+                    Menu {
+                        Picker(selection: Binding(get: {viewModel.selectionIndex}, set: {
+                            viewModel.selectionIndex = $0
                             if fbStore.mediaInfos.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
                                 viewModel.isactiveAlert = .normal
                             } else {
                                 viewModel.isactiveAlert = .duplicated
-                            }
+                            } // 고쳐야함
                             viewModel.isShowAlert = true
+                        }) ) {
+                            ForEach(0..<fbStore.categoryInfo.count) {
+                                Text(fbStore.categoryInfo[$0].category)
+                            }
+                        } label: {
+                            EmptyView()
                         }
+                    } label: {
+                        Image(systemName: "bookmark.fill")
+                            .foregroundColor(.customPurple)
+                    }
                 }
-                
-                //                Menu {
-                //                    Picker(selection: Binding(get: {selectionIndex}, set: {
-                //                        selectionIndex = $0
-                //                        isShowAlert = true
-                //                    }) ) {
-                //                        if fbStore.mediaInfos.isEmpty {
-                //                            ForEach(0..<1) { _ in
-                //                                Text("Mollection")
-                //                            }
-                //                        } else {
-                //                            ForEach(fbStore.mediaInfos, id: \.id) { value in
-                //                                Text(value.category)
-                //                            }
-                //                        }
-                //                    } label: {
-                //                        EmptyView()
-                //                    }
-                //                } label: {
-                //                    Image(systemName: "bookmark.fill")
-                //                        .foregroundColor(.customPurple)
-                //                }
             }
-            
         }
         .onAppear {
             viewModel.configureGenre(mediaInfo: mediaData)
@@ -149,13 +147,12 @@ struct DetailView: View {
                     if let documentID = documentID {
                         fbStore.deleteMediaData(documentPath: documentID)
                     } else {
-                        fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
+                        fbStore.addMediaData(
+                            documentPath: "Mollection",
+                            mediaInfo: mediaData,
+                            category: fbStore.categoryInfo[viewModel.selectionIndex].category
+                        )
                     }
-                    //                if fbStore.mediaInfos.isEmpty {
-                    //                    fbStore.addMediaData(documentPath: "Mollection", mediaInfo: mediaData)
-                    //                } else {
-                    //                    fbStore.addMediaData(documentPath: "ABC", mediaInfo: mediaData)
-                    //                }
                 }
                 let cancel = Alert.Button.cancel(Text("취소"))
                 
@@ -163,10 +160,7 @@ struct DetailView: View {
             case .duplicated:
                 return  Alert(title: Text("이미 저장된 미디어입니다"))
             }
-            
         }
-        
-        
     }
 }
 

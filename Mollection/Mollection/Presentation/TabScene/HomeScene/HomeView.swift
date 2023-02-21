@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var fbStore: FBStore
+    @StateObject private var viewModel = HomeViewModel()
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 10), count: 3)
     
@@ -17,7 +18,7 @@ struct HomeView: View {
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(fbStore.mediaInfos, id: \.id) { data in
                     NavigationLink {
-                        DetailView(mediaData: data.mediaInfo, documentID: data.category)
+                        DetailView(mediaData: data.mediaInfo, documentID: data.documentID)
                     } label: {
                         VStack {
                             PosterImageView(url: data.mediaInfo.posterPath ?? "")
@@ -33,14 +34,20 @@ struct HomeView: View {
             }
             .padding(10)
         }
-        .navigationTitle(Text("Mollection"))
+        .navigationTitle(viewModel.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Image(systemName: "menucard")
+        .toolbarTitleMenu(content: {
+            ForEach(fbStore.categoryInfo, id: \.id) { info in
+                Button {
+                    viewModel.subject.send(info.category)
+                } label: {
+                    Text(info.category)
+                }
             }
+        })
+        .onAppear {
+            viewModel.categoryChange(fbStore: fbStore)
         }
-        
     }
 }
 
