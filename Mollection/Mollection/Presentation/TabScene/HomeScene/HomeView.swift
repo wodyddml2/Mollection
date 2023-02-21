@@ -37,11 +37,11 @@ struct HomeView: View {
         .navigationTitle(viewModel.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarTitleMenu(content: {
-            ForEach(fbStore.categorys, id: \.self) { category in
+            ForEach(fbStore.categoryInfo, id: \.id) { info in
                 Button {
-                    viewModel.subject.send(category) 
+                    viewModel.subject.send(info.category)
                 } label: {
-                    Text(category)
+                    Text(info.category)
                 }
             }
         })

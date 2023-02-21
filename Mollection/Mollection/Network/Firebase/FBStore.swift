@@ -14,7 +14,7 @@ final class FBStore: ObservableObject {
     @Published var userInfo: UserInfo?
 
     @Published var mediaInfos = [MediaInfo]()
-    @Published var categorys = [String]()
+    @Published var categoryInfo = [CategoryInfo]()
     var checkCategory: Bool = false
     
     //MARK: User
@@ -61,7 +61,7 @@ final class FBStore: ObservableObject {
             FireStoreMedia.voteAverage.rawValue: mediaInfo.voteAverage ?? 0.0,
             FireStoreMedia.mediaType.rawValue: mediaInfo.mediaType.rawValue,
             FireStoreMedia.genreIDS.rawValue: mediaInfo.genreIDS ?? [],
-            "category": category
+            FireStoreMedia.category.rawValue: category
         ]
         
         db.collection(FireStoreID.Users.rawValue).document(UserManager.uid ?? "")
@@ -112,39 +112,47 @@ final class FBStore: ObservableObject {
             .delete()
     }
     
-    // 걍 싹 다 저장하는데 카테고리 부분에 이름을 넣어서 가져올 때 쿼리로 처리
     //MARK: Category
     func addCategoryData(category: String) {
         guard let uid = UserManager.uid else {return}
-        db.collection(FireStoreID.Users.rawValue).document(uid).collection("Category")
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.Category.rawValue)
             .addDocument(data: ["category": category])
     }
     
     func getCategoryData() {
         guard let uid = UserManager.uid else {return}
-        db.collection(FireStoreID.Users.rawValue).document(uid).collection("Category")
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.Category.rawValue)
             .addSnapshotListener { [weak self] snapshot, error in
                 guard let documents = snapshot?.documents else {
                     print("no document")
                     return
                 }
                 
-                self?.categorys.removeAll()
+                self?.categoryInfo.removeAll()
                 
                 for document in documents {
-                    self?.categorys.append(document.data()["category"] as! String)
+                    self?.categoryInfo.append(CategoryInfo(
+                        category: document.data()["category"] as! String,
+                        documentID: document.documentID))
                 }
             }
     }
     
     func checkCategoryData() {
         guard let uid = UserManager.uid else {return}
-        db.collection(FireStoreID.Users.rawValue).document(uid).collection("Category")
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.Category.rawValue)
             .getDocuments { [weak self] snapshot, error in
                 guard let document = snapshot?.documents else {return}
                 if document.isEmpty {
                     self?.checkCategory.toggle()
                 }
             }
+    }
+    
+    func deleteCategoryData(documentPath: String) {
+        guard let uid = UserManager.uid else {return}
+        db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.Category.rawValue)
+            .document(documentPath)
+            .delete()
     }
 }

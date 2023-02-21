@@ -13,9 +13,10 @@ enum FireStoreMedia: String {
     case backdropPath, posterPath
     case overview, releaseDate, voteAverage
     case mediaType, genreIDS
+    case category
 }
 
 enum FireStoreID: String {
     case Users, Mollection
-    case info, media
+    case info, media, Category
 }

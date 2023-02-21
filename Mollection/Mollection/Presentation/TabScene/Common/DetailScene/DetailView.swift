@@ -123,8 +123,8 @@ struct DetailView: View {
                             } // 고쳐야함
                             viewModel.isShowAlert = true
                         }) ) {
-                            ForEach(0..<fbStore.categorys.count) {
-                                Text(fbStore.categorys[$0])
+                            ForEach(0..<fbStore.categoryInfo.count) {
+                                Text(fbStore.categoryInfo[$0].category)
                             }
                         } label: {
                             EmptyView()
@@ -150,7 +150,7 @@ struct DetailView: View {
                         fbStore.addMediaData(
                             documentPath: "Mollection",
                             mediaInfo: mediaData,
-                            category: fbStore.categorys[viewModel.selectionIndex]
+                            category: fbStore.categoryInfo[viewModel.selectionIndex].category
                         )
                     }
                 }
