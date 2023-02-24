@@ -102,17 +102,6 @@ struct DetailView: View {
                             viewModel.isShowAlert = true
                         }
                 } else {
-//                    Image(systemName: "bookmark.fill")
-//                        .foregroundColor(.customPurple)
-//                        .onTapGesture {
-//                            if fbStore.mediaInfos.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
-//                                viewModel.isactiveAlert = .normal
-//                            } else {
-//                                viewModel.isactiveAlert = .duplicated
-//                            }
-//                            viewModel.isShowAlert = true
-//                        }
-//
                     Menu {
                         Picker(selection: Binding(get: {viewModel.selectionIndex}, set: {
                             viewModel.selectionIndex = $0

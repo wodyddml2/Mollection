@@ -37,5 +37,4 @@ final class SearchViewModel: ObservableObject {
             }
             .store(in: &cancellableSet)
     }
-  
 }

@@ -9,48 +9,58 @@ import SwiftUI
 import AuthenticationServices
 
 struct LoginView: View {
-    @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
+    @StateObject private var viewModel: LoginViewModel = LoginViewModel()
     @Binding var isLogged: Bool
+    @EnvironmentObject private var fbStore: FBStore
     
     var body: some View {
         NavigationStack {
             VStack {
-                Image(systemName: "play.fill")
-                    .foregroundColor(.customPurple)
-                    .font(.system(size: 130))
-                    .padding(.bottom)
-                    .frame(height: 100)
+                logoImage
                 
-                Text("Mollection")
-                    .font(.notoSans(.Medium, size: 30))
-                    .foregroundColor(.customPurple)
-                
-                Spacer().frame(height: 130)
-                
-                SignInWithAppleButton(.continue) { request in
-                    let nonce = FBAuth.randomNonceString()
-                    viewModel.currentNonce = nonce
-                    request.requestedScopes = [.email, .fullName]
-                    request.nonce = FBAuth.sha256(nonce)
-                } onCompletion: { result in
-                    switch result {
-                    case .success(let authResult):
-                        switch authResult.credential {
-                        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-                            viewModel.idCredential(appleIDCredential)
-                        default:
-                            break
-                        }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-                .frame(width: 280, height: 40)
-                .navigationTitle("")
-                .navigationDestination(isPresented: $viewModel.isLogin) {
-                    SignupView(isLogged: $isLogged)
-                }
+                signInButton
             }
+        }
+    }
+    
+    @ViewBuilder
+    var logoImage: some View {
+        Image(systemName: "play.fill")
+            .foregroundColor(.customPurple)
+            .font(.system(size: 130))
+            .padding(.bottom)
+            .frame(height: 100)
+        
+        Text("Mollection")
+            .font(.notoSans(.Medium, size: 30))
+            .foregroundColor(.customPurple)
+            .padding(.bottom, 120)
+    }
+    
+    @ViewBuilder
+    var signInButton: some View {
+        SignInWithAppleButton(.continue) { request in
+            let nonce = FBAuth.randomNonceString()
+            viewModel.currentNonce = nonce
+            request.requestedScopes = [.email, .fullName]
+            request.nonce = FBAuth.sha256(nonce)
+        } onCompletion: { result in
+            switch result {
+            case .success(let authResult):
+                switch authResult.credential {
+                case let appleIDCredential as ASAuthorizationAppleIDCredential:
+                    viewModel.idCredential(appleIDCredential)
+                default:
+                    break
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+        .frame(width: 280, height: 40)
+        .navigationTitle("")
+        .navigationDestination(isPresented: $viewModel.isLogin) {
+            SignupView(isLogged: $isLogged, fbStore: fbStore)
         }
     }
 

@@ -10,9 +10,10 @@ import Combine
 
 final class SignupViewModel: ObservableObject {
     @Published var nickname: String = ""
-    @Published var favoriteGenre: String = ""
+    @Published var genre: String = ""
     
     @Published var isValid: Bool = false
+    private var fbStore: FBStore
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -25,10 +26,27 @@ final class SignupViewModel: ObservableObject {
     }
     
     
-    init() {
-        isNicknameValid
+    init(fbStore: FBStore) {
+        self.fbStore = fbStore
+        self.isNicknameValid
             .receive(on: RunLoop.main)
-            .assign(to: \.isValid, on: self)
+            .sink(receiveValue: { [weak self] value in
+                self?.isValid = value
+            })
             .store(in: &cancellables)
+    }
+    
+    func addData() {
+        fbStore.addUserData(nickname: nickname, genre: genre)
+        if fbStore.checkCategory {
+            fbStore.addCategoryData(category: "Mollection")
+            if genre != "" {
+                fbStore.addCategoryData(category: genre)
+            }
+        }
+    }
+    
+    func checkCategory() {
+        fbStore.checkCategoryData()
     }
 }
