@@ -11,6 +11,7 @@ import AuthenticationServices
 struct LoginView: View {
     @StateObject private var viewModel: LoginViewModel = LoginViewModel()
     @Binding var isLogged: Bool
+    @EnvironmentObject private var fbStore: FBStore
     
     var body: some View {
         NavigationStack {
@@ -47,7 +48,7 @@ struct LoginView: View {
                 .frame(width: 280, height: 40)
                 .navigationTitle("")
                 .navigationDestination(isPresented: $viewModel.isLogin) {
-                    SignupView(isLogged: $isLogged)
+                    SignupView(isLogged: $isLogged, fbStore: fbStore)
                 }
             }
         }

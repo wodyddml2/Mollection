@@ -13,11 +13,14 @@ struct SignupView: View {
         case genre
     }
     @FocusState private var focusedField: FocusedField?
-    
-    @EnvironmentObject private var fbStore: FBStore
-    @ObservedObject var viewModel: SignupViewModel = SignupViewModel()
+    @ObservedObject var viewModel: SignupViewModel
     @Binding var isLogged: Bool
     @State private var isShowAlert: Bool = false
+    
+    init(isLogged: Binding<Bool>, fbStore: FBStore) {
+        viewModel = SignupViewModel(fbStore: fbStore)
+        self._isLogged = isLogged
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -69,11 +72,11 @@ struct SignupView: View {
             
             Button {
                 if viewModel.isValid {
-                    fbStore.addUserData(nickname: viewModel.nickname, genre: viewModel.favoriteGenre)
-                    if fbStore.checkCategory {
-                        fbStore.addCategoryData(category: "Mollection")
+                    viewModel.fbStore.addUserData(nickname: viewModel.nickname, genre: viewModel.favoriteGenre)
+                    if viewModel.fbStore.checkCategory {
+                        viewModel.fbStore.addCategoryData(category: "Mollection")
                         if viewModel.favoriteGenre != "" {
-                            fbStore.addCategoryData(category: viewModel.favoriteGenre)
+                            viewModel.fbStore.addCategoryData(category: viewModel.favoriteGenre)
                         }
                     }
                     UserManager.login = true
@@ -97,13 +100,13 @@ struct SignupView: View {
             Spacer()
         }
         .onAppear {
-            fbStore.checkCategoryData()
+            viewModel.fbStore.checkCategoryData()
         }
     }
 }
 
 struct SignupView_Previews: PreviewProvider {
     static var previews: some View {
-        SignupView(isLogged: .constant(false))
+        SignupView(isLogged: .constant(false), fbStore: FBStore())
     }
 }

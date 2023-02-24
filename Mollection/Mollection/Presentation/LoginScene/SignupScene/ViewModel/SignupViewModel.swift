@@ -13,6 +13,7 @@ final class SignupViewModel: ObservableObject {
     @Published var favoriteGenre: String = ""
     
     @Published var isValid: Bool = false
+    var fbStore: FBStore
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -25,8 +26,9 @@ final class SignupViewModel: ObservableObject {
     }
     
     
-    init() {
-        isNicknameValid
+    init(fbStore: FBStore) {
+        self.fbStore = fbStore
+        self.isNicknameValid
             .receive(on: RunLoop.main)
             .assign(to: \.isValid, on: self)
             .store(in: &cancellables)
