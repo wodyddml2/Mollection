@@ -98,7 +98,8 @@ final class FBStore: ObservableObject {
                             voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
                             mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
                             genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
-                        documentID: document.documentID, category: ""))
+                        documentID: document.documentID,
+                        category: document.data()[FireStoreMedia.category.rawValue] as! String))
                 }
             }
     }

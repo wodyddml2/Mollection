@@ -11,7 +11,7 @@ import Firebase
 @main
 struct MollectionApp: App {
     
-    @StateObject var firestoreManager = FBStore()
+    var firestoreManager = FBStore()
 
     init() {
         FirebaseApp.configure()
