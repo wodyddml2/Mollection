@@ -26,10 +26,8 @@ struct SplashView: View {
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                withAnimation {
-                    isActive = true
-                }
+            withAnimation(.default.delay(1.2)) {
+                isActive = true
             }
         }
     }
