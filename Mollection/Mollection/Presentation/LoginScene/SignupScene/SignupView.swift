@@ -20,9 +20,7 @@ struct SignupView: View {
     @State private var isShowAlert: Bool = false
     
     var body: some View {
-        VStack {
-            Spacer()
-                .frame(height: 20)
+        VStack(spacing: 0) {
 
             Text("""
             환영합니다 👐
@@ -33,9 +31,6 @@ struct SignupView: View {
             .multilineTextAlignment(.center)
             .lineSpacing(8)
             
-            Spacer()
-                .frame(height: 90)
-            
             VStack(alignment: .leading) {
                 Text("닉네임")
                     .font(.notoSans(.Medium, size: 14))
@@ -45,12 +40,10 @@ struct SignupView: View {
                     .focused($focusedField, equals: .nickname)
                     .submitLabel(.next)
                     .frame(height: 44)
-                    .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    .padding(.horizontal, 10)
                     .background(Color.gray2)
                     .cornerRadius(5)
-                
-                Spacer()
-                    .frame(height: 40)
+                    .padding(.bottom, 20)
                     
                 Text("좋아하는 장르")
                     .font(.notoSans(.Medium, size: 14))
@@ -60,11 +53,11 @@ struct SignupView: View {
                     .focused($focusedField, equals: .genre)
                     .submitLabel(.done)
                     .frame(height: 44)
-                    .padding(.init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    .padding(.horizontal, 10)
                     .background(Color.gray2)
                     .cornerRadius(5)
             }
-            .padding(.init(top: 0, leading: 60, bottom: 0, trailing: 60))
+            .padding(EdgeInsets(top: 90, leading: 60, bottom: 0, trailing: 60))
             .onSubmit {
                 switch focusedField {
                 case .nickname:
@@ -73,9 +66,6 @@ struct SignupView: View {
                     break
                 }
             }
-            
-            Spacer()
-                .frame(height: 100)
             
             Button {
                 if viewModel.isValid {
@@ -102,6 +92,7 @@ struct SignupView: View {
             .alert(isPresented: $isShowAlert) {
                 Alert(title: Text("닉네임을 입력해주세요"))
             }
+            .padding(.top, 90)
             
             Spacer()
         }

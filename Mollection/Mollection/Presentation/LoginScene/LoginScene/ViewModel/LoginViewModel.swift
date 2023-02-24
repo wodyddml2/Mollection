@@ -10,7 +10,7 @@ import AuthenticationServices
 
 final class LoginViewModel: ObservableObject {
     @Published var isLogin: Bool = false
-    @Published var currentNonce: String?
+    var currentNonce: String?
     
     func idCredential(_ appleCredential: ASAuthorizationAppleIDCredential) {
         guard let nonce = currentNonce else {

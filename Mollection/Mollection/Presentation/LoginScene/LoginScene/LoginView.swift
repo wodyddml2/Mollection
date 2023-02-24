@@ -9,7 +9,7 @@ import SwiftUI
 import AuthenticationServices
 
 struct LoginView: View {
-    @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
+    @StateObject private var viewModel: LoginViewModel = LoginViewModel()
     @Binding var isLogged: Bool
     
     var body: some View {
@@ -24,8 +24,7 @@ struct LoginView: View {
                 Text("Mollection")
                     .font(.notoSans(.Medium, size: 30))
                     .foregroundColor(.customPurple)
-                
-                Spacer().frame(height: 130)
+                    .padding(.bottom, 120)
                 
                 SignInWithAppleButton(.continue) { request in
                     let nonce = FBAuth.randomNonceString()
