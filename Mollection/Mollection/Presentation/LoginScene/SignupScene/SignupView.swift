@@ -52,7 +52,7 @@ struct SignupView: View {
                     .font(.notoSans(.Medium, size: 14))
                     .foregroundColor(.gray7)
                 
-                TextField("option", text: $viewModel.favoriteGenre)
+                TextField("option", text: $viewModel.genre)
                     .focused($focusedField, equals: .genre)
                     .submitLabel(.done)
                     .frame(height: 44)
@@ -72,13 +72,7 @@ struct SignupView: View {
             
             Button {
                 if viewModel.isValid {
-                    viewModel.fbStore.addUserData(nickname: viewModel.nickname, genre: viewModel.favoriteGenre)
-                    if viewModel.fbStore.checkCategory {
-                        viewModel.fbStore.addCategoryData(category: "Mollection")
-                        if viewModel.favoriteGenre != "" {
-                            viewModel.fbStore.addCategoryData(category: viewModel.favoriteGenre)
-                        }
-                    }
+                    viewModel.addData()
                     UserManager.login = true
                     isLogged = true
                 } else {
@@ -100,7 +94,7 @@ struct SignupView: View {
             Spacer()
         }
         .onAppear {
-            viewModel.fbStore.checkCategoryData()
+            viewModel.checkCategory()
         }
     }
 }
