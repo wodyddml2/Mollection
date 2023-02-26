@@ -9,16 +9,22 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject private var fbStore: FBStore
-    @StateObject private var viewModel = HomeViewModel()
+    @StateObject private var viewModel: HomeViewModel
     
     private let columns: [GridItem] = Array(repeating: .init(.flexible(), spacing: 10), count: 3)
+    
+    init(fbStore: FBStore) {
+        self._viewModel = StateObject(wrappedValue: HomeViewModel(fbStore: fbStore))
+    }
+    
     
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(fbStore.mediaInfos, id: \.id) { data in
                     NavigationLink {
-                        DetailView(mediaData: data.mediaInfo, documentID: data.documentID)
+                        DetailView(fbStore: fbStore, mediaData: data.mediaInfo, documentID: data.documentID)
+//                        DetailView(fbStore: fbStore, mediaData: data.mediaInfo, documentID: data.documentID)
                     } label: {
                         VStack {
                             PosterImageView(url: data.mediaInfo.posterPath ?? "")
@@ -53,6 +59,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(fbStore: FBStore())
     }
 }

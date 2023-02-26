@@ -21,7 +21,7 @@ struct TabView: View {
                 switch selectedIndex {
                 case .house:
                     NavigationView {
-                        HomeView()
+                        HomeView(fbStore: fbStore)
                     }
                 case .ellipsis:
                     NavigationView {

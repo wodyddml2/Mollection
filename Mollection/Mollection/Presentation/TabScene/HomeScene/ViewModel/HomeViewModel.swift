@@ -12,6 +12,11 @@ class HomeViewModel: ObservableObject {
     @Published var navigationTitle: String = "Mollection"
     private var cancellables = Set<AnyCancellable>()
     let subject = CurrentValueSubject<String, Never>("Mollection")
+    private var fbStore: FBStore
+    
+    init(fbStore: FBStore) {
+        self.fbStore = fbStore
+    }
 
     func categoryChange(fbStore: FBStore) {
         subject.sink { value in

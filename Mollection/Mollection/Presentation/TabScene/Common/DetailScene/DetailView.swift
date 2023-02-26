@@ -9,11 +9,15 @@ import SwiftUI
 import Kingfisher
 
 struct DetailView: View {
-    @StateObject private var viewModel = DetailViewModel()
-    @EnvironmentObject private var fbStore: FBStore
+    @StateObject private var viewModel: DetailViewModel
     
     var mediaData: MediaVO
     var documentID: String? = nil
+    
+    init(fbStore: FBStore, mediaData: MediaVO, documentID: String? = nil) {
+        self._viewModel = StateObject(wrappedValue: DetailViewModel(fbStore: fbStore, mediaData: mediaData))
+        self.mediaData = mediaData
+    }
     
     var body: some View {
         VStack {
@@ -104,16 +108,10 @@ struct DetailView: View {
                 } else {
                     Menu {
                         Picker(selection: Binding(get: {viewModel.selectionIndex}, set: {
-                            viewModel.selectionIndex = $0
-                            if fbStore.mediaInfos.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
-                                viewModel.isactiveAlert = .normal
-                            } else {
-                                viewModel.isactiveAlert = .duplicated
-                            } // 고쳐야함
-                            viewModel.isShowAlert = true
+                            viewModel.pickerBindingSet(index: $0)
                         }) ) {
-                            ForEach(0..<fbStore.categoryInfo.count) {
-                                Text(fbStore.categoryInfo[$0].category)
+                            ForEach(0..<viewModel.categoryCount) {
+                                Text(viewModel.categoryTitle(index: $0))
                             }
                         } label: {
                             EmptyView()
@@ -133,15 +131,7 @@ struct DetailView: View {
             switch viewModel.isactiveAlert {
             case .normal:
                 let ok = Alert.Button.default(Text("확인")) {
-                    if let documentID = documentID {
-                        fbStore.deleteMediaData(documentPath: documentID)
-                    } else {
-                        fbStore.addMediaData(
-                            documentPath: "Mollection",
-                            mediaInfo: mediaData,
-                            category: fbStore.categoryInfo[viewModel.selectionIndex].category
-                        )
-                    }
+                    viewModel.alertOkAction(documentID: documentID)
                 }
                 let cancel = Alert.Button.cancel(Text("취소"))
                 
@@ -155,6 +145,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(mediaData: MediaVO(id: 1, mediaType: .movie))
+        DetailView(fbStore: FBStore(), mediaData: MediaVO(id: 1, mediaType: .movie))
     }
 }

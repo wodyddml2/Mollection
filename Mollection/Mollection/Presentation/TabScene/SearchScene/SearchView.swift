@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SearchView: View {
-
     @ObservedObject private var viewModel = SearchViewModel()
     @State var isShowingDetail: Bool = false
     @State var mediaData: MediaVO?
+    @EnvironmentObject private var fbStore: FBStore
     
     var body: some View {
         List(viewModel.mediaList) { data in
@@ -63,7 +63,7 @@ struct SearchView: View {
         }
         .navigationDestination(isPresented: $isShowingDetail) {
             if let mediaData = mediaData {
-                DetailView(mediaData: mediaData)
+                DetailView(fbStore: fbStore, mediaData: mediaData)
             }
         }
     }
