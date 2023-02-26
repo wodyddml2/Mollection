@@ -8,15 +8,20 @@
 import Foundation
 import Combine
 
-class HomeViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
     @Published var navigationTitle: String = "Mollection"
     private var cancellables = Set<AnyCancellable>()
     let subject = CurrentValueSubject<String, Never>("Mollection")
+    private(set) var fbStore: FBStore
+    
+    init(fbStore: FBStore) {
+        self.fbStore = fbStore
+    }
 
-    func categoryChange(fbStore: FBStore) {
-        subject.sink { value in
-            self.navigationTitle = value
-            fbStore.getMediaData(category: value)
+    func categoryChange() {
+        subject.sink { [weak self] value in
+            self?.navigationTitle = value
+            self?.fbStore.getMediaData(category: value)
         }
         .store(in: &cancellables)
     }

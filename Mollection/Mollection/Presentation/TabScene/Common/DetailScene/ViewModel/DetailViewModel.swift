@@ -19,10 +19,21 @@ final class DetailViewModel: ObservableObject {
     @Published var isShowAlert: Bool = false
     @Published var isactiveAlert: ActiveAlert = .normal
     @Published var selectionIndex: Int = 0
+    var categoryCount: Int {
+        fbStore.categoryInfo.count
+    }
     
     private let genreList = GenreList()
     
     private var cancellableSet = Set<AnyCancellable>()
+    
+    private var fbStore: FBStore
+    private var mediaData: MediaVO
+    
+    init(fbStore: FBStore, mediaData: MediaVO) {
+        self.fbStore = fbStore
+        self.mediaData = mediaData
+    }
     
     func configureGenre(mediaInfo: MediaVO) {
         guard let mediaGenre = mediaInfo.genreIDS else {return}
@@ -58,15 +69,36 @@ final class DetailViewModel: ObservableObject {
                 case .finished:
                     break
                 }
-            } receiveValue: { [weak self] response in
-                switch response.result {
-                case .success(let result):
-                    self?.castData = result.cast
-                    self?.castData.append(contentsOf: result.crew)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            } receiveValue: { [weak self] result in
+                self?.castData = result.cast
+                self?.castData.append(contentsOf: result.crew)
             }
             .store(in: &cancellableSet)
+    }
+    
+    func pickerBindingSet(index: Int) {
+        selectionIndex = index
+        if fbStore.mediaInfos.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
+            isactiveAlert = .normal
+        } else {
+            isactiveAlert = .duplicated
+        } // 고쳐야함
+        isShowAlert = true
+    }
+    
+    func alertOkAction(documentID: String?) {
+        if let documentID = documentID {
+            fbStore.deleteMediaData(documentPath: documentID)
+        } else {
+            fbStore.addMediaData(
+                documentPath: "Mollection",
+                mediaInfo: mediaData,
+                category: fbStore.categoryInfo[selectionIndex].category
+            )
+        }
+    }
+    
+    func categoryTitle(index: Int) -> String {
+        return fbStore.categoryInfo[index].category
     }
 }

@@ -24,16 +24,11 @@ final class SearchViewModel: ObservableObject {
                 case .finished:
                     break
                 }
-            } receiveValue: { [weak self] response in
-                switch response.result {
-                case .success(let result):
-                    self?.mediaList = result.results.filter { $0.title != nil }
-                        .map({ result in
-                            result.toDomain()
-                        })
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            } receiveValue: { [weak self] result in
+                self?.mediaList = result.results.filter { $0.title != nil }
+                    .map({ value in
+                        value.toDomain()
+                    })
             }
             .store(in: &cancellableSet)
     }

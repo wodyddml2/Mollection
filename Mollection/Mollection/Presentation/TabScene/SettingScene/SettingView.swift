@@ -23,44 +23,9 @@ struct SettingView: View {
     var body: some View {
         VStack {
             List {
-                Section {
-                    Text("\(fbStore.userInfo?.nickname ?? "")")
-                        .font(.notoSans(.Regular, size: 16))
-                } header: {
-                    Text("내 정보")
-                        .font(.notoSans(.Bold, size: 14))
-                        .foregroundColor(.gray6)
-                }
-                
-                Section {
-                    ForEach(Setting.allCases) { value in
-                        NavigationLink {
-                            switch value {
-                            case .category:
-                                CategoryView()
-                            default:
-                                EmptyView()
-                            }
-                        } label: {
-                            Text(value.rawValue)
-                                .font(.notoSans(.Medium, size: 14))
-                        }
-                    }
-                } header: {
-                    Text("설정")
-                        .font(.notoSans(.Bold, size: 14))
-                        .foregroundColor(.gray6)
-                }
-                
-                Section {
-                    Text("로그아웃")
-                        .font(.notoSans(.Medium, size: 14))
-                        .foregroundColor(.red)
-                        .onTapGesture {
-                            
-                            isShowAlert = true
-                        }
-                }
+                myProfileSection
+                settingSection
+                logoutSection
             }
             .listStyle(.insetGrouped)
             .navigationTitle("설정")
@@ -74,6 +39,52 @@ struct SettingView: View {
                 
                 return Alert(title: Text("Mollection"), message: Text("로그아웃 하시겠습니까?"), primaryButton: ok, secondaryButton: cancel)
             }
+        }
+    }
+}
+
+extension SettingView {
+    @ViewBuilder var myProfileSection: some View {
+        Section {
+            Text("\(fbStore.userInfo?.nickname ?? "")")
+                .font(.notoSans(.Regular, size: 16))
+        } header: {
+            Text("내 정보")
+                .font(.notoSans(.Bold, size: 14))
+                .foregroundColor(.gray6)
+        }
+    }
+    
+    @ViewBuilder var settingSection: some View {
+        Section {
+            ForEach(Setting.allCases) { value in
+                NavigationLink {
+                    switch value {
+                    case .category:
+                        CategoryView()
+                    default:
+                        EmptyView()
+                    }
+                } label: {
+                    Text(value.rawValue)
+                        .font(.notoSans(.Medium, size: 14))
+                }
+            }
+        } header: {
+            Text("설정")
+                .font(.notoSans(.Bold, size: 14))
+                .foregroundColor(.gray6)
+        }
+    }
+    
+    @ViewBuilder var logoutSection: some View {
+        Section {
+            Text("로그아웃")
+                .font(.notoSans(.Medium, size: 14))
+                .foregroundColor(.red)
+                .onTapGesture {
+                    isShowAlert = true
+                }
         }
     }
 }

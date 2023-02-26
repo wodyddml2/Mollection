@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SearchView: View {
-
     @ObservedObject private var viewModel = SearchViewModel()
     @State var isShowingDetail: Bool = false
     @State var mediaData: MediaVO?
+    @EnvironmentObject private var fbStore: FBStore
     
     var body: some View {
         List(viewModel.mediaList) { data in
@@ -21,7 +21,6 @@ struct SearchView: View {
                 Spacer()
                     
                 VStack(alignment: .leading) {
-                    Divider().opacity(0)
                     Text(data.title ?? "")
                         .font(.notoSans(.Medium, size: 14))
                     
@@ -31,8 +30,7 @@ struct SearchView: View {
                     Text(data.overview ?? "")
                         .font(.notoSans(.Regular, size: 12))
                         .lineLimit(3)
-                    
-                    Spacer().frame(height: 8)
+                        .padding(.bottom, 8)
                     
                     HStack {
                         Spacer()
@@ -63,7 +61,7 @@ struct SearchView: View {
         }
         .navigationDestination(isPresented: $isShowingDetail) {
             if let mediaData = mediaData {
-                DetailView(mediaData: mediaData)
+                DetailView(fbStore: fbStore, mediaData: mediaData)
             }
         }
     }
