@@ -17,14 +17,12 @@ struct HomeView: View {
         self._viewModel = StateObject(wrappedValue: HomeViewModel(fbStore: fbStore))
     }
     
-    
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(fbStore.mediaInfos, id: \.id) { data in
                     NavigationLink {
                         DetailView(fbStore: fbStore, mediaData: data.mediaInfo, documentID: data.documentID)
-//                        DetailView(fbStore: fbStore, mediaData: data.mediaInfo, documentID: data.documentID)
                     } label: {
                         VStack {
                             PosterImageView(url: data.mediaInfo.posterPath ?? "")
@@ -43,7 +41,7 @@ struct HomeView: View {
         .navigationTitle(viewModel.navigationTitle)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarTitleMenu(content: {
-            ForEach(fbStore.categoryInfo, id: \.id) { info in
+            ForEach(viewModel.fbStore.categoryInfo, id: \.id) { info in
                 Button {
                     viewModel.subject.send(info.category)
                 } label: {
@@ -52,7 +50,7 @@ struct HomeView: View {
             }
         })
         .onAppear {
-            viewModel.categoryChange(fbStore: fbStore)
+            viewModel.categoryChange()
         }
     }
 }

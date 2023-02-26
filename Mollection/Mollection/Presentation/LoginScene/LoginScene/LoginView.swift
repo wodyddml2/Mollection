@@ -22,7 +22,9 @@ struct LoginView: View {
             }
         }
     }
-    
+}
+
+extension LoginView {
     @ViewBuilder
     var logoImage: some View {
         Image(systemName: "play.fill")
@@ -63,7 +65,6 @@ struct LoginView: View {
             SignupView(isLogged: $isLogged, fbStore: fbStore)
         }
     }
-
 }
 
 struct LoginView_Previews: PreviewProvider {

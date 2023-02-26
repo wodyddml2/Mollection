@@ -46,7 +46,9 @@ struct TabView: View {
             fbStore.getUserData()
         }
     }
-    
+}
+
+extension TabView {
     @ViewBuilder func tabButton(index: TabBarIndex) -> some View {
         Button {
             if index == .plus {

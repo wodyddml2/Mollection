@@ -62,7 +62,9 @@ struct SignupView: View {
             viewModel.checkCategory()
         }
     }
-    
+}
+
+extension SignupView {
     @ViewBuilder func textFieldTitle(text: String) -> some View {
         Text(text)
             .font(.notoSans(.Medium, size: 14))
