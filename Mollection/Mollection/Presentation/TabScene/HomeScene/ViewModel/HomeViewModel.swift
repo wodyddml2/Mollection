@@ -8,11 +8,11 @@
 import Foundation
 import Combine
 
-class HomeViewModel: ObservableObject {
+final class HomeViewModel: ObservableObject {
     @Published var navigationTitle: String = "Mollection"
     private var cancellables = Set<AnyCancellable>()
     let subject = CurrentValueSubject<String, Never>("Mollection")
-    var fbStore: FBStore
+    private(set) var fbStore: FBStore
     
     init(fbStore: FBStore) {
         self.fbStore = fbStore

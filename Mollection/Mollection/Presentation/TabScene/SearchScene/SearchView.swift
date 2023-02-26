@@ -21,7 +21,6 @@ struct SearchView: View {
                 Spacer()
                     
                 VStack(alignment: .leading) {
-                    Divider().opacity(0)
                     Text(data.title ?? "")
                         .font(.notoSans(.Medium, size: 14))
                     
@@ -31,8 +30,7 @@ struct SearchView: View {
                     Text(data.overview ?? "")
                         .font(.notoSans(.Regular, size: 12))
                         .lineLimit(3)
-                    
-                    Spacer().frame(height: 8)
+                        .padding(.bottom, 8)
                     
                     HStack {
                         Spacer()
