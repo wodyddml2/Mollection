@@ -13,12 +13,25 @@ final class MediaAPIService {
     static let shared = MediaAPIService()
     
     private init() { }
-    
-    func requestMediaAPI<T: Codable>(type: T.Type = T.self, router: URLRequestConvertible) -> AnyPublisher<DataResponse<T, AFError>, Never> {
-        return AF.request(router)
-            .publishDecodable(type: T.self)
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
+//    AnyPublisher<DataResponse<T, AFError>, Never>
+    func requestMediaAPI<T: Codable>(type: T.Type = T.self, router: URLRequestConvertible) -> Future<T, AFError> {
+        return Future { promise in
+            AF.request(router)
+                .responseDecodable(of: T.self) { response in
+                    switch response.result {
+                    case .success(let value):
+                        promise(.success(value))
+                    case .failure(let error):
+                        promise(.failure(error))
+                        break
+                    }
+                }
+        }
+        
+//        return AF.request(router)
+//            .publishDecodable(type: T.self)
+//            .receive(on: DispatchQueue.main)
+//            .eraseToAnyPublisher()
     }
     
 }

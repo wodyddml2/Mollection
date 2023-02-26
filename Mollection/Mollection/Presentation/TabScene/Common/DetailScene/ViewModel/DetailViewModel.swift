@@ -69,14 +69,9 @@ final class DetailViewModel: ObservableObject {
                 case .finished:
                     break
                 }
-            } receiveValue: { [weak self] response in
-                switch response.result {
-                case .success(let result):
-                    self?.castData = result.cast
-                    self?.castData.append(contentsOf: result.crew)
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
+            } receiveValue: { [weak self] result in
+                self?.castData = result.cast
+                self?.castData.append(contentsOf: result.crew)
             }
             .store(in: &cancellableSet)
     }
