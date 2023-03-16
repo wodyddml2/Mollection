@@ -84,10 +84,16 @@ final class FBStore: ObservableObject {
                     return
                 }
                 
-                self?.mediaInfos.removeAll()
+//                self?.mediaInfos.removeAll()
+                if let index = self?.mediaInfos.firstIndex(where: { $0.category == category} ) {
+                    self?.mediaInfos.remove(at: index)
+                }
+                
+                var media: [Media] = []
                 
                 for document in documents {
-                    self?.mediaInfos.append(MediaInfo(
+                    media.append(Media(
+                        documentID: document.documentID,
                         mediaInfo: MediaVO(
                             id: document.data()[FireStoreMedia.id.rawValue] as! Int,
                             backdropPath: document.data()[FireStoreMedia.backdropPath.rawValue] as? String,
@@ -97,10 +103,23 @@ final class FBStore: ObservableObject {
                             overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
                             voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
                             mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
-                            genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
-                        documentID: document.documentID,
-                        category: document.data()[FireStoreMedia.category.rawValue] as! String))
+                            genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int])))
                 }
+                
+                self?.mediaInfos.append(MediaInfo(media: media, category: category))
+//                (MediaInfo(
+//                    mediaInfo: MediaVO(
+//                        id: document.data()[FireStoreMedia.id.rawValue] as! Int,
+//                        backdropPath: document.data()[FireStoreMedia.backdropPath.rawValue] as? String,
+//                        posterPath: document.data()[FireStoreMedia.posterPath.rawValue] as? String,
+//                        title: document.data()[FireStoreMedia.title.rawValue] as? String,
+//                        releaseDate: document.data()[FireStoreMedia.releaseDate.rawValue] as? String,
+//                        overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
+//                        voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
+//                        mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
+//                        genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
+//                    documentID: document.documentID,
+//                    category: document.data()[FireStoreMedia.category.rawValue] as! String))
             }
     }
     
