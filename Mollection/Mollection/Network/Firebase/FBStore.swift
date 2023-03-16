@@ -71,7 +71,7 @@ final class FBStore: ObservableObject {
             .addDocument(data: data)
     }
     
-    func getMediaData(category: String) {
+    func getMediaData(category: String, completion: @escaping () -> Void = {}) {
         guard let uid = UserManager.uid else {return}
         
         db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.media.rawValue)
@@ -83,8 +83,7 @@ final class FBStore: ObservableObject {
                     print("no document")
                     return
                 }
-                
-//                self?.mediaInfos.removeAll()
+
                 if let index = self?.mediaInfos.firstIndex(where: { $0.category == category} ) {
                     self?.mediaInfos.remove(at: index)
                 }
@@ -107,19 +106,7 @@ final class FBStore: ObservableObject {
                 }
                 
                 self?.mediaInfos.append(MediaInfo(media: media, category: category))
-//                (MediaInfo(
-//                    mediaInfo: MediaVO(
-//                        id: document.data()[FireStoreMedia.id.rawValue] as! Int,
-//                        backdropPath: document.data()[FireStoreMedia.backdropPath.rawValue] as? String,
-//                        posterPath: document.data()[FireStoreMedia.posterPath.rawValue] as? String,
-//                        title: document.data()[FireStoreMedia.title.rawValue] as? String,
-//                        releaseDate: document.data()[FireStoreMedia.releaseDate.rawValue] as? String,
-//                        overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
-//                        voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
-//                        mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
-//                        genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
-//                    documentID: document.documentID,
-//                    category: document.data()[FireStoreMedia.category.rawValue] as! String))
+                completion()
             }
     }
     

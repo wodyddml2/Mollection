@@ -87,12 +87,7 @@ final class DetailViewModel: ObservableObject {
         } else {
             isactiveAlert = .duplicated
         }
-        
-//        if fbStore.mediaInfos.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
-//            isactiveAlert = .normal
-//        } else {
-//            isactiveAlert = .duplicated
-//        }
+    
         isShowAlert = true
     }
     

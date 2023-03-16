@@ -22,10 +22,11 @@ final class HomeViewModel: ObservableObject {
     func categoryChange() {
         subject.sink { [weak self] value in
             self?.navigationTitle = value
-            self?.fbStore.getMediaData(category: value)
-            if let index = self?.fbStore.mediaInfos.firstIndex(where: {$0.category == value}) {
-                self?.media = self?.fbStore.mediaInfos[index].media
-            }
+            self?.fbStore.getMediaData(category: value, completion: {
+                if let index = self?.fbStore.mediaInfos.firstIndex(where: {$0.category == value}) {
+                    self?.media = self?.fbStore.mediaInfos[index].media
+                }
+            })
         }
         .store(in: &cancellables)
     }
