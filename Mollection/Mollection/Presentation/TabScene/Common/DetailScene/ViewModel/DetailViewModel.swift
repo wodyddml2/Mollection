@@ -78,11 +78,16 @@ final class DetailViewModel: ObservableObject {
     
     func pickerBindingSet(index: Int) {
         selectionIndex = index
-        if fbStore.mediaInfos.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
-            isactiveAlert = .normal
+        if let firstIndex = fbStore.mediaInfos.firstIndex(where: {$0.category == fbStore.categoryInfo[index].category}) {
+            if fbStore.mediaInfos[firstIndex].media.filter({$0.mediaInfo.id == mediaData.id}).isEmpty {
+                isactiveAlert = .normal
+            } else {
+                isactiveAlert = .duplicated
+            }
         } else {
             isactiveAlert = .duplicated
-        } // 고쳐야함
+        }
+    
         isShowAlert = true
     }
     

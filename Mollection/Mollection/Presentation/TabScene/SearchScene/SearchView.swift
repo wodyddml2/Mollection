@@ -61,7 +61,7 @@ struct SearchView: View {
         }
         .navigationDestination(isPresented: $isShowingDetail) {
             if let mediaData = mediaData {
-                DetailView(fbStore: fbStore, mediaData: mediaData)
+                DetailView(fbStore: fbStore, mediaData: mediaData, documentID: nil)
             }
         }
     }

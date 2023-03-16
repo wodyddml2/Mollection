@@ -20,7 +20,7 @@ struct HomeView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 15) {
-                ForEach(fbStore.mediaInfos, id: \.id) { data in
+                ForEach(viewModel.media ?? [], id: \.documentID) { data in
                     NavigationLink {
                         DetailView(fbStore: fbStore, mediaData: data.mediaInfo, documentID: data.documentID)
                     } label: {

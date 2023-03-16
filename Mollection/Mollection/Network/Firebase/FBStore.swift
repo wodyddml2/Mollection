@@ -71,7 +71,7 @@ final class FBStore: ObservableObject {
             .addDocument(data: data)
     }
     
-    func getMediaData(category: String) {
+    func getMediaData(category: String, completion: @escaping () -> Void = {}) {
         guard let uid = UserManager.uid else {return}
         
         db.collection(FireStoreID.Users.rawValue).document(uid).collection(FireStoreID.media.rawValue)
@@ -83,11 +83,16 @@ final class FBStore: ObservableObject {
                     print("no document")
                     return
                 }
+
+                if let index = self?.mediaInfos.firstIndex(where: { $0.category == category} ) {
+                    self?.mediaInfos.remove(at: index)
+                }
                 
-                self?.mediaInfos.removeAll()
+                var media: [Media] = []
                 
                 for document in documents {
-                    self?.mediaInfos.append(MediaInfo(
+                    media.append(Media(
+                        documentID: document.documentID,
                         mediaInfo: MediaVO(
                             id: document.data()[FireStoreMedia.id.rawValue] as! Int,
                             backdropPath: document.data()[FireStoreMedia.backdropPath.rawValue] as? String,
@@ -97,10 +102,11 @@ final class FBStore: ObservableObject {
                             overview: document.data()[FireStoreMedia.overview.rawValue] as? String,
                             voteAverage: document.data()[FireStoreMedia.voteAverage.rawValue] as? Double,
                             mediaType: MediaType(rawValue: document.data()[FireStoreMedia.mediaType.rawValue] as! String) ?? .movie,
-                            genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int]),
-                        documentID: document.documentID,
-                        category: document.data()[FireStoreMedia.category.rawValue] as! String))
+                            genreIDS: document.data()[FireStoreMedia.genreIDS.rawValue] as? [Int])))
                 }
+                
+                self?.mediaInfos.append(MediaInfo(media: media, category: category))
+                completion()
             }
     }
     
