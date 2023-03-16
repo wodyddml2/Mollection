@@ -12,11 +12,12 @@ struct DetailView: View {
     @StateObject private var viewModel: DetailViewModel
     
     var mediaData: MediaVO
-    var documentID: String? = nil
+    var documentID: String?
     
-    init(fbStore: FBStore, mediaData: MediaVO, documentID: String? = nil) {
+    init(fbStore: FBStore, mediaData: MediaVO, documentID: String?) {
         self._viewModel = StateObject(wrappedValue: DetailViewModel(fbStore: fbStore, mediaData: mediaData))
         self.mediaData = mediaData
+        self.documentID = documentID
     }
     
     var body: some View {
@@ -151,6 +152,6 @@ extension DetailView {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(fbStore: FBStore(), mediaData: MediaVO(id: 1, mediaType: .movie))
+        DetailView(fbStore: FBStore(), mediaData: MediaVO(id: 1, mediaType: .movie), documentID: nil)
     }
 }
