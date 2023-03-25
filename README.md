@@ -109,15 +109,12 @@
 
 ### **Keep**
 
-1. **SwiftUI**를 학습하고 프로젝트에 적용 시키면서 UIKit과 다른 새로운 프로그래밍 방식을 다뤄 볼 수 있었습니다.
-2. **@ViewBuilder**를 사용해 View를 추출하여 개인 또는 협업 시에 가독성을 높일 수 있었습니다.
-3. **Firestore**와 **Firebase** **Authentication**를 통해 DB에 사용자 UID와 연동시켜 사용자 정보를 안전하게 저장하는 과정을 경험할 수 있었습니다.
+1. Custom View와 **@ViewBuilder**를 사용해 View를 추출하여, 코드의 가독성과 재사용성을 높일 수 있었습니다. 
+2. **Firestore**와 **Firebase** **Authentication**를 통해 DB에 사용자 UID와 연동시켜 사용자 정보를 안전하게 저장하는 계정 생성 과정을 진행할 수 있었습니다.
 
 ### Problem • Try
 
-1. SwiftUI의 각 Property Wrapper마다 사용 시 발생하는 문제에 대해 고민해보았습니다. 몇몇 Property Wrapper는 값이 변할 때 View가 업데이트 되므로 랜더링 비용을 생각해 필요한 부분에서는 수동으로도 잡아줘야 할 필요가 있음을 느꼈습니다.
-2. Combine을 학습하고 네트워크 요청 비동기 로직에서 적용해보았습니다. 다른 필요한 부분에서 Combine을 적절하게 활용 하지 못하는 느낌이 들어 개선이 필요하다 생각했습니다.
-3. @EnvironmentObject를 사용한 Model을 View에서 ViewModel에 주입하였습니다.
-Model을 직접 주입하면 ViewModel이 너무 많은 책임을 가지게 되어서 유연성과 재사용성이 떨어지게 된다고 생각이 듭니다.
-따라서 @EnvironmentObject을 제거하고 ViewModel에 주입하지 않는 방향으로 수정할 필요를 느꼈습니다.
+1. SwiftUI에서 값이 변할 때 View가 업데이트 되는 Property Wrapper를 사용 시 발생하는 문제에 대해 고민해보았습니다. 값이 변할 때마다 렌더링 비용이 발생할 것이라 생각하기 때문에 필요한 부분에서 수동으로 처리하는 것이 필요하다고 생각합니다.
+2. Combine을 네트워크 요청 비동기 로직에서 적용해보았습니다. 다른 필요한 부분에서 Combine을 다양하게 활용 하지 못하는 느낌이 들어 개선이 필요하다고 생각합니다.
+3. @EnvironmentObject를 사용한 Model을 ViewModel에 주입하였습니다. Model을 직접 주입하면 ViewModel이 너무 많은 책임을 가지게 되어서 유연성과 재사용성이 떨어지게 된다고 생각이 듭니다. 따라서 @EnvironmentObject을 제거하고 ViewModel에 주입하지 않는 방향으로 수정할 필요를 느낍니다.
 
